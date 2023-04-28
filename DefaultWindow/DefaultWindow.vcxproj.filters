@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c32a71dc-ae6a-402d-911e-da99a24fa0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{b0009653-701c-4218-93c9-257021278bd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\00. MainGame">
+      <UniqueIdentifier>{9519dae6-4498-4c11-86a3-4b3cebd0e891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Engine\99. Else">
+      <UniqueIdentifier>{38d9ced7-1988-4e06-a936-76f2a5fd6e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component">
+      <UniqueIdentifier>{a96dd1f3-993f-4e9e-a2c5-4da99f3c66ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\BaseClass">
+      <UniqueIdentifier>{9cb1837f-d079-4134-8a06-86406eb817c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Collider">
+      <UniqueIdentifier>{9906378c-3f8f-4bf3-9942-0e35c1c61e60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\RigidBody">
+      <UniqueIdentifier>{ef2afa39-e3cc-4629-8767-44ece525f7ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Graphics">
+      <UniqueIdentifier>{00912257-ce09-4dc6-89c0-4a35cddfca8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Input">
+      <UniqueIdentifier>{44853945-c2b3-479b-a252-b2e6967afec9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\00. DefaultWindow">
+      <UniqueIdentifier>{eeaf45b7-4885-44de-84d1-5e47a9a3ea86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\99. Define">
+      <UniqueIdentifier>{76ae4e74-d386-49a2-b9d4-c3d3da25fa8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject">
+      <UniqueIdentifier>{34ea21b2-7929-44bb-ad75-74ee86870eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\00. BaseClass">
+      <UniqueIdentifier>{5c2cb324-df8a-42d1-b816-1b06af3c71bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\01. Player">
+      <UniqueIdentifier>{9bf70e91-be93-40ad-a3c9-dce4e8e025cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster">
+      <UniqueIdentifier>{6a92b72d-e4ce-4950-b699-408dffc696c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss">
+      <UniqueIdentifier>{a00aeb0a-693f-4e45-af11-c5fd1b39c9a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager">
+      <UniqueIdentifier>{99547a22-c594-4408-90c8-1987e35077f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\SceneManager">
+      <UniqueIdentifier>{76c0f932-bfd6-4338-8e1a-d40f0339e12e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\ResourceManager">
+      <UniqueIdentifier>{e29351df-7787-4b9b-ba3f-5d6253b452e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\KeyManager">
+      <UniqueIdentifier>{78a14a3d-111d-4488-b2d1-48f3cd516d11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\CollisionManager">
+      <UniqueIdentifier>{11545802-8173-498c-8895-cd859268b08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\PoolManager">
+      <UniqueIdentifier>{53454055-7a81-434e-a603-c69a1b97228a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\ScrollManager">
+      <UniqueIdentifier>{01f6e6eb-d4eb-45f4-b125-8a8fecbcc44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\EditManager">
+      <UniqueIdentifier>{32d46d5e-f071-4adf-874e-45a401569f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\00. Managers">
+      <UniqueIdentifier>{59596001-6fd4-415b-8df0-b1d3b4fccfeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene">
+      <UniqueIdentifier>{dea13479-c5ce-4639-a795-2b5f73bb642a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\GameScene">
+      <UniqueIdentifier>{403e57e9-8e1a-4dc7-927b-cb40d780d6dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\ResourceManager\Resources">
+      <UniqueIdentifier>{cc3a6e6c-0b34-47b8-bb04-1f29486b33c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\00. BaseClass">
+      <UniqueIdentifier>{886d4357-0110-49e2-9727-b428e4886b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\StartScene">
+      <UniqueIdentifier>{d1076357-ac0a-4da0-bc0d-0e1bf0353482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item">
+      <UniqueIdentifier>{a350d8cf-b989-45ae-8c8f-2194d8b030df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Weapon">
+      <UniqueIdentifier>{38c4c19d-f111-44e3-b0bc-6a2e36d18b6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Chest">
+      <UniqueIdentifier>{ad94b63c-67b9-498b-b1a9-6daa1f6a6982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Helmet">
+      <UniqueIdentifier>{255ba4a1-f759-44a5-bf93-039d97e6bf65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Pants">
+      <UniqueIdentifier>{3e65e96f-51c6-4aae-bf06-2ee5c247397d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\00. BaseClass">
+      <UniqueIdentifier>{220b1704-032e-41fd-8237-a6e280d0cf58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\05. Wall">
+      <UniqueIdentifier>{2f5668bb-0ddf-4ae9-ba8e-877e9186d759}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainGame.h">
+      <Filter>Script\00. MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Script\02. GameObject\01. Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Script\02. GameObject\00. BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Script\99. Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Script\99. Define</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Script\03. Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolManager.h">
+      <Filter>Script\03. Manager\PoolManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Script\02. GameObject\02. Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers.h">
+      <Filter>Script\03. Manager\00. Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Script\03. Manager\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollManager.h">
+      <Filter>Script\03. Manager\ScrollManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Script\03. Manager\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EditManager.h">
+      <Filter>Script\03. Manager\EditManager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>Script\03. Manager\KeyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>Script\99. Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Script\99. Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Engine\01. Component\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Engine\01. Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Engine\01. Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Engine\01. Component\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Engine\01. Component\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Engine\99. Else</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Engine\99. Else</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Engine\99. Else</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultWindow.h">
+      <Filter>Engine\00. DefaultWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Script\01. Scene\00. BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Script\01. Scene\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Script\03. Manager\ResourceManager\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>Script\01. Scene\StartScene</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGDI.h">
+      <Filter>Script\99. Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Script\02. GameObject\04. Item\00. BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PickAxe.h">
+      <Filter>Script\02. GameObject\04. Item\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Script\02. GameObject\05. Wall</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>Script\00. MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Script\02. GameObject\01. Player</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Script\02. GameObject\00. BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Script\03. Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolManager.cpp">
+      <Filter>Script\03. Manager\PoolManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Script\02. GameObject\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers.cpp">
+      <Filter>Script\03. Manager\00. Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Script\03. Manager\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollManager.cpp">
+      <Filter>Script\03. Manager\ScrollManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Script\03. Manager\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EditManager.cpp">
+      <Filter>Script\03. Manager\EditManager</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>Script\03. Manager\KeyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Engine\01. Component\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Engine\01. Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Engine\01. Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Engine\01. Component\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>Engine\01. Component\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Engine\99. Else</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultWindow.cpp">
+      <Filter>Engine\00. DefaultWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Script\01. Scene\00. BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Script\01. Scene\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Script\03. Manager\ResourceManager\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>Script\01. Scene\StartScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGDI.cpp">
+      <Filter>Script\99. Define</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Script\02. GameObject\04. Item\00. BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="PickAxe.cpp">
+      <Filter>Script\02. GameObject\04. Item\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Script\02. GameObject\05. Wall</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Engine\리소스 파일</Filter>
+    </Image>
+    <Image Include="DefaultWindow.ico">
+      <Filter>Engine\리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DefaultWindow.rc">
+      <Filter>Engine\리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>Engine\99. Else</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
