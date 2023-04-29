@@ -68,17 +68,11 @@
     <Filter Include="Script\03. Manager\KeyManager">
       <UniqueIdentifier>{78a14a3d-111d-4488-b2d1-48f3cd516d11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\03. Manager\CollisionManager">
-      <UniqueIdentifier>{11545802-8173-498c-8895-cd859268b08c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\03. Manager\PoolManager">
       <UniqueIdentifier>{53454055-7a81-434e-a603-c69a1b97228a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\03. Manager\ScrollManager">
       <UniqueIdentifier>{01f6e6eb-d4eb-45f4-b125-8a8fecbcc44a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\03. Manager\EditManager">
-      <UniqueIdentifier>{32d46d5e-f071-4adf-874e-45a401569f67}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\03. Manager\00. Managers">
       <UniqueIdentifier>{59596001-6fd4-415b-8df0-b1d3b4fccfeb}</UniqueIdentifier>
@@ -119,6 +113,21 @@
     <Filter Include="Script\02. GameObject\05. Wall">
       <UniqueIdentifier>{2f5668bb-0ddf-4ae9-ba8e-877e9186d759}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\02. GameObject\06. Tile">
+      <UniqueIdentifier>{ad7badd7-c21c-48bd-b6bd-c6c557f28467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\EditScene">
+      <UniqueIdentifier>{76d0e109-9b71-4253-9714-20a23f42afb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Graphics\TileGraphics">
+      <UniqueIdentifier>{05673513-e616-4064-9013-9fa384c126d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\TileManager">
+      <UniqueIdentifier>{32d46d5e-f071-4adf-874e-45a401569f67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\00. Managers\CollisionManager">
+      <UniqueIdentifier>{11545802-8173-498c-8895-cd859268b08c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -155,10 +164,7 @@
       <Filter>Script\03. Manager\ScrollManager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Script\03. Manager\CollisionManager</Filter>
-    </ClInclude>
-    <ClInclude Include="EditManager.h">
-      <Filter>Script\03. Manager\EditManager</Filter>
+      <Filter>Script\03. Manager\00. Managers\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
       <Filter>Script\03. Manager\KeyManager</Filter>
@@ -220,6 +226,18 @@
     <ClInclude Include="Wall.h">
       <Filter>Script\02. GameObject\05. Wall</Filter>
     </ClInclude>
+    <ClInclude Include="TileManager.h">
+      <Filter>Script\03. Manager\TileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EditScene.h">
+      <Filter>Script\01. Scene\EditScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Script\02. GameObject\06. Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileGraphics.h">
+      <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -250,10 +268,7 @@
       <Filter>Script\03. Manager\ScrollManager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Script\03. Manager\CollisionManager</Filter>
-    </ClCompile>
-    <ClCompile Include="EditManager.cpp">
-      <Filter>Script\03. Manager\EditManager</Filter>
+      <Filter>Script\03. Manager\00. Managers\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
       <Filter>Script\03. Manager\KeyManager</Filter>
@@ -302,6 +317,18 @@
     </ClCompile>
     <ClCompile Include="Wall.cpp">
       <Filter>Script\02. GameObject\05. Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="TileManager.cpp">
+      <Filter>Script\03. Manager\TileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EditScene.cpp">
+      <Filter>Script\01. Scene\EditScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Script\02. GameObject\06. Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileGraphics.cpp">
+      <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

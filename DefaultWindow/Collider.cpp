@@ -74,6 +74,18 @@ void CCollider::Render(HDC _hDC)
 	);
 }
 
+void CCollider::OnCollisionEnter()
+{
+}
+
+void CCollider::OnCollisionStay()
+{
+}
+
+void CCollider::OnCollisionExit()
+{
+}
+
 
 CCollider::~CCollider()
 {

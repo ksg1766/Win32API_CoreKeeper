@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "Player.h"
+#include "Managers.h"
 
 CGameScene::CGameScene()
 {
@@ -15,6 +16,9 @@ void CGameScene::Initialize(void)
 	CGameObject* pPlayer = new CPlayer;
 	pPlayer->Initialize();
 	m_cObjList[(int)TYPE::PLAYER].push_back(pPlayer);
+
+	CManagers::instance().Tile()->LoadTile();
+
 }
 
 void CGameScene::FixedUpdate(void)

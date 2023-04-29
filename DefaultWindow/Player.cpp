@@ -32,7 +32,7 @@ void CPlayer::Initialize(void)
 	m_pCollider = new CCollider;
 	m_pRigidBody = new CRigidBody;
 	m_pGraphics = new CGraphics;
-	m_pInput = new CInput;
+	//m_pInput = new CInput;
 
 	m_pCollider->Initialize(this);
 	m_pRigidBody->Initialize(this);
@@ -40,13 +40,14 @@ void CPlayer::Initialize(void)
 
 	// 나중에 아이템 획득한 후 처리 과정에서 수정되어야 할 코드
 	CItem* _pPickAxe = new CPickAxe;
-	_pPickAxe->Initialize(this);
+	_pPickAxe->SetOwner(this); // Initialize보다 먼저해줘야함.
+	_pPickAxe->Initialize();
 	m_parrEquipment[(UINT)ITEM::WEAPON] = _pPickAxe;
-	for (int i = 0; i < (UINT)ITEM::END; ++i)
+	/*for (int i = 0; i < (UINT)ITEM::END; ++i)
 	{
 		if (nullptr != m_parrEquipment[i])
-			m_parrEquipment[i]->Initialize(this);
-	}
+			m_parrEquipment[i]->Initialize();
+	}*/
 
 	m_fSpeed = 5.f;
 
@@ -334,16 +335,4 @@ void CPlayer::MoveFrame(void)
 		
 		m_tFrame.dwTime = GetTickCount();
 	}
-}
-
-void CPlayer::OnCollisionEnter()
-{
-}
-
-void CPlayer::OnCollisionStay()
-{
-}
-
-void CPlayer::OnCollisionExit()
-{
 }

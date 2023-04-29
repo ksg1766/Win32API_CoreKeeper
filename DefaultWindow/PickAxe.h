@@ -11,7 +11,7 @@ public:
 	virtual ~CPickAxe();
 
 	// CItem을(를) 통해 상속됨
-	virtual void Initialize(CPlayer* _pOwner) override;
+	virtual void Initialize() override;
 	virtual int	Update(void) override;
 	virtual int LateUpdate(void) override;
 	virtual void Render(HDC hDC) override;
@@ -19,16 +19,9 @@ public:
 
 public:
 
-public:
-	virtual void OnCollisionEnter() override;
-	virtual void OnCollisionStay() override;
-	virtual void OnCollisionExit() override;
-
-
 private:
 	virtual void	SetMotion(void) override;
 	virtual void	MoveFrame(void) override;
-
 
 private:
 	CCollider*	m_pCollider;

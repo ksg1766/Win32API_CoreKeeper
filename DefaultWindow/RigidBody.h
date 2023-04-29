@@ -9,7 +9,7 @@ public:
 	CRigidBody();
 	virtual ~CRigidBody();
 
-	void Initialize(CGameObject* _pHost);
+	virtual void Initialize(CGameObject* _pHost) override;
 	void Update();
 
 	void SetVelocity(Vector2 _vVelocity)

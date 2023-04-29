@@ -14,9 +14,8 @@ CPickAxe::~CPickAxe()
 {
 }
 
-void CPickAxe::Initialize(CPlayer* _pOwner)
+void CPickAxe::Initialize()
 {
-	m_pOwner = _pOwner;
 	m_eType = TYPE::ITEM;
 	m_eItemType = ITEM::WEAPON;
 
@@ -86,7 +85,7 @@ void CPickAxe::SetMotion(void)
 				m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
 				m_tFrame.iFrameEnd = 0;
 				m_tFrame.iMotion = 0;
-				m_tFrame.dwSpeed = 100;
+				m_tFrame.dwSpeed = 30;
 				m_tFrame.dwTime = GetTickCount();
 			}
 			else if (m_eDir == DIR::UP)
@@ -95,7 +94,7 @@ void CPickAxe::SetMotion(void)
 				m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
 				m_tFrame.iFrameEnd = 3;
 				m_tFrame.iMotion = 0;
-				m_tFrame.dwSpeed = 100;
+				m_tFrame.dwSpeed = 30;
 				m_tFrame.dwTime = GetTickCount();
 			}
 			else if (m_eDir == DIR::LEFT)
@@ -104,7 +103,7 @@ void CPickAxe::SetMotion(void)
 				m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
 				m_tFrame.iFrameEnd = 6;
 				m_tFrame.iMotion = 0;
-				m_tFrame.dwSpeed = 100;
+				m_tFrame.dwSpeed = 30;
 				m_tFrame.dwTime = GetTickCount();
 			}
 			else if (m_eDir == DIR::DOWN)
@@ -113,7 +112,7 @@ void CPickAxe::SetMotion(void)
 				m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
 				m_tFrame.iFrameEnd = 9;
 				m_tFrame.iMotion = 0;
-				m_tFrame.dwSpeed = 100;
+				m_tFrame.dwSpeed = 30;
 				m_tFrame.dwTime = GetTickCount();
 			}
 			break;
@@ -171,16 +170,4 @@ void CPickAxe::MoveFrame(void)
 
 		m_tFrame.dwTime = GetTickCount();
 	}
-}
-
-void CPickAxe::OnCollisionEnter()
-{
-}
-
-void CPickAxe::OnCollisionStay()
-{
-}
-
-void CPickAxe::OnCollisionExit()
-{
 }

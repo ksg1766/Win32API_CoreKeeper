@@ -35,10 +35,21 @@ void CMainGame::LateUpdate(void)
 void CMainGame::Render()
 {
 	//Rectangle(m_DC, 0, 0, WINCX, WINCY);
-	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"BackBuffer");
+	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"FullBackBuffer");
 	BitBlt(m_DC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
 	CManagers::instance().Scene()->Get_Current_Scene()->Render(hMemDC);
+
+	++m_iFPS;
+
+	if (m_dwTime + 1000 < GetTickCount())
+	{
+		swprintf_s(m_szFPS, L"FPS : %d", m_iFPS);
+		SetWindowText(g_hWnd, m_szFPS);
+
+		m_iFPS = 0;
+		m_dwTime = GetTickCount();
+	}
 }
 
 void CMainGame::Release(void)

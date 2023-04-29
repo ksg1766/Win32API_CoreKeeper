@@ -5,9 +5,10 @@ enum class TYPE
 	PLAYER	= 0,
 	MONSTER	= 1,
 	BOSS	= 2,
-	WALL	= 3,
-	ITEM	= 4,
-	END		= 5,
+	TILE	= 3,
+	WALL	= 4,
+	ITEM	= 5,
+	END		= 6,
 };
 
 enum class ITEM
@@ -26,6 +27,15 @@ enum class ITEM
 ////	SHOVEL	= 2,
 //	END		= 2,
 //};
+
+enum class RENDERID
+{
+	BACKGROUND,
+	GAMEOBJECT,
+	EFFECT,
+	UI,
+	END,
+};
 
 enum class STATE
 {

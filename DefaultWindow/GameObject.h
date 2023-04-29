@@ -12,16 +12,11 @@ public:
 	virtual ~CGameObject();
 
 public:
-	virtual void	Initialize(void) {};
+	virtual void	Initialize(void)	PURE;
 	virtual int		Update(void)		PURE;
 	virtual int		LateUpdate(void)	PURE;
 	virtual void	Render(HDC hDC)		PURE;
 	virtual void	Release(void)		PURE;
-
-public:
-	virtual void	OnCollisionEnter()	PURE;
-	virtual void	OnCollisionStay()	PURE;
-	virtual void	OnCollisionExit()	PURE;
 
 public:
 	TYPE			GetType()						{ return m_eType; }

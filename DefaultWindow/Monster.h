@@ -14,11 +14,6 @@ public:
 	virtual void Render(HDC hDC)	override;
 	virtual void Release(void)		override;
 
-public:
-	virtual void OnCollisionEnter()	override;
-	virtual void OnCollisionStay()	override;
-	virtual void OnCollisionExit()	override;
-
 //protected:
 //	void		Update_Rect(void);
 //	void		SetDead(bool _IsDead) { m_IsDead = _IsDead; }

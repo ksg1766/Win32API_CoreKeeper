@@ -8,7 +8,7 @@ class CCollider :
 public:
 	CCollider();
 	virtual ~CCollider();
-	void Initialize(CGameObject* _pHost);
+	virtual void Initialize(CGameObject* _pHost) override;
 	void LateUpdate();
 	void Render(HDC _hDC);
 
@@ -20,6 +20,11 @@ public:
 	void SetOffset(Vector2 _vOffset)		{ m_vOffeset = _vOffset; }
 	void SetPosition(Vector2 _vPosition)	{ m_vPosition = _vPosition; }
 	void SetScale(Vector2 _vScale)			{ m_vScale = _vScale; }
+
+public:
+	virtual void	OnCollisionEnter();
+	virtual void	OnCollisionStay();
+	virtual void	OnCollisionExit();
 
 private:
 	Vector2		m_vOffeset;

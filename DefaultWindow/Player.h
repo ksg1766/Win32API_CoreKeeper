@@ -28,11 +28,6 @@ public:
 	void		SetState(STATE _eState) { m_eCurState = _eState; }
 	void		SetVelocity(Vector2 _tVelocity) { m_vVelocity = _tVelocity; }
 
-public:
-	virtual void OnCollisionEnter()	override;
-	virtual void OnCollisionStay()	override;
-	virtual void OnCollisionExit()	override;
-
 private:
 	void		Key_Input(void);
 	void		Action(void);

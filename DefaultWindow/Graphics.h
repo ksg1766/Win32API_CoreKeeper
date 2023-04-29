@@ -6,8 +6,8 @@ class CGraphics :
 public:
 	CGraphics() = default;
 	CGraphics(CGameObject* _pHost) : CComponent(_pHost) {}
-	void Initialize(CGameObject* _pHost);
-	void Render(HDC hDC, HDC hMemDC);
+	virtual void Initialize(CGameObject* _pHost) override;
+	virtual void Render(HDC hDC, HDC hMemDC);
 
 	virtual ~CGraphics();
 };

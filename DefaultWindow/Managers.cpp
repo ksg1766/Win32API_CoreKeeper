@@ -21,7 +21,7 @@ void CManagers::Initialize()
 	m_pResource->Initialize();
 	m_pPool = new CPoolManager;
 	m_pPool->Initialize();
-	m_pEdit = new CEditManager;
+	m_pTile = new CTileManager;
 }
 
 void CManagers::Release()
@@ -32,5 +32,5 @@ void CManagers::Release()
 	Safe_Delete(m_pScene);
 	Safe_Delete(m_pPool);
 	Safe_Delete(m_pResource);
-	Safe_Delete(m_pEdit);
+	Safe_Delete(m_pTile);
 }

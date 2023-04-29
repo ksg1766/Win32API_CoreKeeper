@@ -32,15 +32,3 @@ void CMonster::Render(HDC hDC)
 void CMonster::Release(void)
 {
 }
-
-void CMonster::OnCollisionEnter()
-{
-}
-
-void CMonster::OnCollisionStay()
-{
-}
-
-void CMonster::OnCollisionExit()
-{
-}

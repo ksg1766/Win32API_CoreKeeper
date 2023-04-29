@@ -17,6 +17,9 @@ public:
 private:
 
 	HDC			m_DC;
+	int			m_iFPS;
+	TCHAR		m_szFPS[32];
+	DWORD		m_dwTime;
 
 public:
 	CMainGame();

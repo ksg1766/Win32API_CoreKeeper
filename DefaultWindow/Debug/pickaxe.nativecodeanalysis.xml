@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>89</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>98</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>107</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>116</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>127</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>136</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>145</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>154</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::SetMotion</FUNCTION>
+    <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>164</LINE>
+      <COLUMN>54</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::MoveFrame</FUNCTION>
+    <DECORATED>?MoveFrame@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>162</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>pickaxe.cpp</FILENAME>
+      <LINE>171</LINE>
+      <COLUMN>32</COLUMN>
+    </SFA>
+    <DEFECTCODE>28159</DEFECTCODE>
+    <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
+    <FUNCTION>CPickAxe::MoveFrame</FUNCTION>
+    <DECORATED>?MoveFrame@CPickAxe@@EAEXXZ</DECORATED>
+    <FUNCLINE>162</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

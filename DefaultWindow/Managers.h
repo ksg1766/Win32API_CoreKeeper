@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneManager.h"
 #include "ResourceManager.h"
-#include "EditManager.h"
+#include "TileManager.h"
 #include "PoolManager.h"
 #include "KeyManager.h"
 #include "ScrollManager.h"
@@ -25,7 +25,7 @@ public:
 	CSceneManager*		Scene() { return m_pScene; }
 	CPoolManager*		Pool() { return m_pPool; }
 	CResourceManager*	Resource() { return m_pResource; }
-	CEditManager*		Edit() { return m_pEdit; }
+	CTileManager*		Tile() { return m_pTile; }
 
 private:
 	CManagers();
@@ -39,5 +39,5 @@ private:
 	CSceneManager*		m_pScene;
 	CPoolManager*		m_pPool;
 	CResourceManager*	m_pResource;
-	CEditManager*		m_pEdit;
+	CTileManager*		m_pTile;
 };
