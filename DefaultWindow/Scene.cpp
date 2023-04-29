@@ -15,8 +15,8 @@ void CScene::Release(void)
 {
 	for (int i = 0; i < (int)TYPE::END; ++i)
 	{
-		for (auto& iter : m_cObjList[i])
+		for (auto& iter : m_vecObjList[i])
 			Safe_Delete(iter);
-		m_cObjList[i].clear();
+		m_vecObjList[i].clear();
 	}
 }

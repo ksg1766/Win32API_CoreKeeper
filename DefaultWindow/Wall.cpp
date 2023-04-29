@@ -32,6 +32,7 @@ int CWall::Update(void)
 
 int CWall::LateUpdate(void)
 {
+	m_pCollider->LateUpdate();
 	return 0;
 }
 
@@ -39,10 +40,13 @@ void CWall::Render(HDC hDC)
 {
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"Wall0");
 	m_pGraphics->Render(hDC, hMemDC);
+	m_pCollider->Render(hDC);
 }
 
 void CWall::Release(void)
 {
+	Safe_Delete(m_pCollider);
+	Safe_Delete(m_pGraphics);
 }
 
 void CWall::OnUpdate(DIR _eDir, bool _isCreated)

@@ -34,7 +34,6 @@ void CMainGame::LateUpdate(void)
 
 void CMainGame::Render()
 {
-	//Rectangle(m_DC, 0, 0, WINCX, WINCY);
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"FullBackBuffer");
 	BitBlt(m_DC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
@@ -54,6 +53,6 @@ void CMainGame::Render()
 
 void CMainGame::Release(void)
 {
-	//Safe_Delete<CGameObject*>(m_pPlayer);
+	CManagers::instance().Release();
 	ReleaseDC(g_hWnd, m_DC);
 }

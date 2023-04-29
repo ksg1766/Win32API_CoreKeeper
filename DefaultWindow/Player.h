@@ -35,6 +35,8 @@ private:
 	void		SetMotion(void);
 	void		MoveFrame(void);
 
+	void		OffSet(void);
+
 	STATE		m_eCurState;
 	STATE		m_ePreState;
 	Vector2		m_vVelocity;

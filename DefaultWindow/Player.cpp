@@ -22,7 +22,7 @@ CPlayer::~CPlayer()
 void CPlayer::Initialize(void)
 {
 	m_eType = TYPE::PLAYER;
-	m_vPosition = Vector2(400.f, 300.f);
+	m_vPosition = Vector2(500.f, 400.f);
 	m_vScale = Vector2(44.f, 44.f);
 
 	m_ePreState = STATE::END;
@@ -49,7 +49,7 @@ void CPlayer::Initialize(void)
 			m_parrEquipment[i]->Initialize();
 	}*/
 
-	m_fSpeed = 5.f;
+	m_fSpeed = 10.f;
 
 	m_fTime = 0;
 
@@ -78,6 +78,8 @@ int CPlayer::Update(void)
 
 int CPlayer::LateUpdate(void)
 {
+	OffSet();
+
 	m_pCollider->LateUpdate();
 	MoveFrame();
 	SetMotion();
@@ -100,6 +102,9 @@ void CPlayer::Render(HDC hDC)
 
 void CPlayer::Release(void)
 {
+	Safe_Delete(m_pCollider);
+	Safe_Delete(m_pRigidBody);
+	Safe_Delete(m_pGraphics);
 }
 
 void CPlayer::Key_Input(void)
@@ -335,4 +340,29 @@ void CPlayer::MoveFrame(void)
 		
 		m_tFrame.dwTime = GetTickCount();
 	}
+}
+
+void CPlayer::OffSet(void)
+{
+	float fOffSetminX = 450.f;
+	float fOffSetmaxX = 350.f;
+
+	float fOffSetminY = 350.f;
+	float fOffSetmaxY = 250.f;
+
+	float	fScrollY = CManagers::instance().Scroll()->Get_ScrollY();
+	float	fScrollX = CManagers::instance().Scroll()->Get_ScrollX();
+
+	if (fOffSetminX > m_vPosition.x + fScrollX)	// 플레이어가 왼쪽으로 향하고 있는 경우
+		CManagers::instance().Scroll()->Set_ScrollX(m_fSpeed);
+
+	if (fOffSetmaxX < m_vPosition.x + fScrollX)	// 플레이어가 오른쪽으로 향하고 있는 경우
+		CManagers::instance().Scroll()->Set_ScrollX(-m_fSpeed);
+
+
+	if (fOffSetminY > m_vPosition.y + fScrollY)
+		CManagers::instance().Scroll()->Set_ScrollY(m_fSpeed);
+
+	if (fOffSetmaxY < m_vPosition.y + fScrollY)
+		CManagers::instance().Scroll()->Set_ScrollY(-m_fSpeed);
 }

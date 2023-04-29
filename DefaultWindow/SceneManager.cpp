@@ -23,7 +23,10 @@ void CSceneManager::Load_Scene(CScene* _pNewScene)
 	m_pCurrentScene = _pNewScene;
 	m_pCurrentScene->Initialize();	// 초기 상태의 씬이 호출되는 점 주의
 	if (!m_sceneStack.empty())
+	{
 		m_sceneStack.top()->Release();
+		Safe_Delete(m_sceneStack.top());
+	}
 	m_sceneStack.push(m_pCurrentScene);
 }
 

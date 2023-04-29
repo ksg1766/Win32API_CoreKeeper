@@ -11,7 +11,7 @@ CStartScene::CStartScene()
 
 CStartScene::~CStartScene()
 {
-}
+} 
 
 void CStartScene::Initialize(void)
 {
@@ -42,6 +42,6 @@ void CStartScene::LateUpdate(void)
 
 void CStartScene::Render(HDC m_DC)
 {
-	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"FullStartScene");
+	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"StartScene");
 	GdiTransparentBlt(m_DC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, WINCX, WINCY, RGB(255, 255, 255));
 }

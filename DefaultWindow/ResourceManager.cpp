@@ -15,7 +15,7 @@ CResourceManager::~CResourceManager()
 void CResourceManager::Initialize()
 {
 	Insert_Bmp(L"../Image/BackGround/FullBackBuffer.bmp", L"FullBackBuffer");
-	Insert_Bmp(L"../Image/Background/FullStartScene.bmp", L"FullStartScene");
+	Insert_Bmp(L"../Image/Background/StartScene.bmp", L"StartScene");
 	Insert_Bmp(L"../Image/Object/Player/Miner.bmp", L"Player");
 	Insert_Bmp(L"../Image/Object/Item/PickAxeWood.bmp", L"PickAxeWood");
 	Insert_Bmp(L"../Image/Object/Tileset/tileset0_ground_state0_BMP.bmp", L"tileset0_ground_state0_BMP");

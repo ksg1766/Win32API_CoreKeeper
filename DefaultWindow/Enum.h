@@ -5,9 +5,10 @@ enum class TYPE
 	PLAYER	= 0,
 	MONSTER	= 1,
 	BOSS	= 2,
-	TILE	= 3,
-	WALL	= 4,
-	ITEM	= 5,
+	WALL	= 3,
+	ITEM	= 4,
+	TILE	= 5,
+
 	END		= 6,
 };
 

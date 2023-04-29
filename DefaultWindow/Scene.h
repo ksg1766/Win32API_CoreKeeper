@@ -17,9 +17,9 @@ public:
 	
 	virtual void		Release(void);
 
-	list<CGameObject*>&	GetObjList(TYPE _eType) { return m_cObjList[(int)_eType]; }
+	vector<CGameObject*>&	GetObjList(TYPE _eType) { return m_vecObjList[(int)_eType]; }
 
 protected:
-	list<CGameObject*> m_cObjList[int(TYPE::END)];
+	vector<CGameObject*> m_vecObjList[int(TYPE::END)];
 };
 

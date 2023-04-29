@@ -14,4 +14,5 @@ public:
 	virtual void Update(void)		override;
 	virtual void LateUpdate(void)	override;
 	virtual void Render(HDC m_DC)	override;
+	virtual void Release()	override;
 };

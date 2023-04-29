@@ -15,6 +15,8 @@ public:
 	void Release(void);
 
 public:
+	vector<CGameObject*>& GetTile() { return m_vecTile;	}
+
 	void CreateWall(Vector2 _vPos);
 	void DestroyWall(Vector2 _vPos);
 
@@ -22,7 +24,7 @@ public:
 	void DestroyTile(Vector2 _vPos);
 
 	void Invoke(Vector2 _pPos, bool _IsCreated);
-
+	 
 public:
 	void	PickingTile(POINT _pt, int _iDrawIDX, int _iDrawIDY, int _iOption);
 	void	SaveTile(void);
@@ -30,5 +32,6 @@ public:
 
 private:
 	vector<CGameObject*>	m_vecTile;
+	vector<CGameObject*>	m_vecWall;
 };
 

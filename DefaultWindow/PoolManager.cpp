@@ -42,9 +42,9 @@ void CPoolManager::MonsterPool::Initialize()
 {
 	for (int i = 0; i < iMaxMonsterPool; ++i)
 	{
-		CGameObject* _cMonster = new CMonster;
-		dynamic_cast<CMonster*>(_cMonster)->Initialize();
-		m_MonsterList.push_back(_cMonster);
+		//CGameObject* _cMonster = new CMonster;
+		//dynamic_cast<CMonster*>(_cMonster)->Initialize();
+		//m_MonsterList.push_back(_cMonster);
 	}
 }
 

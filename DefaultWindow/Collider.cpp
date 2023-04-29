@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "Collider.h"
-//#include "Managers.h"
+#include "Managers.h"
 #include "GameObject.h"
 #include "SelectGDI.h"
 #include "Item.h"
 #include "Player.h"
 
-CCollider::CCollider() : CComponent(), m_iCol(0), m_vOffeset(), m_vPosition(), m_vScale()
+CCollider::CCollider() : CComponent(), m_iCol(0), m_vOffset(), m_vPosition(), m_vScale()
 {
 }
 
@@ -15,8 +15,8 @@ void CCollider::Initialize(CGameObject* _pHost)
 	m_pHost = _pHost;
 	if (TYPE::PLAYER == m_pHost->GetType() || TYPE::MONSTER == m_pHost->GetType() || TYPE::BOSS == m_pHost->GetType())
 	{
-		m_vOffeset = Vector2(0.f, m_pHost->GetScale().y * 0.3f);
-		m_vPosition = m_pHost->GetPosition() + m_vOffeset;
+		m_vOffset = Vector2(0.f, m_pHost->GetScale().y * 0.3f);
+		m_vPosition = m_pHost->GetPosition() + m_vOffset;
 		m_vScale = Vector2(m_pHost->GetScale().x * 0.5f, m_pHost->GetScale().y * 0.4f);
 	}
 	// 나눌 필요가 있는지 의문
@@ -24,11 +24,17 @@ void CCollider::Initialize(CGameObject* _pHost)
 	{
 		if (ITEM::WEAPON == dynamic_cast<CItem*>(m_pHost)->GetItemType())
 		{
-			m_vOffeset = Vector2::Zero();
-			m_vPosition = dynamic_cast<CItem*>(m_pHost)->GetOwner()->GetPosition() + m_vOffeset;
+			m_vOffset = Vector2::Zero();
+			m_vPosition = dynamic_cast<CItem*>(m_pHost)->GetOwner()->GetPosition() + m_vOffset;
 			m_vScale = dynamic_cast<CItem*>(m_pHost)->GetOwner()->GetScale();
 			//m_vScale = Vector2(66.f * 3.f, 66.f);
 		}
+	}
+
+	else if (TYPE::WALL == m_pHost->GetType())
+	{
+		m_vPosition = m_pHost->GetPosition();
+		m_vScale = Vector2(m_pHost->GetScale().x, m_pHost->GetScale().y);
 	}
 }
 
@@ -58,7 +64,7 @@ void CCollider::LateUpdate()
 		}
 	}
 	else
-		m_vPosition = m_pHost->GetPosition() + m_vOffeset;
+		m_vPosition = m_pHost->GetPosition() + m_vOffset;
 }
 
 void CCollider::Render(HDC _hDC)
@@ -66,11 +72,14 @@ void CCollider::Render(HDC _hDC)
 	CSelectGDI temp1(_hDC, PEN_TYPE::GREEN);
 	CSelectGDI temp2(_hDC, BRUSH_TYPE::HOLLOW);
 
+	float	fScrollX = CManagers::instance().Scroll()->Get_ScrollX();
+	float	fScrollY = CManagers::instance().Scroll()->Get_ScrollY();
+
 	Rectangle(_hDC,
-		(int)(m_vPosition.x - m_vScale.x / 2.f),
-		(int)(m_vPosition.y - m_vScale.y / 2.f),
-		(int)(m_vPosition.x + m_vScale.x / 2.f),
-		(int)(m_vPosition.y + m_vScale.y / 2.f)
+		(int)(m_vPosition.x - m_vScale.x / 2.f + fScrollX),
+		(int)(m_vPosition.y - m_vScale.y / 2.f + fScrollY),
+		(int)(m_vPosition.x + m_vScale.x / 2.f + fScrollX),
+		(int)(m_vPosition.y + m_vScale.y / 2.f + fScrollY)
 	);
 }
 

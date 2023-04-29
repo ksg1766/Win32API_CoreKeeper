@@ -123,5 +123,5 @@ void CTile::OnUpdate(DIR _eDir, bool _isCreated)
 
 void CTile::Release(void)
 {
-
+	Safe_Delete(m_pGraphics);
 }

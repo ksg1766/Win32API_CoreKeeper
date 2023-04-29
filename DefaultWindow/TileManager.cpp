@@ -120,7 +120,7 @@ void CTileManager::CreateTile(Vector2 _vPos)
 	Safe_Delete(m_vecTile[iIndex]);
 	pObj->SetPosition(Vector2(fX, fY));
 	pObj->Initialize();
-	Safe_Delete(m_vecTile[iIndex]);
+	//Safe_Delete(m_vecTile[iIndex]);
 	m_vecTile[iIndex] = pObj;
 	//dynamic_cast<CTile*>(m_vecTile[iIndex])->SetTile(_iDrawIDX, _iDrawIDY, _iOption);
 }
@@ -158,10 +158,10 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 		if (_IsCreated)
 		{
 			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
-			if (TYPE::TILE == (m_vecTile[iIndex + 1 - TILEX - 2])->GetType())
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 2])->OnUpdate(DIR::RIGHT, _IsCreated);
-			if (TYPE::TILE == (m_vecTile[iIndex + 1 - TILEX + 1])->GetType())
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX + 1])->OnUpdate(DIR::LEFT, _IsCreated); 
+			if (TYPE::TILE == (m_vecTile[iIndex - 1 - TILEX])->GetType())
+				dynamic_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
+			if (TYPE::TILE == (m_vecTile[iIndex + 2 - TILEX])->GetType())
+				dynamic_cast<CTile*>(m_vecTile[iIndex + 2 - TILEX])->OnUpdate(DIR::LEFT, _IsCreated); 
 		}
 		else
 		{
@@ -217,27 +217,36 @@ void CTileManager::SaveTile(void)
 		return;
 	}
 
+	TYPE	eType = TYPE::END;
 	int		iDrawIDX = 0, iDrawIDY = 0, iOption = 0;
+	unsigned char	chWallAround = 0;
 	DWORD	dwByte = 0;
 
 	for (auto& iter : m_vecTile)
 	{
 		if (TYPE::TILE == iter->GetType())
 		{
+			eType	= dynamic_cast<CTile*>(iter)->GetType();
 			iDrawIDX = dynamic_cast<CTile*>(iter)->GetDrawIDX();
 			iDrawIDY = dynamic_cast<CTile*>(iter)->GetDrawIDY();
 			iOption = dynamic_cast<CTile*>(iter)->GetOption();
+			chWallAround = dynamic_cast<CTile*>(iter)->GetWallAround();
 		}
 		else if(TYPE::WALL == iter->GetType())
 		{
+			eType = dynamic_cast<CWall*>(iter)->GetType();
 			iDrawIDX = dynamic_cast<CWall*>(iter)->GetDrawIDX();
 			iDrawIDY = dynamic_cast<CWall*>(iter)->GetDrawIDY();
 			iOption = dynamic_cast<CWall*>(iter)->GetOption();
+			chWallAround = dynamic_cast<CWall*>(iter)->GetWallAround();
 		}
+
+		WriteFile(hFile, &eType, sizeof(TYPE), &dwByte, nullptr);
 		WriteFile(hFile, &(iter->GetPosition()), sizeof(Vector2), &dwByte, nullptr);
 		WriteFile(hFile, &iDrawIDX, sizeof(int), &dwByte, nullptr);
 		WriteFile(hFile, &iDrawIDY, sizeof(int), &dwByte, nullptr);
 		WriteFile(hFile, &iOption, sizeof(int), &dwByte, nullptr);
+		WriteFile(hFile, &chWallAround, sizeof(unsigned char), &dwByte, nullptr);
 	}
 
 	CloseHandle(hFile);
@@ -266,35 +275,38 @@ void CTileManager::LoadTile(void)
 
 	Vector2 vPosition{};
 
+	TYPE	eType = TYPE::END;
 	int		iDrawIDX = 0, iDrawIDY = 0, iOption = 0;
+	unsigned char	chWallAround = 0;
 	DWORD	dwByte = 0;
 
 	while (true)
 	{
+		ReadFile(hFile, &eType, sizeof(TYPE), &dwByte, nullptr);
 		ReadFile(hFile, &vPosition, sizeof(Vector2), &dwByte, nullptr);
 		ReadFile(hFile, &iDrawIDX, sizeof(int), &dwByte, nullptr);
 		ReadFile(hFile, &iDrawIDY, sizeof(int), &dwByte, nullptr);
 		ReadFile(hFile, &iOption, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &chWallAround, sizeof(unsigned char), &dwByte, nullptr);
 
 		if (0 == dwByte)
 			break;
 
-		//CGameObject*	pObj = CAbstractFactory<CTile>::Create(tInfo.fX, tInfo.fY);
-		if (0 == iOption)
+		if (TYPE::TILE == eType)
 		{
 			CGameObject*	pObj = new CTile();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CTile*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption);
+			dynamic_cast<CTile*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}
-		else if (1 == iOption)
+		else if (TYPE::WALL == eType)
 		{
 			CGameObject*	pObj = new CWall();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CWall*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption);
+			dynamic_cast<CWall*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}
