@@ -7,6 +7,7 @@
 CTile::CTile()
 	: m_iDrawIDX(14), m_iDrawIDY(0), m_iOption(0)
 {
+	m_IsDead = false;
 }
 
 CTile::~CTile()
@@ -16,6 +17,7 @@ CTile::~CTile()
 
 void CTile::Initialize()
 {
+	m_IsDead = false;
 	m_eType = TYPE::TILE;
 	m_vScale = Vector2(TILECX, TILECY);
 

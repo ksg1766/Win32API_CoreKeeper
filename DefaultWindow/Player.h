@@ -1,10 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
-class CCollider;
-class CRigidBody;
-class CGraphics;
-class CInput;
+//class CInput;
+class CRay;
 class CItem;
 class CPlayer :	public CGameObject
 {
@@ -25,8 +23,14 @@ public:
 	Vector2		GetVelocity()		{ return m_vVelocity; }
 	FRAME		GetFrame()			{ return m_tFrame; }
 
+	CCollider*	GetWallTarget()		{ return m_pWallTarget; }
+	CRay*		GetRay()			{ return m_pRay; }
+	//
+	CItem**		GetEquipList()		{ return m_parrEquipment; }
+
 	void		SetState(STATE _eState) { m_eCurState = _eState; }
 	void		SetVelocity(Vector2 _tVelocity) { m_vVelocity = _tVelocity; }
+	void		SetWallTarget(CCollider* _pWallTarget) { m_pWallTarget = _pWallTarget; }
 
 private:
 	void		Key_Input(void);
@@ -40,12 +44,13 @@ private:
 	STATE		m_eCurState;
 	STATE		m_ePreState;
 	Vector2		m_vVelocity;
+	// 벽은 한번에 한 개만 충돌해야 하므로
+
+	CCollider*	m_pWallTarget;	// 상위 클래스로 옮기는 것 고려
 
 	CItem*		m_parrEquipment[(UINT)ITEM::END];
 
-	CCollider*		m_pCollider;
-	CRigidBody*		m_pRigidBody;
-	CGraphics*		m_pGraphics;
-	CInput*			m_pInput;
+	CRay*		m_pRay;
+	//CInput*			m_pInput;
 };
 

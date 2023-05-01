@@ -13,12 +13,12 @@ void CSceneManager::Initialize()
 
 }
 
-void CSceneManager::Load_Prev_Scene()
+void CSceneManager::LoadPrevScene()
 {
 	m_pCurrentScene = m_sceneStack.top();
 }
 
-void CSceneManager::Load_Scene(CScene* _pNewScene)
+void CSceneManager::LoadScene(CScene* _pNewScene)
 {
 	m_pCurrentScene = _pNewScene;
 	m_pCurrentScene->Initialize();	// 초기 상태의 씬이 호출되는 점 주의
@@ -30,12 +30,12 @@ void CSceneManager::Load_Scene(CScene* _pNewScene)
 	m_sceneStack.push(m_pCurrentScene);
 }
 
-void CSceneManager::Terminate_Scene()
+void CSceneManager::TerminateScene()
 {
 	m_pCurrentScene->Release();
 	m_sceneStack.pop();
 	if (!m_sceneStack.empty())
-		Load_Prev_Scene();
+		LoadPrevScene();
 	else
 		;	// Terminate Game
 

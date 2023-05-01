@@ -62,7 +62,7 @@ void CPoolManager::MonsterPool::Create_Monster(CGameObject* _pPlayer)
 
 	(*iterMonster)->SetDead(false);
 
-	CManagers::instance().Scene()->Get_Current_Scene()->GetObjList(TYPE::MONSTER).push_back(*iterMonster);
+	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::MONSTER).push_back(*iterMonster);
 	m_MonsterList.erase(iterMonster);
 }
 

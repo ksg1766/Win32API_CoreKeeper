@@ -125,8 +125,17 @@
     <Filter Include="Script\03. Manager\TileManager">
       <UniqueIdentifier>{32d46d5e-f071-4adf-874e-45a401569f67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\03. Manager\00. Managers\CollisionManager">
+    <Filter Include="Script\02. GameObject\Ray">
+      <UniqueIdentifier>{411216fc-60a8-47eb-afab-3bbf1cd90f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\EventManager">
+      <UniqueIdentifier>{c960d4fa-e468-40c5-9a5c-b1959c75725e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\CollisionManager">
       <UniqueIdentifier>{11545802-8173-498c-8895-cd859268b08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\00. Glurch">
+      <UniqueIdentifier>{8e1989ba-3e96-44a2-bba1-58286bcf6a66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +173,7 @@
       <Filter>Script\03. Manager\ScrollManager</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Script\03. Manager\00. Managers\CollisionManager</Filter>
+      <Filter>Script\03. Manager\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="KeyManager.h">
       <Filter>Script\03. Manager\KeyManager</Filter>
@@ -238,6 +247,15 @@
     <ClInclude Include="TileGraphics.h">
       <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
     </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Script\02. GameObject\Ray</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Script\03. Manager\EventManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Glurch.h">
+      <Filter>Script\02. GameObject\03. Boss\00. Glurch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -268,7 +286,7 @@
       <Filter>Script\03. Manager\ScrollManager</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Script\03. Manager\00. Managers\CollisionManager</Filter>
+      <Filter>Script\03. Manager\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
       <Filter>Script\03. Manager\KeyManager</Filter>
@@ -329,6 +347,15 @@
     </ClCompile>
     <ClCompile Include="TileGraphics.cpp">
       <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>Script\02. GameObject\Ray</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Script\03. Manager\EventManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Glurch.cpp">
+      <Filter>Script\02. GameObject\03. Boss\00. Glurch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,8 +2,9 @@
 #include "Item.h"
 
 
-CItem::CItem():m_eItemType(ITEM::END)
+CItem::CItem():CGameObject(), m_eItemType(ITEM::END)
 {
+	m_IsDead = false;
 }
 
 

@@ -27,12 +27,12 @@ void CStartScene::Update(void)
 	if (CManagers::instance().Key()->Key_Down(VK_RETURN))
 	{
 		CScene* pGameScene = new CGameScene;
-		CManagers::instance().Scene()->Load_Scene(pGameScene);
+		CManagers::instance().Scene()->LoadScene(pGameScene);
 	}
 	else if (CManagers::instance().Key()->Key_Down('E'))
 	{
 		CScene* pEditScene = new CEditScene;
-		CManagers::instance().Scene()->Load_Scene(pEditScene);
+		CManagers::instance().Scene()->LoadScene(pEditScene);
 	}
 }
 

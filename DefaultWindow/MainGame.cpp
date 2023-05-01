@@ -19,17 +19,17 @@ void CMainGame::Initialize(void)
 	CManagers::instance().Initialize();
 
 	CScene* cStartScene = new CStartScene;
-	CManagers::instance().Scene()->Load_Scene(cStartScene);
+	CManagers::instance().Scene()->LoadScene(cStartScene);
 }
 
 void CMainGame::Update(void)
 {
-	CManagers::instance().Scene()->Get_Current_Scene()->Update();
+	CManagers::instance().Scene()->CurrentScene()->Update();
 }
 
 void CMainGame::LateUpdate(void)
 {
-	CManagers::instance().Scene()->Get_Current_Scene()->LateUpdate();
+	CManagers::instance().Scene()->CurrentScene()->LateUpdate();
 }
 
 void CMainGame::Render()
@@ -37,7 +37,7 @@ void CMainGame::Render()
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"FullBackBuffer");
 	BitBlt(m_DC, 0, 0, WINCX, WINCY, hMemDC, 0, 0, SRCCOPY);
 
-	CManagers::instance().Scene()->Get_Current_Scene()->Render(hMemDC);
+	CManagers::instance().Scene()->CurrentScene()->Render(hMemDC);
 
 	++m_iFPS;
 
@@ -49,6 +49,8 @@ void CMainGame::Render()
 		m_iFPS = 0;
 		m_dwTime = GetTickCount();
 	}
+
+	CManagers::instance().Event()->Update();
 }
 
 void CMainGame::Release(void)

@@ -1,4 +1,5 @@
 #pragma once
+#include "Enum.h"
 
 typedef struct tagInfo
 {

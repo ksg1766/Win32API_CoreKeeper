@@ -6,14 +6,17 @@
 
 CWall::CWall() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(1)
 {
+	m_IsDead = false;
 }
 
 CWall::~CWall()
 {
+	Release();
 }
 
 void CWall::Initialize(void)
 {
+	m_IsDead = false;
 	m_eType = TYPE::WALL;
 	m_vScale = Vector2(TILECX, TILECY);
 	m_chWallAround = 0b00000000;
@@ -162,4 +165,100 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 			}
 		}
 	}
+}
+
+void CWall::OnCollisionEnter(CCollider * _pOther)
+{
+	CGameObject* pOtherObj = _pOther->GetHost();
+	if (TYPE::PLAYER == pOtherObj->GetType())
+	{
+		Vector2 vOtherPos = _pOther->GetPosition();
+		Vector2 vOtherScale = _pOther->GetScale();
+
+		Vector2 vThisPos = GetCollider()->GetPosition();
+		Vector2 vThisScale = GetCollider()->GetScale();
+
+		float fWidth = fabs(vOtherPos.x - vThisPos.x);
+		float fHeight = fabs(vOtherPos.y - vThisPos.y);
+		float fRadiusX = (vOtherScale.x / 2.f + vThisScale.x / 2.f) - fWidth;
+		float fRadiusY = (vOtherScale.y / 2.f + vThisScale.y / 2.f) - fHeight;
+
+		if (fRadiusX < fRadiusY)
+		{
+			if (vOtherPos.x < vThisPos.x)
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.x -= fRadiusX;
+			}
+			else
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.x += fRadiusX;
+			}
+		}
+		else
+		{
+			if (vOtherPos.y < vThisPos.y)
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.y -= fRadiusY;
+			}
+			else
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.y += fRadiusY;
+			}
+		}
+		pOtherObj->SetPosition(vOtherPos);
+	}
+}
+
+void CWall::OnCollisionStay(CCollider * _pOther)
+{
+	CGameObject* pOtherObj = _pOther->GetHost();
+	if (TYPE::PLAYER == pOtherObj->GetType())
+	{
+		Vector2 vOtherPos = _pOther->GetPosition();
+		Vector2 vOtherScale = _pOther->GetScale();
+
+		Vector2 vThisPos = GetCollider()->GetPosition();
+		Vector2 vThisScale = GetCollider()->GetScale();
+
+		float fWidth = fabs(vOtherPos.x - vThisPos.x);
+		float fHeight = fabs(vOtherPos.y - vThisPos.y);
+		float fRadiusX = (vOtherScale.x / 2.f + vThisScale.x / 2.f) - fWidth;
+		float fRadiusY = (vOtherScale.y / 2.f + vThisScale.y / 2.f) - fHeight;
+
+		if (fRadiusX < fRadiusY)
+		{
+			if (vOtherPos.x < vThisPos.x)
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.x -= fRadiusX;
+			}
+			else
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.x += fRadiusX;
+			}
+		}
+		else
+		{
+			if (vOtherPos.y < vThisPos.y)
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.y -= fRadiusY;
+			}
+			else
+			{
+				vOtherPos = pOtherObj->GetPosition();
+				vOtherPos.y += fRadiusY;
+			}
+		}
+		pOtherObj->SetPosition(vOtherPos);
+	}
+}
+
+void CWall::OnCollisionExit(CCollider * _pOther)
+{
 }

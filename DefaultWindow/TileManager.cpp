@@ -154,18 +154,21 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 	}
 	else
 	{
-		dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
-		if (_IsCreated)
-		{
-			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
-			if (TYPE::TILE == (m_vecTile[iIndex - 1 - TILEX])->GetType())
-				dynamic_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
-			if (TYPE::TILE == (m_vecTile[iIndex + 2 - TILEX])->GetType())
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 2 - TILEX])->OnUpdate(DIR::LEFT, _IsCreated); 
-		}
-		else
+		if (TYPE::TILE == m_vecTile[iIndex + 1 - TILEX - 1]->GetType())
 		{
 			dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+			if (_IsCreated)
+			{
+				dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
+				if (TYPE::TILE == (m_vecTile[iIndex - 1 - TILEX])->GetType())
+					dynamic_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
+				if (TYPE::TILE == (m_vecTile[iIndex + 2 - TILEX])->GetType())
+					dynamic_cast<CTile*>(m_vecTile[iIndex + 2 - TILEX])->OnUpdate(DIR::LEFT, _IsCreated);
+			}
+			else
+			{
+				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+			}
 		}
 	}
 
@@ -203,7 +206,7 @@ void CTileManager::PickingTile(POINT _pt, int _iDrawIDX, int _iDrawIDY, int _iOp
 
 void CTileManager::SaveTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/Tile.dat",
+	HANDLE	hFile = CreateFile(L"../Data/CollisionOptimize.dat",
 		GENERIC_WRITE,
 		NULL,
 		NULL,
@@ -255,7 +258,7 @@ void CTileManager::SaveTile(void)
 
 void CTileManager::LoadTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/Tile.dat",
+	HANDLE	hFile = CreateFile(L"../Data/CollisionOptimize.dat",
 		GENERIC_READ,
 		NULL,
 		NULL,

@@ -8,13 +8,13 @@ public:
 	CSceneManager();
 
 	void Initialize();
-	void Load_Prev_Scene();
-	void Load_Scene(CScene* _pCurrentScene);
-	void Terminate_Scene();
+	void LoadPrevScene();
+	void LoadScene(CScene* _pCurrentScene);
+	void TerminateScene();
 	void Release();
 
-	CScene* Get_Current_Scene() { return m_pCurrentScene; };
-	void*	Set_Current_Scene(CScene* _pCurrentScene) { m_pCurrentScene = _pCurrentScene; };
+	CScene* CurrentScene() { return m_pCurrentScene; };
+	void*	SetCurrentScene(CScene* _pCurrentScene) { m_pCurrentScene = _pCurrentScene; };
 	HBRUSH	GetBrush(BRUSH_TYPE _eBrush) { return m_arrBrush[(UINT)_eBrush]; }
 	HPEN	GetPen(PEN_TYPE _ePen) { return m_arrPen[(UINT)_ePen]; }
 

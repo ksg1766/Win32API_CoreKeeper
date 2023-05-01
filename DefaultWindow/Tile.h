@@ -30,7 +30,7 @@ public:
 
 	void		OnUpdate(DIR _eDir, bool _isCreated);
 
-protected:
+private:
 	int			m_iDrawIDX;
 	int			m_iDrawIDY;
 	int			m_iOption;	// 지금은 Dummy지만 나중에 타일에 상태부여하거나 할때 쓸 수 있음.

@@ -41,189 +41,215 @@
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>tilemanager.cpp</FILENAME>
-      <LINE>263</LINE>
+      <LINE>285</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>6031</DEFECTCODE>
     <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
     <FUNCTION>CTileManager::LoadTile</FUNCTION>
     <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
-    <FUNCLINE>236</FUNCLINE>
+    <FUNCLINE>256</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>tilemanager.cpp</FILENAME>
-      <LINE>264</LINE>
+      <LINE>286</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>6031</DEFECTCODE>
     <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
     <FUNCTION>CTileManager::LoadTile</FUNCTION>
     <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
-    <FUNCLINE>236</FUNCLINE>
+    <FUNCLINE>256</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>tilemanager.cpp</FILENAME>
-      <LINE>265</LINE>
+      <LINE>287</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>6031</DEFECTCODE>
     <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
     <FUNCTION>CTileManager::LoadTile</FUNCTION>
     <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
-    <FUNCLINE>236</FUNCLINE>
+    <FUNCLINE>256</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>tilemanager.cpp</FILENAME>
-      <LINE>266</LINE>
+      <LINE>288</LINE>
       <COLUMN>10</COLUMN>
     </SFA>
     <DEFECTCODE>6031</DEFECTCODE>
     <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
     <FUNCTION>CTileManager::LoadTile</FUNCTION>
     <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
-    <FUNCLINE>236</FUNCLINE>
+    <FUNCLINE>256</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>tilemanager.cpp</FILENAME>
+      <LINE>289</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
+    <FUNCTION>CTileManager::LoadTile</FUNCTION>
+    <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
+    <FUNCLINE>256</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT><DEFECT>
+    <SFA>
+      <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
+      <FILENAME>tilemanager.cpp</FILENAME>
+      <LINE>290</LINE>
+      <COLUMN>10</COLUMN>
+    </SFA>
+    <DEFECTCODE>6031</DEFECTCODE>
+    <DESCRIPTION>반환 값이 무시되었습니다. 'ReadFile'.</DESCRIPTION>
+    <FUNCTION>CTileManager::LoadTile</FUNCTION>
+    <DECORATED>?LoadTile@CTileManager@@QAEXXZ</DECORATED>
+    <FUNCLINE>256</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>89</LINE>
+      <LINE>95</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>98</LINE>
+      <LINE>104</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>107</LINE>
+      <LINE>113</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>116</LINE>
+      <LINE>122</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>127</LINE>
+      <LINE>133</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>136</LINE>
+      <LINE>142</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>145</LINE>
+      <LINE>151</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>154</LINE>
+      <LINE>160</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>74</FUNCLINE>
+    <FUNCLINE>80</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>164</LINE>
+      <LINE>170</LINE>
       <COLUMN>54</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::MoveFrame</FUNCTION>
     <DECORATED>?MoveFrame@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>162</FUNCLINE>
+    <FUNCLINE>168</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>pickaxe.cpp</FILENAME>
-      <LINE>171</LINE>
+      <LINE>177</LINE>
       <COLUMN>32</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPickAxe::MoveFrame</FUNCTION>
     <DECORATED>?MoveFrame@CPickAxe@@EAEXXZ</DECORATED>
-    <FUNCLINE>162</FUNCLINE>
+    <FUNCLINE>168</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>maingame.cpp</FILENAME>
-      <LINE>45</LINE>
+      <LINE>44</LINE>
       <COLUMN>35</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
@@ -236,7 +262,7 @@
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>maingame.cpp</FILENAME>
-      <LINE>51</LINE>
+      <LINE>50</LINE>
       <COLUMN>25</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
@@ -249,195 +275,195 @@
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>62</LINE>
+      <LINE>66</LINE>
       <COLUMN>31</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::Initialize</FUNCTION>
     <DECORATED>?Initialize@CPlayer@@UAEXXZ</DECORATED>
-    <FUNCLINE>22</FUNCLINE>
+    <FUNCLINE>23</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>213</LINE>
+      <LINE>235</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>222</LINE>
+      <LINE>244</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>231</LINE>
+      <LINE>253</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>240</LINE>
+      <LINE>262</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>252</LINE>
+      <LINE>274</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>261</LINE>
+      <LINE>283</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>270</LINE>
+      <LINE>292</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>279</LINE>
+      <LINE>301</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>291</LINE>
+      <LINE>313</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>300</LINE>
+      <LINE>322</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>309</LINE>
+      <LINE>331</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>318</LINE>
+      <LINE>340</LINE>
       <COLUMN>34</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::SetMotion</FUNCTION>
     <DECORATED>?SetMotion@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>199</FUNCLINE>
+    <FUNCLINE>221</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>329</LINE>
+      <LINE>351</LINE>
       <COLUMN>54</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::MoveFrame</FUNCTION>
     <DECORATED>?MoveFrame@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>327</FUNCLINE>
+    <FUNCLINE>349</FUNCLINE>
     <PATH></PATH>
   </DEFECT><DEFECT>
     <SFA>
       <FILEPATH>c:\users\pc\desktop\jusin\137_김성규_3rd_api\win32api_corekeeper\defaultwindow\</FILEPATH>
       <FILENAME>player.cpp</FILENAME>
-      <LINE>336</LINE>
+      <LINE>358</LINE>
       <COLUMN>32</COLUMN>
     </SFA>
     <DEFECTCODE>28159</DEFECTCODE>
     <DESCRIPTION>'GetTickCount64'을(를) 'GetTickCount' 대신 사용하십시오. 이유: GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem</DESCRIPTION>
     <FUNCTION>CPlayer::MoveFrame</FUNCTION>
     <DECORATED>?MoveFrame@CPlayer@@AAEXXZ</DECORATED>
-    <FUNCLINE>327</FUNCLINE>
+    <FUNCLINE>349</FUNCLINE>
     <PATH></PATH>
   </DEFECT></DEFECTS>

@@ -77,7 +77,7 @@ void CEditScene::Update(void)
 		CManagers::instance().Tile()->LoadTile();
 
 	if (CManagers::instance().Key()->Key_Pressing(VK_CONTROL) && CManagers::instance().Key()->Key_Down('Q'))
-		CManagers::instance().Scene()->Terminate_Scene();
+		CManagers::instance().Scene()->TerminateScene();
 }
 
 void CEditScene::LateUpdate(void)

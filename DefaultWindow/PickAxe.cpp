@@ -5,13 +5,15 @@
 #include "Managers.h"
 #include "Player.h"
 
-CPickAxe::CPickAxe()
+CPickAxe::CPickAxe():CItem()
 {
+	m_IsDead = false;
 }
 
 
 CPickAxe::~CPickAxe()
 {
+	Release();
 }
 
 void CPickAxe::Initialize()
@@ -25,11 +27,17 @@ void CPickAxe::Initialize()
 	m_ePreState = STATE::END;
 	m_eCurState = STATE::IDLE;
 
+	m_IsUsing = false;
+
 	m_pCollider = new CCollider;
 	m_pGraphics = new CGraphics;
+
 	m_pCollider->Initialize(this);
+	m_pCollider->SetScale(m_pOwner->GetScale());
+
 	m_pGraphics->Initialize(this);
 	m_pFrameKey = L"PickAxeWood";
+
 	m_eDir = m_pOwner->GetDir();
 }
 
@@ -39,18 +47,41 @@ int CPickAxe::Update(void)
 	m_vPosition = m_pOwner->GetPosition();
 	m_ePreState = m_eCurState;
 	m_eCurState = m_pOwner->GetState();
+
+	switch (m_eDir)
+	{
+	case DIR::RIGHT:
+		m_pCollider->SetOffset(Vector2(m_pOwner->GetScale().x, m_pOwner->GetScale().y * 0.3f));
+		break;
+	case DIR::UP:
+		m_pCollider->SetOffset(Vector2(0.f, m_pOwner->GetScale().y * -0.7f));
+		break;
+	case DIR::DOWN:
+		m_pCollider->SetOffset(Vector2(0.f, m_pOwner->GetScale().y * 1.3f));
+		break;
+	case DIR::LEFT:
+		m_pCollider->SetOffset(Vector2(-m_pOwner->GetScale().x, m_pOwner->GetScale().y * 0.3f));
+		break;
+	}
+
 	return 0;
 }
 
 int CPickAxe::LateUpdate(void)
 {
-	if (STATE::ATTACK != m_eCurState)
-		m_pCollider->SetScale(Vector2::Zero());
-	else
-		m_pCollider->SetScale(m_pOwner->GetScale());
-	
-	m_pCollider->LateUpdate();
+	//if (STATE::ATTACK != m_eCurState)
+	//{
+	//	m_pCollider->SetScale(Vector2::Zero());
+	//	//m_pCollider->SetPosition(m_pOwner->GetCollider()->GetPosition());
+	//	m_pCollider->SetPosition(Vector2(-100.f, -100.f));
+	//}
+	//else
+	//{
+	//	m_pCollider->SetScale(m_pOwner->GetScale());
 
+	//}
+	m_pCollider->LateUpdate();
+	
 	MoveFrame();
 	SetMotion();
 
@@ -62,13 +93,14 @@ void CPickAxe::Render(HDC hDC)
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(m_pFrameKey);
 
 	m_pGraphics->Render(hDC, hMemDC);
-	m_pCollider->Render(hDC);
-	//if (STATE::ATTACK == m_eCurState)
-	//	m_parrEquipment[(UINT)ITEM::WEAPON]->Render(hDC);
+	if(m_IsUsing)
+		m_pCollider->Render(hDC);
 }
 
 void CPickAxe::Release(void)
 {
+	Safe_Delete(m_pCollider);
+	Safe_Delete(m_pGraphics);
 }
 
 void CPickAxe::SetMotion(void)
@@ -79,6 +111,8 @@ void CPickAxe::SetMotion(void)
 		{
 		case STATE::IDLE:
 		case STATE::MOVE:
+			if(m_IsUsing)			// 여기말고 충돌 검사 끝나고 false로 만들 것
+				m_IsUsing = false;
 			if (m_eDir == DIR::RIGHT)
 			{
 				m_tFrame.iFrameStart = 0;
@@ -166,8 +200,28 @@ void CPickAxe::MoveFrame(void)
 		++m_tFrame.iFrameStart;
 
 		if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
+		{
 			m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
-
+		}
 		m_tFrame.dwTime = GetTickCount();
 	}
+}
+
+void CPickAxe::OnCollisionEnter(CCollider * _pOther)
+{
+
+}
+
+void CPickAxe::OnCollisionStay(CCollider * _pOther)
+{
+	CGameObject* pOtherObj = _pOther->GetHost();
+	if (m_IsUsing && m_pOwner->GetWallTarget() == _pOther)
+	{
+		CManagers::instance().Event()->DeleteObject(pOtherObj);
+	}
+
+}
+
+void CPickAxe::OnCollisionExit(CCollider * _pOther)
+{
 }

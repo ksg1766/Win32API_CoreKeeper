@@ -36,14 +36,14 @@ public:
 public:
 	void		OnUpdate(DIR _eDir, bool _isCreated);
 
+	virtual void	OnCollisionEnter(CCollider* _pOther);
+	virtual void	OnCollisionStay(CCollider* _pOther);
+	virtual void	OnCollisionExit(CCollider* _pOther);
+
 private:
 	int			m_iDrawIDX;
 	int			m_iDrawIDY;
 	int			m_iOption;	// 지금은 Dummy지만 나중에 타일에 상태부여하거나 할때 쓸 수 있음.
 	unsigned char	m_chWallAround;
-
-private:
-	CCollider*		m_pCollider;
-	CTileGraphics*	m_pGraphics;
 };
 

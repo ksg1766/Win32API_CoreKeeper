@@ -9,7 +9,6 @@ CRigidBody::CRigidBody(): CComponent(), m_vVelocity()
 void CRigidBody::Initialize(CGameObject* _pHost)
 {
 	m_pHost = _pHost;
-
 }
 
 void CRigidBody::Update()

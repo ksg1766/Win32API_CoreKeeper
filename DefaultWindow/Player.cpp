@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include "RigidBody.h"
 #include "Graphics.h"
+#include "Ray.h"
 #include "Input.h"
 #include "Managers.h"
 
@@ -21,8 +22,9 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize(void)
 {
+	m_IsDead = false;
 	m_eType = TYPE::PLAYER;
-	m_vPosition = Vector2(500.f, 400.f);
+	m_vPosition = Vector2(600.f, 500.f);
 	m_vScale = Vector2(44.f, 44.f);
 
 	m_ePreState = STATE::END;
@@ -38,16 +40,19 @@ void CPlayer::Initialize(void)
 	m_pRigidBody->Initialize(this);
 	m_pGraphics->Initialize(this);
 
+	m_pRay = new CRay;
+	m_pRay->SetHost(this);
+	m_pRay->Initialize();
+	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::RAY).push_back(m_pRay);
+
+	m_pWallTarget = nullptr;
+
 	// 나중에 아이템 획득한 후 처리 과정에서 수정되어야 할 코드
 	CItem* _pPickAxe = new CPickAxe;
 	_pPickAxe->SetOwner(this); // Initialize보다 먼저해줘야함.
 	_pPickAxe->Initialize();
 	m_parrEquipment[(UINT)ITEM::WEAPON] = _pPickAxe;
-	/*for (int i = 0; i < (UINT)ITEM::END; ++i)
-	{
-		if (nullptr != m_parrEquipment[i])
-			m_parrEquipment[i]->Initialize();
-	}*/
+	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::ITEM).push_back(_pPickAxe);
 
 	m_fSpeed = 10.f;
 
@@ -64,14 +69,9 @@ void CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 { 
-	//m_pInput->Update();
 	Key_Input();
 	Action();
 	m_pRigidBody->Update();
-
-	m_parrEquipment[(UINT)ITEM::WEAPON]->Update();
-
-	//__super::Update_Rect();
 
 	return 0;
 }
@@ -81,11 +81,9 @@ int CPlayer::LateUpdate(void)
 	OffSet();
 
 	m_pCollider->LateUpdate();
+
 	MoveFrame();
 	SetMotion();
-
-	//if (STATE::ATTACK == m_eCurState)
-		m_parrEquipment[(UINT)ITEM::WEAPON]->LateUpdate();
 
 	return 0;
 }
@@ -94,10 +92,8 @@ void CPlayer::Render(HDC hDC)
 {
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(m_pFrameKey);
 
-	m_parrEquipment[(UINT)ITEM::WEAPON]->Render(hDC);
 	m_pGraphics->Render(hDC, hMemDC);
 	m_pCollider->Render(hDC);
-	//if(STATE::ATTACK == m_eCurState)
 }
 
 void CPlayer::Release(void)
@@ -156,18 +152,14 @@ void CPlayer::Action(void)
 	switch (m_eCurState)
 	{
 	case STATE::IDLE:
-		if (CManagers::instance().Key()->Key_Down(VK_SPACE))
-		{
-			// Do Something
-		}
 		m_pRigidBody->SetVelocity(Vector2::Zero());
+		m_pRay->SetScale(Vector2::Zero());
+		m_pRay->SetPosition(m_vPosition);
 		break;
 
 	case STATE::MOVE:
-		if (CManagers::instance().Key()->Key_Down(VK_SPACE))
-		{
-			// Do Something
-		}
+		m_pRay->SetScale(Vector2::Zero());
+		m_pRay->SetPosition(m_vPosition);
 		if (DIR::RIGHT == m_eDir)
 			m_pRigidBody->SetVelocity(m_fSpeed * Vector2::Right());
 		else if (DIR::RIGHTUP == m_eDir)
@@ -194,11 +186,7 @@ void CPlayer::Action(void)
  
 void CPlayer::Attack()
 {
-	//if(m_parrEquipment[(UINT)ITEM::WEAPON])
-		//m_parrEquipment[(UINT)ITEM::WEAPON]->LateUpdate();
-
-	//m_parrEquipment[(UINT)ITEM::WEAPON]->Render();
-		//->LateUpdate();
+	m_parrEquipment[(UINT)ITEM::WEAPON]->SetUsing(true);
 }
 
 void CPlayer::SetMotion(void)

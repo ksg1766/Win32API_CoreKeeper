@@ -21,7 +21,8 @@ void CManagers::Initialize()
 	m_pResource->Initialize();
 	m_pPool = new CPoolManager;
 	m_pPool->Initialize();
-	m_pTile = new CTileManager;
+	m_pTile = new CTileManager;	// Initialize는 EditScene에서 호출
+	m_pEvent = new CEventManager;
 }
 
 void CManagers::Release()
@@ -33,4 +34,5 @@ void CManagers::Release()
 	Safe_Delete(m_pPool);
 	Safe_Delete(m_pResource);
 	Safe_Delete(m_pTile);
+	Safe_Delete(m_pEvent);
 }

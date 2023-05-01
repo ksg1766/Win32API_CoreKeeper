@@ -18,14 +18,15 @@ public:
 	virtual void Release(void) override;
 
 public:
+	virtual void	OnCollisionEnter(CCollider* _pOther);
+	virtual void	OnCollisionStay(CCollider* _pOther);
+	virtual void	OnCollisionExit(CCollider* _pOther);
 
 private:
 	virtual void	SetMotion(void) override;
 	virtual void	MoveFrame(void) override;
 
-private:
-	CCollider*	m_pCollider;
-	CGraphics*	m_pGraphics;
+	virtual void	SetUsing(bool _isUsig) override { m_IsUsing = _isUsig; }
 //private:
 	//bool		m_IsDead;
 

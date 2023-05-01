@@ -5,6 +5,10 @@
 #include "Struct.h"
 #include "Vector2.h"
 
+class CCollider;
+class CRigidBody;
+class CGraphics;
+class CEventManager;
 class CGameObject
 {
 public:
@@ -19,13 +23,16 @@ public:
 	virtual void	Release(void)		PURE;
 
 public:
-	TYPE			GetType()						{ return m_eType; }
-	bool			IsDead()						{ return !m_IsDead; }
+ 	TYPE			GetType()						{ return m_eType; }
+	bool			IsDead()						{ return m_IsDead; }
 	Vector2			GetPosition()					{ return m_vPosition; }
 	Vector2			GetScale()						{ return m_vScale; }
 	FRAME			GetFrame()						{ return m_tFrame; }
-
 	DIR				GetDir()						{ return m_eDir; }
+
+	CCollider*		GetCollider()					{ return m_pCollider; }
+	CRigidBody*		GetRigidBody()					{ return m_pRigidBody; }
+	CGraphics*		GetGraphics()					{ return m_pGraphics; }
 
 public:
 	void			SetDead(bool _IsDead)			{ m_IsDead = _IsDead; }
@@ -33,10 +40,9 @@ public:
 	void			SetScale(Vector2 _vScale)		{ m_vScale = _vScale; }
 	void			SetDir(DIR _eDir)				{ m_eDir = _eDir; }
 
-protected:
-	//void			Update_Rect(void);
-	
-	friend class	CPoolManager;
+	virtual void	OnCollisionEnter(CCollider* _pOther) {}
+	virtual void	OnCollisionStay(CCollider* _pOther) {}
+	virtual void	OnCollisionExit(CCollider* _pOther) {}
 
 protected:
 	TYPE		m_eType;
@@ -52,5 +58,16 @@ protected:
 	float		m_fTime;
 
 	float		m_fSpeed;
+
+protected:
+	CCollider*		m_pCollider;
+	CRigidBody*		m_pRigidBody;
+	CGraphics*		m_pGraphics;
+
+	friend class CCollider;
+	friend class RigidBody;
+	friend class Graphics;
+	friend class CEventManager;
+	friend class CPoolManager;
 };
 

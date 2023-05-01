@@ -10,6 +10,7 @@ CResourceManager::CResourceManager()
 
 CResourceManager::~CResourceManager()
 {
+	Release();
 }
 
 void CResourceManager::Initialize()
@@ -20,6 +21,8 @@ void CResourceManager::Initialize()
 	Insert_Bmp(L"../Image/Object/Item/PickAxeWood.bmp", L"PickAxeWood");
 	Insert_Bmp(L"../Image/Object/Tileset/tileset0_ground_state0_BMP.bmp", L"tileset0_ground_state0_BMP");
 	Insert_Bmp(L"../Image/Object/Tileset/Wall0.bmp", L"Wall0");
+	Insert_Bmp(L"../Image/Object/Boss/Glurch", L"Glurch");
+	Insert_Bmp(L"../Image/Object/Boss/Glurch_Shadow", L"Glurch_Shadow");
 }
 
 void CResourceManager::Insert_Bmp(const TCHAR * pFilePath, const TCHAR * pImgKey)

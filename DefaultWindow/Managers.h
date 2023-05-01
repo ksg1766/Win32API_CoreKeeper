@@ -6,6 +6,7 @@
 #include "KeyManager.h"
 #include "ScrollManager.h"
 #include "CollisionManager.h"
+#include "EventManager.h"
 
 class CManagers
 {
@@ -15,6 +16,15 @@ public:
 		static CManagers*	m_instance = new CManagers();
 		return *m_instance;
 	}
+
+	/*static void		Destroy_Instance(void)
+	{
+		if (m_instance)
+		{
+			delete m_instance;
+			m_instance = nullptr;
+		}
+	}*/
 
 	void Initialize();
 	void Release();
@@ -26,6 +36,7 @@ public:
 	CPoolManager*		Pool() { return m_pPool; }
 	CResourceManager*	Resource() { return m_pResource; }
 	CTileManager*		Tile() { return m_pTile; }
+	CEventManager*		Event() { return m_pEvent; }
 
 private:
 	CManagers();
@@ -40,4 +51,5 @@ private:
 	CPoolManager*		m_pPool;
 	CResourceManager*	m_pResource;
 	CTileManager*		m_pTile;
+	CEventManager*		m_pEvent;
 };

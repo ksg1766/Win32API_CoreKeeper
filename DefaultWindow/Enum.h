@@ -3,13 +3,14 @@
 enum class TYPE
 {
 	PLAYER	= 0,
-	MONSTER	= 1,
-	BOSS	= 2,
-	WALL	= 3,
+	RAY		= 1,
+	MONSTER	= 2,
+	BOSS	= 3,
 	ITEM	= 4,
 	TILE	= 5,
-
 	END		= 6,
+
+	WALL	= 7,
 };
 
 enum class ITEM
@@ -57,6 +58,14 @@ enum class DIR
 	DOWN		= 6,
 	RIGHTDOWN	= 7,
 	END			= 8,
+};
+
+enum class EVENT_TYPE
+{
+	CREATE_OBJECT	= 0,
+	DELETE_OBJECT	= 1,
+	SCENE_CHANGE	= 2,
+	END				= 3,
 };
 
 enum class BRUSH_TYPE
