@@ -26,7 +26,7 @@ public:
 	CCollider*	GetWallTarget()		{ return m_pWallTarget; }
 	CRay*		GetRay()			{ return m_pRay; }
 	//
-	CItem**		GetEquipList()		{ return m_parrEquipment; }
+	CItem**		GetEquipList()		{ return m_parrEquipment; }	// ÀÌ°Ç ¹¹Áö?
 
 	void		SetState(STATE _eState) { m_eCurState = _eState; }
 	void		SetVelocity(Vector2 _tVelocity) { m_vVelocity = _tVelocity; }

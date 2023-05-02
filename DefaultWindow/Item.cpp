@@ -5,6 +5,7 @@
 CItem::CItem():CGameObject(), m_eItemType(ITEM::END)
 {
 	m_IsDead = false;
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 

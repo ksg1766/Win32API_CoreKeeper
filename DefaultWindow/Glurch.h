@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+
+class CShadow;
 class CGlurch :
 	public CGameObject
 {
@@ -19,15 +21,23 @@ public:
 	virtual void	OnCollisionExit(CCollider* _pOther);
 
 private:
-	void		Action();
-	void		SetMotion(void);
-	void		MoveFrame(void);
+	void			Action();
+	void			TakeDown();
+	void			SetMotion(void);
+	void			MoveFrame(void);
 
-	int			m_iRange;
+	int				m_iRange;
+	CGameObject*	m_pTarget;
+	Vector2			m_vTargetPoint;
 
-	STATE		m_eCurState;
-	STATE		m_ePreState;
-	Vector2		m_vVelocity;
+	CShadow*		m_pShadow;
+	bool			m_IsTakingDown;
+
+	STATE			m_eCurState;
+	STATE			m_ePreState;
+
+	friend class	CShadow;
+	//CGameObject*	m_pShadow;
 
 //protected:
 //	TYPE		m_eType;
@@ -40,7 +50,7 @@ private:
 //
 //	FRAME		m_tFrame;
 //	TCHAR*		m_pFrameKey;
-//	float		m_fTime;
+//	DWORD		m_fTime;
 //
 //	float		m_fSpeed;
 //

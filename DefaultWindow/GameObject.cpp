@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 
-CGameObject::CGameObject() : m_pCollider(nullptr), m_pRigidBody(nullptr), m_pGraphics(nullptr), m_fSpeed(0.f), m_IsDead(false)
+CGameObject::CGameObject() : m_pCollider(nullptr), m_pRigidBody(nullptr), m_pGraphics(nullptr), m_fSpeed(0.f), m_IsDead(false), m_eRender(RENDERID::GAMEOBJECT)
 {
 }
 

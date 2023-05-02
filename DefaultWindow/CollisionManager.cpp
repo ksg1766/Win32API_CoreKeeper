@@ -25,7 +25,7 @@ void CCollisionManager::LateUpdate()
 			//if ((UINT)TYPE::PLAYER == iRow && (UINT)TYPE::PLAYER == iCol)	// 나중에 enum순서 바꾸고 삭제 할 것...
 			//	continue;
 
-			if (m_arrCheck[iRow] & (1 << iCol))		// 왜 아이템 충돌 안나지?
+			if (m_arrCheck[iRow] & (1 << iCol))
 			{
 				CheckCollisionByType((TYPE)iRow, (TYPE)iCol);
 			}
@@ -129,7 +129,7 @@ bool CCollisionManager::IsCollision(CCollider * _pLeft, CCollider * _pRight)
 
 void CCollisionManager::Reset()
 {
-	memset(m_arrCheck, 0, sizeof(UINT) * (UINT)TYPE::TILE);
+	memset(m_arrCheck, 0, sizeof(UINT) * (UINT)TYPE::END);
 }
 
 void CCollisionManager::CheckGroup(TYPE _eLeft, TYPE _eRight)

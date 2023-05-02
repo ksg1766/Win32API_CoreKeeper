@@ -5,6 +5,7 @@
 CMonster::CMonster()
 {
 	m_IsDead = false;
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 

@@ -12,6 +12,9 @@ public:
 	void		Set_ScrollX(float _fX) { m_fScrollX += _fX; }
 	void		Set_ScrollY(float _fY) { m_fScrollY += _fY; }
 
+	void		ScrollShaking();
+	void		StartScrollShaking();
+
 public:
 	void Initialize();
 	void Release();
@@ -19,5 +22,6 @@ public:
 private:
 	float					m_fScrollX;
 	float					m_fScrollY;
+	DWORD					m_dwTime;
 };
 

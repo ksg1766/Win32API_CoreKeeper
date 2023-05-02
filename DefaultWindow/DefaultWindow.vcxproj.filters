@@ -137,6 +137,18 @@
     <Filter Include="Script\02. GameObject\03. Boss\00. Glurch">
       <UniqueIdentifier>{8e1989ba-3e96-44a2-bba1-58286bcf6a66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\01. Component\Graphics\BaseGraphics">
+      <UniqueIdentifier>{93124635-cf25-46da-86ed-412c6d3c02f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\07. Shadow">
+      <UniqueIdentifier>{692f8577-54f8-43fe-bbb0-12aa1ce7502d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster\Slime">
+      <UniqueIdentifier>{70380001-ef0d-4c2d-ad67-11a0b2e88646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster\BaseMonster">
+      <UniqueIdentifier>{6510165a-c212-4015-a51f-3b495dfdf0d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainGame.h">
@@ -159,9 +171,6 @@
     </ClInclude>
     <ClInclude Include="PoolManager.h">
       <Filter>Script\03. Manager\PoolManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Script\02. GameObject\02. Monster</Filter>
     </ClInclude>
     <ClInclude Include="Managers.h">
       <Filter>Script\03. Manager\00. Managers</Filter>
@@ -192,9 +201,6 @@
     </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>Engine\01. Component\RigidBody</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Engine\01. Component\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Engine\01. Component\Input</Filter>
@@ -256,6 +262,18 @@
     <ClInclude Include="Glurch.h">
       <Filter>Script\02. GameObject\03. Boss\00. Glurch</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Engine\01. Component\Graphics\BaseGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Shadow.h">
+      <Filter>Script\02. GameObject\07. Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Script\02. GameObject\02. Monster\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Script\02. GameObject\02. Monster\BaseMonster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainGame.cpp">
@@ -272,9 +290,6 @@
     </ClCompile>
     <ClCompile Include="PoolManager.cpp">
       <Filter>Script\03. Manager\PoolManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Script\02. GameObject\02. Monster</Filter>
     </ClCompile>
     <ClCompile Include="Managers.cpp">
       <Filter>Script\03. Manager\00. Managers</Filter>
@@ -299,9 +314,6 @@
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>Engine\01. Component\RigidBody</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Engine\01. Component\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Engine\01. Component\Input</Filter>
@@ -356,6 +368,18 @@
     </ClCompile>
     <ClCompile Include="Glurch.cpp">
       <Filter>Script\02. GameObject\03. Boss\00. Glurch</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Engine\01. Component\Graphics\BaseGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Shadow.cpp">
+      <Filter>Script\02. GameObject\07. Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Script\02. GameObject\02. Monster\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Script\02. GameObject\02. Monster\BaseMonster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

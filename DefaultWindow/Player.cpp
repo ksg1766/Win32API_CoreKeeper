@@ -56,7 +56,7 @@ void CPlayer::Initialize(void)
 
 	m_fSpeed = 10.f;
 
-	m_fTime = 0;
+//	m_dwTime = 0;
 
 	m_pFrameKey = L"Player";
 	m_tFrame.iFrameStart = 0;
@@ -65,6 +65,8 @@ void CPlayer::Initialize(void)
 	m_tFrame.iMotion = 0;
 	m_tFrame.dwSpeed = 100;
 	m_tFrame.dwTime = GetTickCount();
+
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 int CPlayer::Update(void)
@@ -332,11 +334,11 @@ void CPlayer::MoveFrame(void)
 
 void CPlayer::OffSet(void)
 {
-	float fOffSetminX = 450.f;
-	float fOffSetmaxX = 350.f;
+	float fOffSetminX = WINCX / 2 - 50;
+	float fOffSetmaxX = WINCX / 2 + 50;
 
-	float fOffSetminY = 350.f;
-	float fOffSetmaxY = 250.f;
+	float fOffSetminY = WINCY / 2 - 50;
+	float fOffSetmaxY = WINCY / 2 + 50;
 
 	float	fScrollY = CManagers::instance().Scroll()->Get_ScrollY();
 	float	fScrollX = CManagers::instance().Scroll()->Get_ScrollX();

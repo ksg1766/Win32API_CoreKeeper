@@ -21,5 +21,6 @@ public:
 
 protected:
 	vector<CGameObject*> m_vecObjList[int(TYPE::END)];
+	vector<CGameObject*> m_RenderSort[(int)RENDERID::RENDER_END];
 };
 

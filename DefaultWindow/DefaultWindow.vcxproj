@@ -154,6 +154,8 @@
     <ClInclude Include="DefaultWindow.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="EditScene.h" />
+    <ClInclude Include="Shadow.h" />
+    <ClInclude Include="Slime.h" />
     <ClInclude Include="TileGraphics.h" />
     <ClInclude Include="TileManager.h" />
     <ClInclude Include="Enum.h" />
@@ -194,6 +196,8 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="DefaultWindow.cpp" />
     <ClCompile Include="EditScene.cpp" />
+    <ClCompile Include="Shadow.cpp" />
+    <ClCompile Include="Slime.cpp" />
     <ClCompile Include="TileGraphics.cpp" />
     <ClCompile Include="TileManager.cpp" />
     <ClCompile Include="GameScene.cpp" />

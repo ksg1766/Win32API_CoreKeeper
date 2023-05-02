@@ -24,11 +24,17 @@ CCollider::CCollider(const CCollider & rhs)
 void CCollider::Initialize(CGameObject* _pHost)
 {
 	m_pHost = _pHost;
-	if (TYPE::PLAYER == m_pHost->m_eType || TYPE::MONSTER == m_pHost->m_eType || TYPE::BOSS == m_pHost->m_eType)
+	if (TYPE::PLAYER == m_pHost->m_eType)
 	{
 		m_vOffset = Vector2(0.f, m_pHost->m_vScale.y * 0.3f);
 		m_vPosition = m_pHost->m_vPosition + m_vOffset;
 		m_vScale = Vector2(m_pHost->m_vScale.x * 0.5f, m_pHost->m_vScale.y * 0.5f);
+	}
+	else if (TYPE::MONSTER == m_pHost->m_eType || TYPE::BOSS == m_pHost->m_eType)
+	{
+		m_vOffset = Vector2(0.f, m_pHost->m_vScale.y * 0.05f);
+		m_vPosition = m_pHost->m_vPosition + m_vOffset;
+		m_vScale = Vector2(m_pHost->m_vScale.x * 0.7f, m_pHost->m_vScale.y * 0.4f);
 	}
 	// 나눌 필요가 있는지 의문
 	else if (TYPE::ITEM == m_pHost->m_eType)
@@ -73,7 +79,8 @@ void CCollider::LateUpdate()
 			m_vOffset = Vector2(-pOwner->m_vScale.x, pOwner->m_vScale.y * 0.3f);
 			break;
 		}*/
-	}	m_vPosition = m_pHost->m_vPosition + m_vOffset;
+	}
+	m_vPosition = m_pHost->m_vPosition + m_vOffset;
 		
 	/*}
 	else

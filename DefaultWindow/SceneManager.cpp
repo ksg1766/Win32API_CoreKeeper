@@ -10,7 +10,6 @@ CSceneManager::CSceneManager() : m_pCurrentScene(nullptr)
 
 void CSceneManager::Initialize()
 {
-
 }
 
 void CSceneManager::LoadPrevScene()

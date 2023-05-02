@@ -13,6 +13,15 @@ enum class TYPE
 	WALL	= 7,
 };
 
+enum class RENDERID
+{
+	BACKGROUND = 0,
+	GAMEOBJECT = 1,
+	EFFECT = 2,
+	UI = 3,
+	RENDER_END = 4,
+};
+
 enum class ITEM
 {
 	WEAPON	= 0,
@@ -29,15 +38,6 @@ enum class ITEM
 ////	SHOVEL	= 2,
 //	END		= 2,
 //};
-
-enum class RENDERID
-{
-	BACKGROUND,
-	GAMEOBJECT,
-	EFFECT,
-	UI,
-	END,
-};
 
 enum class STATE
 {

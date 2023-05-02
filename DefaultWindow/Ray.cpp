@@ -20,11 +20,13 @@ void CRay::Initialize(void)
 	m_pCollider = new CCollider;
 	//m_pCollider->Initialize(this);
 	m_pCollider->SetHost(this);
-	m_eType = TYPE::PLAYER;	// 임시 타입
+	m_eType = TYPE::RAY;	// 임시 타입
 
 	m_vScale = Vector2(m_pHost->GetScale().x, 1.f);
 	m_vOffset = Vector2(m_pHost->GetCollider()->GetScale().x, m_pHost->GetCollider()->GetScale().y * 0.7f);
 	m_vPosition = Vector2(m_pHost->GetPosition() + m_vOffset);
+
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 int CRay::Update(void)
@@ -81,7 +83,7 @@ void CRay::SetHost(CGameObject * _pHost)
 
 void CRay::OnCollisionEnter(CCollider * _pOther)
 {
-	if (TYPE::PLAYER == m_pHost->GetType())
+	if (TYPE::PLAYER == m_pHost->GetType() && TYPE::WALL == _pOther->GetHost()->GetType())
 		dynamic_cast<CPlayer*>(m_pHost)->SetWallTarget(_pOther);
 }
 

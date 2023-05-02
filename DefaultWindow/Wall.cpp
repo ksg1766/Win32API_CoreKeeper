@@ -26,6 +26,8 @@ void CWall::Initialize(void)
 
 	m_pCollider->Initialize(this);
 	m_pGraphics->Initialize(this);
+
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 int CWall::Update(void)
@@ -170,7 +172,7 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 void CWall::OnCollisionEnter(CCollider * _pOther)
 {
 	CGameObject* pOtherObj = _pOther->GetHost();
-	if (TYPE::PLAYER == pOtherObj->GetType())
+	if (TYPE::PLAYER == pOtherObj->GetType() || TYPE::MONSTER == pOtherObj->GetType())
 	{
 		Vector2 vOtherPos = _pOther->GetPosition();
 		Vector2 vOtherScale = _pOther->GetScale();
@@ -216,7 +218,7 @@ void CWall::OnCollisionEnter(CCollider * _pOther)
 void CWall::OnCollisionStay(CCollider * _pOther)
 {
 	CGameObject* pOtherObj = _pOther->GetHost();
-	if (TYPE::PLAYER == pOtherObj->GetType())
+	if (TYPE::PLAYER == pOtherObj->GetType() || TYPE::MONSTER == pOtherObj->GetType())
 	{
 		Vector2 vOtherPos = _pOther->GetPosition();
 		Vector2 vOtherScale = _pOther->GetScale();

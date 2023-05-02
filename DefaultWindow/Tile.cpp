@@ -26,7 +26,7 @@ void CTile::Initialize()
 	m_pGraphics = new CTileGraphics;
 	m_pGraphics->Initialize(this);
 
-	//m_eRender = RENDERID::BACKGROUND;
+	m_eRender = RENDERID::BACKGROUND;
 }
 
 int CTile::Update(void)
@@ -87,6 +87,7 @@ void CTile::OnUpdate(DIR _eDir, bool _isCreated)
 			if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 			{
 				m_iDrawIDX = 13;
+				m_eRender = RENDERID::GAMEOBJECT;
 			}
 		}
 		else
@@ -94,6 +95,7 @@ void CTile::OnUpdate(DIR _eDir, bool _isCreated)
 			if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 			{
 				m_iDrawIDX = 8;
+				m_eRender = RENDERID::GAMEOBJECT;
 			}
 		}
 	}
@@ -104,6 +106,7 @@ void CTile::OnUpdate(DIR _eDir, bool _isCreated)
 			if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 			{
 				m_iDrawIDX = 7;
+				m_eRender = RENDERID::GAMEOBJECT;
 			}
 		}
 		else
@@ -111,6 +114,7 @@ void CTile::OnUpdate(DIR _eDir, bool _isCreated)
 			if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 			{
 				m_iDrawIDX = 4;
+				m_eRender = RENDERID::GAMEOBJECT;
 			}
 		}
 	}

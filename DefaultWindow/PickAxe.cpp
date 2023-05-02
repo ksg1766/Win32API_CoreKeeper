@@ -39,12 +39,14 @@ void CPickAxe::Initialize()
 	m_pFrameKey = L"PickAxeWood";
 
 	m_eDir = m_pOwner->GetDir();
+
+	m_eRender = RENDERID::GAMEOBJECT;
 }
 
 int CPickAxe::Update(void)
 {
 	m_eDir = m_pOwner->GetDir();
-	m_vPosition = m_pOwner->GetPosition();
+	m_vPosition = m_pOwner->GetPosition() + Vector2::Up();
 	m_ePreState = m_eCurState;
 	m_eCurState = m_pOwner->GetState();
 
@@ -209,7 +211,11 @@ void CPickAxe::MoveFrame(void)
 
 void CPickAxe::OnCollisionEnter(CCollider * _pOther)
 {
-
+	CGameObject* pOtherObj = _pOther->GetHost();
+	if (m_IsUsing && TYPE::MONSTER == pOtherObj->GetType() || TYPE::BOSS == pOtherObj->GetType())
+	{
+		
+	}
 }
 
 void CPickAxe::OnCollisionStay(CCollider * _pOther)

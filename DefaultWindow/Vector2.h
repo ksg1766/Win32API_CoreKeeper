@@ -30,7 +30,7 @@ struct Vector2
 	Vector2 operator -(Vector2 _right)	{ return Vector2(x - _right.x, y - _right.y); }
 	Vector2 operator *(Vector2 _right)	{ return Vector2(x * _right.x, y * _right.y); }
 	Vector2 operator *(float _right)	{ return Vector2(x * _right, y * _right); }
-	friend Vector2 operator*(float _left, Vector2 _right) { return _right * _left; };
+	friend Vector2 operator*(float _left, Vector2 _right) { return Vector2(_right.x * _left, _right.y * _left); };
 	Vector2 operator /(Vector2 _right)	{ assert(_right.x != 0 || _right.y != 0);  return Vector2(x / _right.x, y / _right.y); }
 	Vector2 operator /(float _right)	{ assert(_right != 0);	return Vector2(x / _right, y / _right); }
 

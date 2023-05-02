@@ -159,6 +159,7 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 			dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
 			if (_IsCreated)
 			{
+				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::GAMEOBJECT);
 				dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
 				if (TYPE::TILE == (m_vecTile[iIndex - 1 - TILEX])->GetType())
 					dynamic_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
@@ -168,6 +169,7 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 			else
 			{
 				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::BACKGROUND);
 			}
 		}
 	}

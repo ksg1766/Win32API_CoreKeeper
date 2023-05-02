@@ -28,7 +28,7 @@ public:
 
 private:
 	map<ULONGLONG, bool> m_mapColInfo;
-	UINT	m_arrCheck[(UINT)TYPE::TILE];
+	UINT	m_arrCheck[(UINT)TYPE::END];
 
 	bool IsCollision(CCollider* _pLeft, CCollider* _pRight);
 	void CheckCollisionByType(TYPE _eTypeLeft, TYPE _eTypeRight);

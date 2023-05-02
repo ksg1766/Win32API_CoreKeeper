@@ -13,6 +13,7 @@ public:
 	void TerminateScene();
 	void Release();
 
+
 	CScene* CurrentScene() { return m_pCurrentScene; };
 	void*	SetCurrentScene(CScene* _pCurrentScene) { m_pCurrentScene = _pCurrentScene; };
 	HBRUSH	GetBrush(BRUSH_TYPE _eBrush) { return m_arrBrush[(UINT)_eBrush]; }

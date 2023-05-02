@@ -8,11 +8,11 @@ public:
 	virtual ~CMonster();
 
 	// CGameObject을(를) 통해 상속됨
-	virtual void Initialize(void)	override;
-	virtual int	 Update(void)		override;
-	virtual int	 LateUpdate(void)	override;
-	virtual void Render(HDC hDC)	override;
-	virtual void Release(void)		override;
+	virtual void Initialize(void)	PURE;
+	virtual int	 Update(void)		PURE;
+	virtual int	 LateUpdate(void)	PURE;
+	virtual void Render(HDC hDC)	PURE;
+	virtual void Release(void)		PURE;
 
 //protected:
 //	void		Update_Rect(void);
