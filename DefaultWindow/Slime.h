@@ -18,12 +18,15 @@ public:
 private:
 	int				m_iRange;
 	CGameObject*	m_pTarget;
+	Vector2			m_vTargetPoint;
+
+	CShadow*		m_pShadow;
 
 	STATE			m_eCurState;
 	STATE			m_ePreState;
 
 	void			Action();
-	void			TakeDown();
+	void			Attack();
 	void			SetMotion(void);
 	void			MoveFrame(void);
 };

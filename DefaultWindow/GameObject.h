@@ -41,6 +41,7 @@ public:
 	void			SetPosition(Vector2 _vPosition) { m_vPosition = _vPosition; }
 	void			SetScale(Vector2 _vScale)		{ m_vScale = _vScale; }
 	void			SetDir(DIR _eDir)				{ m_eDir = _eDir; }
+	void			SetFrame(FRAME _tFrame)			{ m_tFrame = _tFrame; }
 
 	virtual void	OnCollisionEnter(CCollider* _pOther) {}
 	virtual void	OnCollisionStay(CCollider* _pOther) {}

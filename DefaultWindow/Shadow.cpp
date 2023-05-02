@@ -10,6 +10,7 @@ CShadow::CShadow() : m_pHost(nullptr)
 
 CShadow::~CShadow()
 {
+	Release();
 }
 
 void CShadow::Initialize(void)
@@ -17,7 +18,8 @@ void CShadow::Initialize(void)
 	m_IsDead = false;
 	m_eType = TYPE::END;
 	m_vPosition = m_pHost->m_vPosition;
-	m_vScale = Vector2(144., 96.f);
+	m_vScale = m_pHost->m_vScale;
+	//m_vScale = Vector2(144.f, 96.f);
 
 	m_fSpeed = 30.f;
 
@@ -36,7 +38,6 @@ void CShadow::Initialize(void)
 	m_pGraphics->Initialize(this);
 
 	m_eRender = RENDERID::GAMEOBJECT;
-
 }
 
 int CShadow::Update(void)
@@ -60,4 +61,5 @@ void CShadow::Render(HDC hDC)
 
 void CShadow::Release(void)
 {
+	Safe_Delete(m_pGraphics);
 }

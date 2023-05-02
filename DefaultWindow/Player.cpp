@@ -6,7 +6,6 @@
 #include "RigidBody.h"
 #include "Graphics.h"
 #include "Ray.h"
-#include "Input.h"
 #include "Managers.h"
 
 CPlayer::CPlayer() :m_parrEquipment{}

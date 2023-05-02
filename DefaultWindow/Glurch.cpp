@@ -13,6 +13,7 @@ CGlurch::CGlurch()
 
 CGlurch::~CGlurch()
 {
+	Release();
 }
 
 void CGlurch::Initialize(void)
@@ -36,11 +37,14 @@ void CGlurch::Initialize(void)
 
 	m_pShadow->SetHost(this);
 	m_pShadow->Initialize();
+	m_pShadow->SetScale(Vector2(144.f, 96.f));
+	m_pShadow->SetFrameKey(L"Glurch_Shadow");
+
 	m_pCollider->Initialize(this);
 	m_pRigidBody->Initialize(this);
 	m_pGraphics->Initialize(this);
 
-	m_fSpeed = 30.f;
+	m_fSpeed = 25.f;
 
 	m_fTime = 0;
 
@@ -66,9 +70,8 @@ int CGlurch::Update(void)
 		m_pTarget = nullptr;
 	}
 
-	if (nullptr != m_pTarget)// && m_tFrame.iFrameStart == m_tFrame.iFrameEnd)// && STATE::IDLE == m_eCurState)
+	if (nullptr != m_pTarget)
 	{
-		//m_ePreState = m_eCurState;
 		if(STATE::IDLE == m_eCurState)
 			m_vTargetPoint = m_pTarget->GetPosition();
 		if(STATE::ATTACK != m_eCurState)
@@ -108,6 +111,7 @@ void CGlurch::Render(HDC hDC)
 
 void CGlurch::Release(void)
 {
+	Safe_Delete(m_pShadow);
 	Safe_Delete(m_pCollider);
 	Safe_Delete(m_pRigidBody);
 	Safe_Delete(m_pGraphics);
@@ -123,19 +127,18 @@ void CGlurch::Action()
 		break;
 
 	case STATE::MOVE:	//m_tFrame.iFrameStart 가 특정 프레임이 되었을 때 움직임
-		m_pShadow->SetPosition(Vector2(m_vPosition.x, m_vPosition.y));
+		m_pShadow->SetPosition(Vector2(m_vPosition + Vector2::Down() * 30.f));
 		if (14 == m_tFrame.iFrameStart)
 		{
 			m_pRigidBody->SetVelocity(m_fSpeed * (m_vTargetPoint + 100.f * Vector2::Up() - m_vPosition).Normalize());
 			m_pShadow->SetPosition(Vector2(m_vPosition.x, m_vPosition.y + 100.f));
 		}
 		if (m_vTargetPoint.y - 70.f > m_vPosition.y && m_vTargetPoint.y - 130.f < m_vPosition.y
-			&& m_vTargetPoint.x - 30.f < m_vPosition.x && m_vTargetPoint.x +30.f > m_vPosition.x)	// 적 인식과 동시에 저장한 착지 위치에 도달 했을 시(정확힌 착지 위치보다 조금 위에 도달 했을 시)
+			&& m_vTargetPoint.x - 30.f < m_vPosition.x && m_vTargetPoint.x +30.f > m_vPosition.x)
 		{	
 			m_pRigidBody->SetVelocity(Vector2::Zero());
 			m_ePreState = m_eCurState;
 			m_eCurState = STATE::ATTACK;
-			//m_pShadow->SetPosition(Vector2(m_vPosition.x, m_vTargetPoint.y));
 		}
 		break;
 
@@ -240,8 +243,8 @@ void CGlurch::OnCollisionEnter(CCollider * _pOther)
 	//}
 
 	CGameObject* pOtherObj = _pOther->GetHost();
-	//if (STATE::MOVE != m_eCurState)
-	//{
+	if (STATE::MOVE != m_eCurState)
+	{
 		if (TYPE::PLAYER == pOtherObj->GetType() || TYPE::MONSTER == pOtherObj->GetType())
 		{
 			Vector2 vOtherPos = _pOther->GetPosition();
@@ -282,7 +285,7 @@ void CGlurch::OnCollisionEnter(CCollider * _pOther)
 				}
 			}
 			pOtherObj->SetPosition(vOtherPos);
-	// 	}
+	 	}
 	}
 
 	if (m_IsTakingDown)

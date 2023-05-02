@@ -16,6 +16,7 @@ public:
 	virtual void	Release(void)		override;
 
 	void			SetHost(CGameObject* _pHost) { m_pHost = _pHost; }
+	void			SetFrameKey(TCHAR* _pFrameKey) { m_pFrameKey = _pFrameKey; }
 
 private:
 	CGameObject*	m_pHost;

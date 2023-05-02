@@ -8,9 +8,9 @@ public:
 	~CPoolManager();
 
 	void Initialize();
-	void Create_Monster(CGameObject* _cFrom) { m_cMonsterPool->Create_Monster(_cFrom); }
-	void Return_Monster(CGameObject* _cBullet);
-	int Monster_in_Pool() { return m_cMonsterPool->Monster_in_Pool(); }
+	void CreateMonster() { m_cMonsterPool->CreateMonster(); }
+	void ReturnMonster(CGameObject* _cBullet);
+	int MonsterInPool() { return m_cMonsterPool->MonsterInPool(); }
 	void Release();
 
 private:
@@ -19,12 +19,12 @@ private:
 	public:
 		~MonsterPool();
 
-		list<CGameObject*>* Get_MonsterPool() { return &m_MonsterList; }
+		list<CGameObject*>* GetMonsterPool() { return &m_MonsterList; }
 
 		void Initialize();
-		void Create_Monster(CGameObject* _pPlayer);
+		void CreateMonster();
 		void Release();
-		int	Monster_in_Pool() { return m_MonsterList.size(); }
+		int	MonsterInPool() { return m_MonsterList.size(); }
 
 	private:
 		static const int iMaxMonsterPool = 255;

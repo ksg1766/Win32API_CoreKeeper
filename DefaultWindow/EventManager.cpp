@@ -46,6 +46,10 @@ void CEventManager::Update()
 			pTile->SetTile(15, 0, 0, dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
 			m_vecCreate.push_back(pTile);
 		}
+		else if (TYPE::MONSTER == m_vecDead[i]->GetType())
+		{
+			CManagers::instance().Pool()->ReturnMonster(m_vecDead[i]);
+		}
 	}
 	m_vecDead.clear();
 
@@ -54,6 +58,16 @@ void CEventManager::Update()
 		Execute(m_vecEvent[i]);
 	}
 	m_vecEvent.clear();
+}
+
+void CEventManager::CreateObject(CGameObject * _pObj, TYPE _eGroup)
+{
+	tagEvent evn = {};
+	evn.eEvent = EVENT_TYPE::CREATE_OBJECT;
+	evn.lParam = (DWORD_PTR)_pObj;
+	evn.wParam = (DWORD_PTR)_eGroup;
+
+	AddEvent(evn);
 }
 
 void CEventManager::DeleteObject(CGameObject * _pObj)
@@ -70,8 +84,15 @@ void CEventManager::Execute(const tagEvent & _eve)
 	switch (_eve.eEvent)
 	{
 	case EVENT_TYPE::CREATE_OBJECT:
-		//
+	{
+		CGameObject* pNewObject = (CGameObject*)_eve.lParam;
+		TYPE eType = (TYPE)_eve.wParam;
+
+		if (eType == TYPE::MONSTER)
+			CManagers::instance().Scene()->CurrentScene()->GetObjList(eType).push_back(pNewObject);
+	}
 		break;
+
 	case EVENT_TYPE::DELETE_OBJECT:
 	{
 		CGameObject*	pDeadObject = (CGameObject*)_eve.lParam;

@@ -24,6 +24,7 @@
 #include <stack>
 #include <list>
 #include <map>
+#include <ctime>
 
 #ifdef _DEBUG
 

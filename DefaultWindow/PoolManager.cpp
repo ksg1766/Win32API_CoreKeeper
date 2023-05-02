@@ -2,7 +2,7 @@
 #include "PoolManager.h"
 #include "Managers.h"
 #include "Struct.h"
-#include "Monster.h"
+#include "Slime.h"
 #include "Enum.h"
 
 
@@ -21,10 +21,10 @@ CPoolManager::~CPoolManager()
 	Release();
 }
 
-void CPoolManager::Return_Monster(CGameObject * _cMonster)
+void CPoolManager::ReturnMonster(CGameObject * _cMonster)
 {
-	_cMonster->SetDead(true);
-	m_cMonsterPool->Get_MonsterPool()->push_back(_cMonster);
+	//_cMonster->SetDead(true);
+	m_cMonsterPool->GetMonsterPool()->push_back(_cMonster);
 }
 
 void CPoolManager::Release()
@@ -42,13 +42,13 @@ void CPoolManager::MonsterPool::Initialize()
 {
 	for (int i = 0; i < iMaxMonsterPool; ++i)
 	{
-		//CGameObject* _cMonster = new CMonster;
-		//dynamic_cast<CMonster*>(_cMonster)->Initialize();
-		//m_MonsterList.push_back(_cMonster);
+		CGameObject* pSlime = new CSlime;
+		dynamic_cast<CSlime*>(pSlime)->Initialize();
+		m_MonsterList.push_back(pSlime);
 	}
 }
 
-void CPoolManager::MonsterPool::Create_Monster(CGameObject* _pPlayer)
+void CPoolManager::MonsterPool::CreateMonster()
 {
 	auto& findByState = [&](CGameObject* _iter)
 	{
@@ -62,7 +62,19 @@ void CPoolManager::MonsterPool::Create_Monster(CGameObject* _pPlayer)
 
 	(*iterMonster)->SetDead(false);
 
-	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::MONSTER).push_back(*iterMonster);
+	vector<CGameObject*>& vecTile = CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::TILE);
+	UINT iTileSize = vecTile.size();
+	while (true)
+	{
+		UINT iIndex = rand() % iTileSize;
+		if (TYPE::TILE == vecTile[iIndex]->GetType())
+		{
+			(*iterMonster)->SetPosition(vecTile[iIndex]->GetPosition());
+			break;
+		}
+	}
+
+	CManagers::instance().Event()->CreateObject(*iterMonster, TYPE::MONSTER);
 	m_MonsterList.erase(iterMonster);
 }
 

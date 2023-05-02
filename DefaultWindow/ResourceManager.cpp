@@ -24,6 +24,7 @@ void CResourceManager::Initialize()
 	Insert_Bmp(L"../Image/Object/Boss/Glurch.bmp", L"Glurch");
 	Insert_Bmp(L"../Image/Object/Boss/Glurch_Shadow.bmp", L"Glurch_Shadow");
 	Insert_Bmp(L"../Image/Object/Monster/Slime.bmp", L"Slime");
+	Insert_Bmp(L"../Image/Object/Monster/Slime_Shadow.bmp", L"Slime_Shadow");
 }
 
 void CResourceManager::Insert_Bmp(const TCHAR * pFilePath, const TCHAR * pImgKey)

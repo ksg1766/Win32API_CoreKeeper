@@ -32,9 +32,6 @@
     <Filter Include="Engine\01. Component\Graphics">
       <UniqueIdentifier>{00912257-ce09-4dc6-89c0-4a35cddfca8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\01. Component\Input">
-      <UniqueIdentifier>{44853945-c2b3-479b-a252-b2e6967afec9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\00. DefaultWindow">
       <UniqueIdentifier>{eeaf45b7-4885-44de-84d1-5e47a9a3ea86}</UniqueIdentifier>
     </Filter>
@@ -202,9 +199,6 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Engine\01. Component\RigidBody</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Engine\01. Component\Input</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Engine\99. Else</Filter>
     </ClInclude>
@@ -314,9 +308,6 @@
     </ClCompile>
     <ClCompile Include="RigidBody.cpp">
       <Filter>Engine\01. Component\RigidBody</Filter>
-    </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>Engine\01. Component\Input</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Engine\99. Else</Filter>

@@ -21,6 +21,7 @@ public:
 
 	void AddEvent(const tagEvent& _eve) { m_vecEvent.push_back(_eve); }
 
+	void CreateObject(CGameObject* _pObj, TYPE _eGroup);
 	void DeleteObject(CGameObject* _pObj);
 
 private:

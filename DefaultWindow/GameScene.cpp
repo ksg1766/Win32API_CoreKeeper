@@ -6,6 +6,7 @@
 #include "Wall.h"
 #include "Ray.h"
 #include "Collider.h"
+#include "Slime.h"
 #include "Glurch.h"
 #include "Item.h"
 
@@ -22,17 +23,6 @@ void CGameScene::Initialize(void)
 {
 	CManagers::instance().Collision()->Reset();
 
-	CGameObject* pPlayer = new CPlayer;
-	pPlayer->Initialize();
-
-	m_vecObjList[(int)TYPE::PLAYER].push_back(pPlayer);
-
-	CGameObject* pGlurch = new CGlurch;
-	pGlurch->Initialize();
-
-	m_vecObjList[(int)TYPE::BOSS].push_back(pGlurch);
-
-
 	CManagers::instance().Tile()->LoadTile();
 	vector<CGameObject*>& vecTile = CManagers::instance().Tile()->GetTile();
 
@@ -41,12 +31,23 @@ void CGameScene::Initialize(void)
 		m_vecObjList[(UINT)TYPE::TILE].push_back(iter);
 	}
 
+	CGameObject* pPlayer = new CPlayer;
+	pPlayer->Initialize();
+	m_vecObjList[(int)TYPE::PLAYER].push_back(pPlayer);
+
+	CGameObject* pGlurch = new CGlurch;
+	pGlurch->Initialize();
+	m_vecObjList[(int)TYPE::BOSS].push_back(pGlurch);
+
+	for (int i = 0; i < 20; ++i)
+		CManagers::instance().Pool()->CreateMonster();
+
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::MONSTER);
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::BOSS);
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::RAY, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::TILE);
-	CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::MONSTER);
+	//CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::ITEM);
 	CManagers::instance().Collision()->CheckGroup(TYPE::ITEM, TYPE::TILE);
 }
@@ -86,14 +87,20 @@ void CGameScene::Update(void)
 	//		++iter;
 	//}
 	// 다른 오브젝트 삭제는 나중에 처리... // 여기도 함수로 옮길 것..
-
-	for (int i = 0; i < (int)TYPE::END; ++i)
+	srand((unsigned)time(NULL));
+	for (int i = 0; i < (int)TYPE::TILE; ++i)
 	{
-		for (auto& iter : m_vecObjList[i])
+		for (auto& iter = m_vecObjList[i].begin(); iter != m_vecObjList[i].end();)
 		{
-			if (!iter->IsDead())
+			if (!(*iter)->IsDead())
 			{
-				iter->Update();
+				(*iter)->Update();
+				++iter;
+			}
+			else
+			{
+
+				iter = m_vecObjList[i].erase(iter);
 			}
 		}
 	}
@@ -123,7 +130,7 @@ void CGameScene::LateUpdate(void)
 
 void CGameScene::Render(HDC m_DC)
 {
-	//Rectangle(m_DC, 0, 0, WINCX, WINCY);
+	Rectangle(m_DC, 0, 0, WINCX, WINCY);
 	CManagers::instance().Scroll()->ScrollShaking();
 
 	for (size_t i = 0; i < (UINT)RENDERID::RENDER_END; ++i)
