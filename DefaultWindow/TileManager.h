@@ -17,16 +17,16 @@ public:
 public:
 	vector<CGameObject*>& GetTile() { return m_vecTile;	}
 
-	void CreateWall(Vector2 _vPos);
+	void CreateWall(Vector2 _vPos, int _iBiom, int _iDrawID);
 	void DestroyWall(Vector2 _vPos);
 
-	void CreateTile(Vector2 _vPos);
+	void CreateTile(Vector2 _vPos, int _iBiom, int _iDrawID);
 	void DestroyTile(Vector2 _vPos);
 
 	void Invoke(Vector2 _pPos, bool _IsCreated);
 	 
 public:
-	void	PickingTile(POINT _pt, int _iDrawIDX, int _iDrawIDY, int _iOption);
+	void	PickingTile(POINT _pt, int _iBiom, int _iDrawID, int _iOption);
 	void	SaveTile(void);
 	void	LoadTile(void);
 

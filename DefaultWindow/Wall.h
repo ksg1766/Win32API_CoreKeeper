@@ -18,16 +18,23 @@ public:
 	virtual void Release(void) override;
 
 public:
-	int			GetDrawIDX() { return m_iDrawIDX; }
-	int			GetDrawIDY() { return m_iDrawIDY; }
+	int			GetDrawID() { return m_iDrawID; }
 	int			GetOption() { return m_iOption; }
+	int			GetBiom() { return m_iBiom; }
 	unsigned char GetWallAround() { return m_chWallAround; }
 
-	void		SetTile(int _iDrawIDX, int _iDrawIDY, int _iOption, unsigned char _chWallAround)
+	void		GetTile(int* _iDrawID, int* _iBiom, unsigned char* _chWallAround)
 	{
-		m_iDrawIDX = _iDrawIDX;
-		m_iDrawIDY = _iDrawIDY;
-		m_iOption = _iOption;
+		_iDrawID = &m_iDrawID;
+		_iBiom = &m_iBiom;
+		_chWallAround = &m_chWallAround;
+	}
+
+	void		SetTile(int _iDrawID, int _iBiom, unsigned char _chWallAround)
+	{
+		m_iDrawID = _iDrawID;
+		m_iBiom = _iBiom;
+		m_iOption = 1;
 		m_chWallAround = _chWallAround;
 	}
 	void		SetCreateAround(DIR _eDir) { m_chWallAround |= (1 << (UINT)_eDir); }
@@ -41,9 +48,9 @@ public:
 	virtual void	OnCollisionExit(CCollider* _pOther);
 
 private:
-	int			m_iDrawIDX;
-	int			m_iDrawIDY;
+	int			m_iDrawID;
 	int			m_iOption;	// 지금은 Dummy지만 나중에 타일에 상태부여하거나 할때 쓸 수 있음.
+	int			m_iBiom;
 	unsigned char	m_chWallAround;
 };
 

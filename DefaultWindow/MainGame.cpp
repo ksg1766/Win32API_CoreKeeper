@@ -24,6 +24,9 @@ void CMainGame::Initialize(void)
 
 void CMainGame::Update(void)
 {
+	//if (CManagers::instance().Key()->Key_Down('C'))
+	//	CManagers::instance().Scene()->SwitchGridOn();
+
 	CManagers::instance().Scene()->CurrentScene()->Update();
 }
 

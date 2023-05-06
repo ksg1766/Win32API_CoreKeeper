@@ -26,6 +26,13 @@ void CTileManager::Initialize(void)
 			CGameObject*	pObj = new CTile;
 			pObj->SetPosition(Vector2(fX, fY));
 			pObj->Initialize();
+
+			int iDrawID = rand() % 100 - 93;
+			if (iDrawID < 0)
+				iDrawID = 0;
+
+			dynamic_cast<CTile*>(pObj)->SetTile(iDrawID, 0, 0b00000000);
+
 			m_vecTile.push_back(pObj);
 		}
 	}
@@ -67,9 +74,11 @@ void CTileManager::Render(HDC hDC)
 
 void CTileManager::Release(void)
 {
+	//for (auto& iter : m_vecTile)
+	//	Safe_Delete(iter);
 }
 
-void CTileManager::CreateWall(Vector2 _vPos)
+void CTileManager::CreateWall(Vector2 _vPos, int _iBiom, int _iDrawID)
 {
 	// Create~~~
 	int		j = _vPos.x / TILECX;
@@ -87,6 +96,7 @@ void CTileManager::CreateWall(Vector2 _vPos)
 
 	pObj->SetPosition(Vector2(fX, fY));
 	pObj->Initialize();
+	dynamic_cast<CWall*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
 	Safe_Delete(m_vecTile[iIndex]);
 	m_vecTile[iIndex] = pObj;
 
@@ -99,7 +109,7 @@ void CTileManager::DestroyWall(Vector2 _vPos)
 	Invoke(_vPos, false);
 }
 
-void CTileManager::CreateTile(Vector2 _vPos)
+void CTileManager::CreateTile(Vector2 _vPos, int _iBiom, int _iDrawID)
 {
 	int		j = _vPos.x / TILECX;
 	int		i = _vPos.y / TILECY;
@@ -120,9 +130,8 @@ void CTileManager::CreateTile(Vector2 _vPos)
 	Safe_Delete(m_vecTile[iIndex]);
 	pObj->SetPosition(Vector2(fX, fY));
 	pObj->Initialize();
-	//Safe_Delete(m_vecTile[iIndex]);
+	dynamic_cast<CTile*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
 	m_vecTile[iIndex] = pObj;
-	//dynamic_cast<CTile*>(m_vecTile[iIndex])->SetTile(_iDrawIDX, _iDrawIDY, _iOption);
 }
 
 void CTileManager::DestroyTile(Vector2 _vPos)
@@ -188,18 +197,18 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 	}
 }
 
-void CTileManager::PickingTile(POINT _pt, int _iDrawIDX, int _iDrawIDY, int _iOption)
+void CTileManager::PickingTile(POINT _pt, int _iBiom, int _iDrawID, int _iOption)
 {
 	switch (_iOption)
 	{
 	case 0:
 	{
-		CreateTile(Vector2(_pt.x, _pt.y));
+		CreateTile(Vector2(_pt.x, _pt.y), _iBiom, _iDrawID);
 		break;
 	}
 	case 1:
 	{
-		CreateWall(Vector2(_pt.x, _pt.y));
+		CreateWall(Vector2(_pt.x, _pt.y), _iBiom, _iDrawID);
 		//dynamic_cast<CWall*>(m_vecTile[iIndex])->SetTile(_iDrawIDX, _iDrawIDY, _iOption);
 		break;
 	}
@@ -208,7 +217,7 @@ void CTileManager::PickingTile(POINT _pt, int _iDrawIDX, int _iDrawIDY, int _iOp
 
 void CTileManager::SaveTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/CollisionOptimize.dat",
+	HANDLE	hFile = CreateFile(L"../Data/TestMap.dat",
 		GENERIC_WRITE,
 		NULL,
 		NULL,
@@ -223,7 +232,7 @@ void CTileManager::SaveTile(void)
 	}
 
 	TYPE	eType = TYPE::END;
-	int		iDrawIDX = 0, iDrawIDY = 0, iOption = 0;
+	int		iDrawID = 0, iBiom = 0;
 	unsigned char	chWallAround = 0;
 	DWORD	dwByte = 0;
 
@@ -231,26 +240,27 @@ void CTileManager::SaveTile(void)
 	{
 		if (TYPE::TILE == iter->GetType())
 		{
-			eType	= dynamic_cast<CTile*>(iter)->GetType();
-			iDrawIDX = dynamic_cast<CTile*>(iter)->GetDrawIDX();
-			iDrawIDY = dynamic_cast<CTile*>(iter)->GetDrawIDY();
-			iOption = dynamic_cast<CTile*>(iter)->GetOption();
+			eType	= TYPE::TILE;
+			iDrawID = dynamic_cast<CTile*>(iter)->GetDrawID();
+			iBiom	= dynamic_cast<CTile*>(iter)->GetBiom();
 			chWallAround = dynamic_cast<CTile*>(iter)->GetWallAround();
+
+			//dynamic_cast<CTile*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
 		}
 		else if(TYPE::WALL == iter->GetType())
 		{
-			eType = dynamic_cast<CWall*>(iter)->GetType();
-			iDrawIDX = dynamic_cast<CWall*>(iter)->GetDrawIDX();
-			iDrawIDY = dynamic_cast<CWall*>(iter)->GetDrawIDY();
-			iOption = dynamic_cast<CWall*>(iter)->GetOption();
+			eType	= TYPE::WALL;
+			iDrawID = dynamic_cast<CWall*>(iter)->GetDrawID();
+			iBiom	= dynamic_cast<CWall*>(iter)->GetBiom();
 			chWallAround = dynamic_cast<CWall*>(iter)->GetWallAround();
+
+			//dynamic_cast<CWall*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
 		}
 
 		WriteFile(hFile, &eType, sizeof(TYPE), &dwByte, nullptr);
 		WriteFile(hFile, &(iter->GetPosition()), sizeof(Vector2), &dwByte, nullptr);
-		WriteFile(hFile, &iDrawIDX, sizeof(int), &dwByte, nullptr);
-		WriteFile(hFile, &iDrawIDY, sizeof(int), &dwByte, nullptr);
-		WriteFile(hFile, &iOption, sizeof(int), &dwByte, nullptr);
+		WriteFile(hFile, &iDrawID, sizeof(int), &dwByte, nullptr);
+		WriteFile(hFile, &iBiom, sizeof(int), &dwByte, nullptr);
 		WriteFile(hFile, &chWallAround, sizeof(unsigned char), &dwByte, nullptr);
 	}
 
@@ -260,7 +270,7 @@ void CTileManager::SaveTile(void)
 
 void CTileManager::LoadTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/CollisionOptimize.dat",
+	HANDLE	hFile = CreateFile(L"../Data/TestMap.dat",
 		GENERIC_READ,
 		NULL,
 		NULL,
@@ -281,7 +291,7 @@ void CTileManager::LoadTile(void)
 	Vector2 vPosition{};
 
 	TYPE	eType = TYPE::END;
-	int		iDrawIDX = 0, iDrawIDY = 0, iOption = 0;
+	int		iDrawID = 0, iBiom = 0;
 	unsigned char	chWallAround = 0;
 	DWORD	dwByte = 0;
 
@@ -289,9 +299,8 @@ void CTileManager::LoadTile(void)
 	{
 		ReadFile(hFile, &eType, sizeof(TYPE), &dwByte, nullptr);
 		ReadFile(hFile, &vPosition, sizeof(Vector2), &dwByte, nullptr);
-		ReadFile(hFile, &iDrawIDX, sizeof(int), &dwByte, nullptr);
-		ReadFile(hFile, &iDrawIDY, sizeof(int), &dwByte, nullptr);
-		ReadFile(hFile, &iOption, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &iDrawID, sizeof(int), &dwByte, nullptr);
+		ReadFile(hFile, &iBiom, sizeof(int), &dwByte, nullptr);
 		ReadFile(hFile, &chWallAround, sizeof(unsigned char), &dwByte, nullptr);
 
 		if (0 == dwByte)
@@ -302,7 +311,7 @@ void CTileManager::LoadTile(void)
 			CGameObject*	pObj = new CTile();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CTile*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption, chWallAround);
+			dynamic_cast<CTile*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}
@@ -311,7 +320,7 @@ void CTileManager::LoadTile(void)
 			CGameObject*	pObj = new CWall();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CWall*>(pObj)->SetTile(iDrawIDX, iDrawIDY, iOption, chWallAround);
+			dynamic_cast<CWall*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}

@@ -7,12 +7,14 @@
 #include "Graphics.h"
 #include "Ray.h"
 #include "Managers.h"
+#include "Storage.h"
+#include "Monster.h"
+#include "Glurch.h"
 
-CPlayer::CPlayer() :m_parrEquipment{}
+CPlayer::CPlayer() :m_parrQuickSlot{}
 {
-	//ZeroMemory(m_parrEquipment, (UINT)ITEM::END);
+	//ZeroMemory(m_parrQuickSlot, 0);
 }
-
 
 CPlayer::~CPlayer()
 {
@@ -23,8 +25,14 @@ void CPlayer::Initialize(void)
 {
 	m_IsDead = false;
 	m_eType = TYPE::PLAYER;
-	m_vPosition = Vector2(600.f, 500.f);
+	m_vPosition = Vector2(500.f, 400.f);
 	m_vScale = Vector2(44.f, 44.f);
+
+	m_iMaxHp = 100;
+	m_iHp = m_iMaxHp;
+
+	m_bFootStepSound = true;
+	m_dwTime = 0;
 
 	m_ePreState = STATE::END;
 	m_eCurState = STATE::IDLE;
@@ -47,13 +55,21 @@ void CPlayer::Initialize(void)
 	m_pWallTarget = nullptr;
 
 	// 나중에 아이템 획득한 후 처리 과정에서 수정되어야 할 코드
+	for (int i = 0; i < 10; ++i)
+		m_parrQuickSlot[i] = nullptr;
+
 	CItem* _pPickAxe = new CPickAxe;
 	_pPickAxe->SetOwner(this); // Initialize보다 먼저해줘야함.
 	_pPickAxe->Initialize();
-	m_parrEquipment[(UINT)ITEM::WEAPON] = _pPickAxe;
+
+
+	m_parrQuickSlot[0] = _pPickAxe;
+	//m_pStorage->AddObject(_pPickAxe);
+
 	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::ITEM).push_back(_pPickAxe);
 
-	m_fSpeed = 10.f;
+	m_dwAttackSpeed = 300;
+	m_fSpeed = 7.f;
 
 //	m_dwTime = 0;
 
@@ -70,6 +86,7 @@ void CPlayer::Initialize(void)
 
 int CPlayer::Update(void)
 { 
+	//m_dwTime = GetTickCount();
 	Key_Input();
 	Action();
 	m_pRigidBody->Update();
@@ -102,12 +119,44 @@ void CPlayer::Release(void)
 	Safe_Delete(m_pCollider);
 	Safe_Delete(m_pRigidBody);
 	Safe_Delete(m_pGraphics);
+	//Safe_Delete(m_pStorage);
+}
+
+vector<CGameObject*>* CPlayer::GetStorage()
+{
+	return &m_pStorage->GetStorage();
+}
+
+void CPlayer::OnCollisionEnter(CCollider * _pOther)
+{
+	CGameObject* pOtherObj = _pOther->GetHost();
+	if (TYPE::MONSTER == pOtherObj->GetType())
+	{
+		CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT7, CManagers::instance().Sound()->GetVolume());
+		//CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
+		m_iHp -= dynamic_cast<CMonster*>(pOtherObj)->GetDamage();
+	}
+	if (TYPE::BOSS == pOtherObj->GetType())
+	{
+		CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT8, CManagers::instance().Sound()->GetVolume());
+		//CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
+		m_iHp -= dynamic_cast<CGlurch*>(pOtherObj)->GetDamage();
+	}
+}
+
+void CPlayer::OnCollisionStay(CCollider * _pOther)
+{
+}
+
+void CPlayer::OnCollisionExit(CCollider * _pOther)
+{
 }
 
 void CPlayer::Key_Input(void)
 {
 	if (CManagers::instance().Key()->Key_Pressing(VK_RIGHT))
 	{
+		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::RIGHT;
 		if (CManagers::instance().Key()->Key_Pressing(VK_UP))
@@ -115,8 +164,10 @@ void CPlayer::Key_Input(void)
 		else if (CManagers::instance().Key()->Key_Pressing(VK_DOWN))
 			m_eDir = DIR::RIGHTDOWN;
 	}
+
 	else if (CManagers::instance().Key()->Key_Pressing(VK_LEFT))
 	{
+		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::LEFT;
 		if (CManagers::instance().Key()->Key_Pressing(VK_UP))
@@ -127,12 +178,14 @@ void CPlayer::Key_Input(void)
 
 	else if (CManagers::instance().Key()->Key_Pressing(VK_UP))
 	{
+		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::UP;
 	}
 
 	else if (CManagers::instance().Key()->Key_Pressing(VK_DOWN))
 	{
+		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::DOWN;
 	}
@@ -146,6 +199,32 @@ void CPlayer::Key_Input(void)
 	{
 		m_eCurState = STATE::ATTACK;
 	}
+
+	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('F'))
+		m_bFootStepSound = !m_bFootStepSound;
+
+	if (CManagers::instance().Key()->Key_Pressing(VK_LBUTTON))
+	{
+		// 
+		POINT pt{};
+		GetCursorPos(&pt);
+		ScreenToClient(g_hWnd, &pt);
+
+		CManagers::instance().UI()->PickingIcon(pt, true);
+
+		// CManagers::instance().Tile()->PickingTile(pt, m_iBiom, m_iDrawID, m_iOption);
+	}
+	if (CManagers::instance().Key()->Key_Up(VK_LBUTTON))
+	{
+		POINT pt{};
+		GetCursorPos(&pt);
+		ScreenToClient(g_hWnd, &pt);
+
+		CManagers::instance().UI()->PickingIcon(pt, false);
+	}
+
+	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('A'))
+		CManagers::instance().Scene()->SwitchAStarGrid();
 }
 
 void CPlayer::Action(void)
@@ -187,7 +266,13 @@ void CPlayer::Action(void)
  
 void CPlayer::Attack()
 {
-	m_parrEquipment[(UINT)ITEM::WEAPON]->SetUsing(true);
+	if (m_dwTime + m_dwAttackSpeed < GetTickCount())
+	{
+		dynamic_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(true);
+		m_dwTime = GetTickCount();
+	}
+	else
+		dynamic_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(false);
 }
 
 void CPlayer::SetMotion(void)
@@ -197,6 +282,7 @@ void CPlayer::SetMotion(void)
 		switch (m_eCurState)
 		{
 		case STATE::IDLE:
+			//CManagers::instance().Sound()->GetVolume();
 			if (m_eDir == DIR::RIGHT)
 			{
 				m_tFrame.iFrameStart = 1;
@@ -347,7 +433,6 @@ void CPlayer::OffSet(void)
 
 	if (fOffSetmaxX < m_vPosition.x + fScrollX)	// 플레이어가 오른쪽으로 향하고 있는 경우
 		CManagers::instance().Scroll()->Set_ScrollX(-m_fSpeed);
-
 
 	if (fOffSetminY > m_vPosition.y + fScrollY)
 		CManagers::instance().Scroll()->Set_ScrollY(m_fSpeed);

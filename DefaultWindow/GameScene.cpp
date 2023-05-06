@@ -6,9 +6,11 @@
 #include "Wall.h"
 #include "Ray.h"
 #include "Collider.h"
-#include "Slime.h"
 #include "Glurch.h"
 #include "Item.h"
+#include "UI.h"
+
+//float g_fSound = 1.f;
 
 CGameScene::CGameScene()
 {
@@ -33,14 +35,16 @@ void CGameScene::Initialize(void)
 
 	CGameObject* pPlayer = new CPlayer;
 	pPlayer->Initialize();
-	m_vecObjList[(int)TYPE::PLAYER].push_back(pPlayer);
+	m_vecObjList[(UINT)TYPE::PLAYER].push_back(pPlayer);
 
 	CGameObject* pGlurch = new CGlurch;
 	pGlurch->Initialize();
-	m_vecObjList[(int)TYPE::BOSS].push_back(pGlurch);
+	m_vecObjList[(UINT)TYPE::BOSS].push_back(pGlurch);
 
 	for (int i = 0; i < 20; ++i)
 		CManagers::instance().Pool()->CreateMonster();
+
+	CManagers::instance().UI()->InitializeSceneUI();
 
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::MONSTER);
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::BOSS);
@@ -49,7 +53,10 @@ void CGameScene::Initialize(void)
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::TILE);
 	//CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::ITEM);
+	CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::ITEM);
 	CManagers::instance().Collision()->CheckGroup(TYPE::ITEM, TYPE::TILE);
+
+	CManagers::instance().Sound()->PlayBGM(L"Base_Theme_v4.wav", CManagers::instance().Sound()->GetVolume());
 }
 
 void CGameScene::FixedUpdate(void)
@@ -97,35 +104,109 @@ void CGameScene::Update(void)
 				(*iter)->Update();
 				++iter;
 			}
-			else
+			else if ((*iter)->IsDead())
 			{
-
 				iter = m_vecObjList[i].erase(iter);
 			}
+		}
+	}
+
+	for (auto& iter = m_vecObjList[(UINT)TYPE::EFFECT].begin(); iter != m_vecObjList[(UINT)TYPE::EFFECT].end();)
+	{
+		if (!(*iter)->IsDead())
+		{
+		//	(*iter)->Update();
+			++iter;
+		}
+		else
+		{
+			iter = m_vecObjList[(UINT)TYPE::EFFECT].erase(iter);
+		}
+	}
+
+	for (auto& iter = m_vecObjList[(UINT)TYPE::UI].begin(); iter != m_vecObjList[(UINT)TYPE::UI].end();)
+	{
+		if (!(*iter)->IsDead())
+		{
+			(*iter)->Update();
+			++iter;
+		}
+		else
+		{
+			iter = m_vecObjList[(UINT)TYPE::UI].erase(iter);
 		}
 	}
 }
 
 void CGameScene::LateUpdate(void)
 {
+	/*int	iCullX = abs((int)CManagers::instance().Scroll()->Get_ScrollX() / TILECX);
+	int	iCullY = abs((int)CManagers::instance().Scroll()->Get_ScrollY() / TILECY);
+
+	int	iMaxX = iCullX + WINCX / TILECX + 2;
+	int	iMaxY = iCullY + WINCY / TILECY + 2;*/
+
 	Vector2 vPlayerPosition = m_vecObjList[(UINT)TYPE::PLAYER].front()->GetPosition();
-	for (int i = 0; i < (int)TYPE::END; ++i)
+	for (int i = 0; i < (UINT)TYPE::END; ++i)
 	{
-		for (auto& iter : m_vecObjList[i])
+		/*if (i == (UINT)TYPE::TILE)
 		{
-			iter->LateUpdate();
-
-			if (abs(vPlayerPosition.x - iter->GetPosition().x) < 750
-				&& abs(vPlayerPosition.y - iter->GetPosition().y) < 580)
+			for (int i = iCullY; i < iMaxY; ++i)
 			{
-				RENDERID eID = iter->GetRenderID();
+				for (int j = iCullX; j < iMaxX; ++j)
+				{
+					int	iIndex = i * TILEX + j;
 
-				m_RenderSort[(UINT)eID].push_back(iter);
+					if (0 > iIndex || m_vecObjList[(UINT)TYPE::TILE].size() <= (size_t)iIndex)
+						continue;
+
+					if (!m_vecObjList[(UINT)TYPE::TILE][iIndex]->IsDead())
+					{
+						m_vecObjList[(UINT)TYPE::TILE][iIndex]->LateUpdate();
+						if(TYPE::TILE == m_vecObjList[(UINT)TYPE::TILE][iIndex]->GetType())
+							m_RenderSort[(UINT)RENDERID::BACKGROUND].push_back(m_vecObjList[(UINT)TYPE::TILE][iIndex]);
+						else if (TYPE::WALL == m_vecObjList[(UINT)TYPE::TILE][iIndex]->GetType())
+							m_RenderSort[(UINT)RENDERID::GAMEOBJECT].push_back(m_vecObjList[(UINT)TYPE::TILE][iIndex]);
+					}
+
+				}
 			}
 		}
-	}
-	CManagers::instance().Collision()->LateUpdate();	// 나중에 얘네 MainGame으로 옮길 것
+		else
+		{*/
+			for (auto& iter : m_vecObjList[i])
+			{
+				iter->LateUpdate();
 
+				if (abs(vPlayerPosition.x - iter->GetPosition().x) < 750
+					&& abs(vPlayerPosition.y - iter->GetPosition().y) < 580)
+				{
+					RENDERID eID = iter->GetRenderID();
+					m_RenderSort[(UINT)eID].push_back(iter);
+				}
+			}
+		//}
+	}
+
+	for (auto& iter : m_vecObjList[(UINT)TYPE::EFFECT])
+	{
+		iter->LateUpdate();
+		if (abs(vPlayerPosition.x - iter->GetPosition().x) < 750
+			&& abs(vPlayerPosition.y - iter->GetPosition().y) < 580)
+		{
+			m_RenderSort[(UINT)RENDERID::EFFECT].push_back(iter);
+		}
+	}
+
+	for (auto& iter : m_vecObjList[(UINT)TYPE::UI])
+	{
+		iter->LateUpdate();
+		{
+			m_RenderSort[(UINT)RENDERID::UI].push_back(iter);
+		}
+	}
+	// 나중에 꼭 for문 하나로 합칠 것.... END가 중간에 껴 있어갖고......
+	CManagers::instance().Collision()->LateUpdate();	// 나중에 얘네 MainGame으로 옮길 것
 }
 
 void CGameScene::Render(HDC m_DC)
@@ -133,7 +214,7 @@ void CGameScene::Render(HDC m_DC)
 	Rectangle(m_DC, 0, 0, WINCX, WINCY);
 	CManagers::instance().Scroll()->ScrollShaking();
 
-	for (size_t i = 0; i < (UINT)RENDERID::RENDER_END; ++i)
+	for (size_t i = 0; i < (UINT)RENDERID::UI; ++i)
 	{
 		sort(m_RenderSort[i].begin(), m_RenderSort[i].end(), [&](CGameObject* pDest, CGameObject* pSrc)->bool
 		{
@@ -154,29 +235,42 @@ void CGameScene::Render(HDC m_DC)
 		});
 
 		for (auto& iter : m_RenderSort[i])
-			iter->Render(m_DC);
+		{
+			if (!iter->IsDead())
+				iter->Render(m_DC);
+		}
 
 		m_RenderSort[i].clear();
 	}
 
+	sort(m_RenderSort[(UINT)RENDERID::UI].begin(), m_RenderSort[(UINT)RENDERID::UI].end(), [&](CGameObject* pDest, CGameObject* pSrc)
+	{
+		return (dynamic_cast<CUI*>(pDest)->GetLayer() < dynamic_cast<CUI*>(pSrc)->GetLayer());
+	});
 
-	
+	for (auto& iter : m_RenderSort[(UINT)RENDERID::UI])
+		if (!iter->IsDead())
+		{
+			iter->Render(m_DC);
+		}
+
+	m_RenderSort[(UINT)RENDERID::UI].clear();
 
 	//int	iCullX = abs((int)CManagers::instance().Scroll()->Get_ScrollX() / TILECX);
 	//int	iCullY = abs((int)CManagers::instance().Scroll()->Get_ScrollY() / TILECY);
-
+	//
 	//int	iMaxX = iCullX + WINCX / TILECX + 2;
 	//int	iMaxY = iCullY + WINCY / TILECY + 2;
-
+	//
 	//for (int i = iCullY; i < iMaxY; ++i)
 	//{
 	//	for (int j = iCullX; j < iMaxX; ++j)
 	//	{
 	//		int	iIndex = i * TILEX + j;
-
+	//
 	//		if (0 > iIndex || m_vecObjList[(UINT)TYPE::TILE].size() <= (size_t)iIndex)
 	//			continue;
-
+	//
 	//		if (!m_vecObjList[(UINT)TYPE::TILE][iIndex]->IsDead())
 	//		{
 	//			m_vecObjList[(UINT)TYPE::TILE][iIndex]->Render(m_DC);
@@ -187,7 +281,7 @@ void CGameScene::Render(HDC m_DC)
 	//		}*/
 	//	}
 	//}
-
+	//
 	//for (int i = 2; i < (int)TYPE::TILE; ++i)
 	//{
 	//	for (auto& iter : m_vecObjList[i])
@@ -196,8 +290,7 @@ void CGameScene::Render(HDC m_DC)
 	//			iter->Render(m_DC);
 	//		}
 	//}
-
-
+	//
 	//m_vecObjList[(UINT)TYPE::PLAYER].front()->Render(m_DC);
 	//for (int i = 0; i < m_vecObjList[(UINT)TYPE::RAY].size(); ++i)
 	//{

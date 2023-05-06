@@ -3,7 +3,7 @@
 #include "SceneManager.h"
 #include "Scene.h"
 
-CSceneManager::CSceneManager() : m_pCurrentScene(nullptr)
+CSceneManager::CSceneManager() : m_pCurrentScene(nullptr), m_bGridOn(true), m_bAStarGrid(true)
 {
 	CreateBrushPen();
 }
@@ -57,6 +57,8 @@ void CSceneManager::Release()
 void CSceneManager::CreateBrushPen()
 {
 	m_arrBrush[(UINT)BRUSH_TYPE::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
+	m_arrBrush[(UINT)BRUSH_TYPE::SOLID] = (HBRUSH)GetStockObject(DC_BRUSH);
+
 	m_arrPen[(UINT)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_arrPen[(UINT)PEN_TYPE::GREEN] = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	m_arrPen[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));

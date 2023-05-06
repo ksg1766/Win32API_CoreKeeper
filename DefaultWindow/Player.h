@@ -4,6 +4,7 @@
 //class CInput;
 class CRay;
 class CItem;
+class CStorage;
 class CPlayer :	public CGameObject
 {
 public:
@@ -26,11 +27,16 @@ public:
 	CCollider*	GetWallTarget()		{ return m_pWallTarget; }
 	CRay*		GetRay()			{ return m_pRay; }
 	//
-	CItem**		GetEquipList()		{ return m_parrEquipment; }	// 이건 뭐지?
+	CGameObject**			GetQuickSlot()		{ return m_parrQuickSlot; }
+	vector<CGameObject*>*	GetStorage();
 
 	void		SetState(STATE _eState) { m_eCurState = _eState; }
 	void		SetVelocity(Vector2 _tVelocity) { m_vVelocity = _tVelocity; }
 	void		SetWallTarget(CCollider* _pWallTarget) { m_pWallTarget = _pWallTarget; }
+
+	virtual void	OnCollisionEnter(CCollider* _pOther);
+	virtual void	OnCollisionStay(CCollider* _pOther);
+	virtual void	OnCollisionExit(CCollider* _pOther);
 
 private:
 	void		Key_Input(void);
@@ -41,6 +47,11 @@ private:
 
 	void		OffSet(void);
 
+	int			m_iMaxHp;
+	int			m_iHp;
+
+	DWORD		m_dwAttackSpeed;
+
 	STATE		m_eCurState;
 	STATE		m_ePreState;
 	Vector2		m_vVelocity;
@@ -48,9 +59,14 @@ private:
 
 	CCollider*	m_pWallTarget;	// 상위 클래스로 옮기는 것 고려
 
-	CItem*		m_parrEquipment[(UINT)ITEM::END];
+	CStorage*		m_pStorage;
+	CGameObject*	m_parrQuickSlot[10];
 
 	CRay*		m_pRay;
 	//CInput*			m_pInput;
+
+	bool		m_bFootStepSound;
+
+	friend class CHP_Bar;
 };
 

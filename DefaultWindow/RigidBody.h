@@ -12,10 +12,8 @@ public:
 	virtual void Initialize(CGameObject* _pHost) override;
 	void Update();
 
-	void SetVelocity(Vector2 _vVelocity)
-	{
-		m_vVelocity = _vVelocity;
-	}
+	Vector2 GetVelocity() { return m_vVelocity; }
+	void SetVelocity(Vector2 _vVelocity) { m_vVelocity = _vVelocity; }
 
 	void Move();
 

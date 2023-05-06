@@ -20,7 +20,7 @@ public:
 	vector<CGameObject*>&	GetObjList(TYPE _eType) { return m_vecObjList[(int)_eType]; }
 
 protected:
-	vector<CGameObject*> m_vecObjList[int(TYPE::END)];
+	vector<CGameObject*> m_vecObjList[int(TYPE::UI) + 1];
 	vector<CGameObject*> m_RenderSort[(int)RENDERID::RENDER_END];
 };
 

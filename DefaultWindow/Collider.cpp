@@ -57,6 +57,9 @@ void CCollider::Initialize(CGameObject* _pHost)
 
 void CCollider::LateUpdate()
 {
+	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('C'))
+		CManagers::instance().Scene()->SwitchGridOn();
+
 	assert(0 <= m_iCol);
 	// Weapon 같은 경우 플레이어의 m_eDir과 같은 방향으로 Collider On/Off
 	// 플레이어 앞 3타일 // 방향 얻어와서 켜는것으로 결정
@@ -91,23 +94,26 @@ void CCollider::LateUpdate()
 
 void CCollider::Render(HDC _hDC)
 {
-	PEN_TYPE ePen = PEN_TYPE::GREEN;
+	if (CManagers::instance().Scene()->GetGridOn())
+	{
+		PEN_TYPE ePen = PEN_TYPE::GREEN;
 
-	if (m_iCol)
-		ePen = PEN_TYPE::RED;
+		if (m_iCol)
+			ePen = PEN_TYPE::RED;
 
-	CSelectGDI temp1(_hDC, ePen);
-	CSelectGDI temp2(_hDC, BRUSH_TYPE::HOLLOW);
+		CSelectGDI temp1(_hDC, ePen);
+		CSelectGDI temp2(_hDC, BRUSH_TYPE::HOLLOW);
 
-	float	fScrollX = CManagers::instance().Scroll()->Get_ScrollX();
-	float	fScrollY = CManagers::instance().Scroll()->Get_ScrollY();
+		float	fScrollX = CManagers::instance().Scroll()->Get_ScrollX();
+		float	fScrollY = CManagers::instance().Scroll()->Get_ScrollY();
 
-	Rectangle(_hDC,
-		(int)(m_vPosition.x - m_vScale.x / 2.f + fScrollX),
-		(int)(m_vPosition.y - m_vScale.y / 2.f + fScrollY),
-		(int)(m_vPosition.x + m_vScale.x / 2.f + fScrollX),
-		(int)(m_vPosition.y + m_vScale.y / 2.f + fScrollY)
-	);
+		Rectangle(_hDC,
+			(int)(m_vPosition.x - m_vScale.x / 2.f + fScrollX),
+			(int)(m_vPosition.y - m_vScale.y / 2.f + fScrollY),
+			(int)(m_vPosition.x + m_vScale.x / 2.f + fScrollX),
+			(int)(m_vPosition.y + m_vScale.y / 2.f + fScrollY)
+		);
+	}
 }
 
 //void CCollider::SetThisRay()

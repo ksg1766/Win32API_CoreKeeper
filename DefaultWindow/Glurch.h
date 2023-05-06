@@ -11,10 +11,15 @@ public:
 
 	// CGameObject을(를) 통해 상속됨
 	virtual void Initialize(void) override;
-	virtual int Update(void) override;
-	virtual int LateUpdate(void) override;
+	virtual int  Update(void) override;
+	virtual int  LateUpdate(void) override;
 	virtual void Render(HDC hDC) override;
 	virtual void Release(void) override;
+
+	UINT		GetBiom() { return m_iBiom; }
+	int			GetHp() { return m_iHp; }
+	int			GetDamage() { return m_iDamage; }
+	void		SetHp(int _iHp) { m_iHp = _iHp; }
 
 	virtual void	OnCollisionEnter(CCollider* _pOther);
 	virtual void	OnCollisionStay(CCollider* _pOther);
@@ -25,6 +30,12 @@ private:
 	void			TakeDown();
 	void			SetMotion(void);
 	void			MoveFrame(void);
+
+	UINT			m_iBiom;
+
+	int				m_iMaxHp;
+	int				m_iHp;
+	int				m_iDamage;
 
 	int				m_iRange;
 	CGameObject*	m_pTarget;
@@ -37,7 +48,6 @@ private:
 	STATE			m_ePreState;
 
 	friend class	CShadow;
-	//CGameObject*	m_pShadow;
 
 //protected:
 //	TYPE		m_eType;
@@ -50,7 +60,7 @@ private:
 //
 //	FRAME		m_tFrame;
 //	TCHAR*		m_pFrameKey;
-//	DWORD		m_fTime;
+//	DWORD		m_dwTime;
 //
 //	float		m_fSpeed;
 //

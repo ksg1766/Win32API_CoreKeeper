@@ -4,8 +4,9 @@
 #include "TileGraphics.h"
 #include "Collider.h"
 
-CWall::CWall() : m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(1)
+CWall::CWall() : m_iDrawID(0), m_iOption(1), m_iBiom(0)
 {
+	m_pFrameKey = L"Desert_Wall";
 	m_IsDead = false;
 }
 
@@ -43,7 +44,15 @@ int CWall::LateUpdate(void)
 
 void CWall::Render(HDC hDC)
 {
-	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(L"Wall0");
+	if (0 == m_iBiom)
+		m_pFrameKey = L"Desert_Wall";
+	else if (1 == m_iBiom)
+		m_pFrameKey = L"Nature_Wall";
+	else if (2 == m_iBiom)
+		m_pFrameKey = L"LarvaHive_Wall";
+
+	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(m_pFrameKey);
+
 	m_pGraphics->Render(hDC, hMemDC);
 	m_pCollider->Render(hDC);
 }
@@ -69,22 +78,22 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 15;
+					m_iDrawID = 15;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 			else
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 14;
+					m_iDrawID = 14;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 		}
@@ -94,22 +103,22 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 15;
+					m_iDrawID = 13;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 			else
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 14;
+					m_iDrawID = 8;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 		}
@@ -122,22 +131,22 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 12;
+					m_iDrawID = 12;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 			else
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 9;
+					m_iDrawID = 9;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 		}
@@ -147,22 +156,22 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 12;
+					m_iDrawID = 7;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 			else
 			{
 				if (m_chWallAround & 1 << (UINT)DIR::DOWN)
 				{
-					m_iDrawIDX = 4;
+					m_iDrawID = 4;
 				}
 				else
 				{
-					m_iDrawIDX = 16;
+					m_iDrawID = 16;
 				}
 			}
 		}

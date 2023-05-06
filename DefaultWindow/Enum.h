@@ -11,6 +11,9 @@ enum class TYPE
 	END		= 6,
 
 	WALL	= 7,
+	EFFECT  = 8,
+
+	UI		= 9,
 };
 
 enum class RENDERID
@@ -39,12 +42,24 @@ enum class ITEM
 //	END		= 2,
 //};
 
+enum class MONSTER
+{
+
+};
+
+enum class EFFECT_TYPE
+{
+	HIT = 0,
+	END = 1,
+};
+
 enum class STATE
 {
 	IDLE	= 0,
 	MOVE	= 1,
 	ATTACK	= 2,
-	END		= 3,
+	DEAD	= 3,
+	END		= 4,
 };
 
 enum class DIR
@@ -68,10 +83,39 @@ enum class EVENT_TYPE
 	END				= 3,
 };
 
+enum class SCENEUI
+{
+	HPBAR = 0,
+	HUNGERBAR = 1,
+	QUICKSLOT = 2,
+	END = 3,
+};
+
+enum class CHANNELID
+{
+	SOUND_EFFECT1	= 0,
+	SOUND_EFFECT2	= 1,
+	SOUND_EFFECT3	= 2,
+	SOUND_EFFECT4	= 3,
+	SOUND_EFFECT5	= 4,
+	SOUND_EFFECT6	= 5,
+	SOUND_EFFECT7	= 6,
+	SOUND_EFFECT8	= 7,
+	SOUND_EFFECT9	= 8,
+	SOUND_EFFECT10	= 9,
+	SOUND_EFFECT11	= 10,
+	SOUND_EFFECT12	= 11,
+	SOUND_BGM1		= 12,
+	SOUND_BGM2		= 13,
+	MAXCHANNEL		= 14,
+	END				= 15,
+};
+
 enum class BRUSH_TYPE
 {
 	HOLLOW		= 0,
-	END			= 1,
+	SOLID			= 1,
+	END			= 2
 };
 
 enum class PEN_TYPE

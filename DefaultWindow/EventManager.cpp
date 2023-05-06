@@ -40,15 +40,31 @@ void CEventManager::Update()
 		// 여기에서 삭제 해주고, GameScene에서는 벡터 원소만 날려 줌.
 		if (TYPE::WALL == m_vecDead[i]->GetType())
 		{
+			CWall* pWall = dynamic_cast<CWall*>(m_vecDead[i]);
 			CTile* pTile = new CTile;
 			pTile->Initialize();
 			pTile->SetPosition(m_vecDead[i]->GetPosition());
-			pTile->SetTile(15, 0, 0, dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
-			m_vecCreate.push_back(pTile);
+			if (3 == pWall->GetBiom())
+				pTile->SetTile(0, pWall->GetBiom(), dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
+			else
+			{
+				int iDraw = rand() % 30 - 23;
+				if (iDraw < 0)
+					iDraw = 0;
+				pTile->SetTile(iDraw, pWall->GetBiom(), dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
+			}m_vecCreate.push_back(pTile);
 		}
 		else if (TYPE::MONSTER == m_vecDead[i]->GetType())
 		{
-			CManagers::instance().Pool()->ReturnMonster(m_vecDead[i]);
+			CManagers::instance().Pool()->ReturnPool(m_vecDead[i]);
+		}
+		else if (TYPE::EFFECT == m_vecDead[i]->GetType())
+		{
+			CManagers::instance().Pool()->ReturnPool(m_vecDead[i]);
+		}
+		else if (TYPE::BOSS == m_vecDead[i]->GetType())
+		{
+			Safe_Delete(m_vecDead[i]);
 		}
 	}
 	m_vecDead.clear();
@@ -88,8 +104,10 @@ void CEventManager::Execute(const tagEvent & _eve)
 		CGameObject* pNewObject = (CGameObject*)_eve.lParam;
 		TYPE eType = (TYPE)_eve.wParam;
 
-		if (eType == TYPE::MONSTER)
-			CManagers::instance().Scene()->CurrentScene()->GetObjList(eType).push_back(pNewObject);
+		//if (eType == TYPE::MONSTER)
+		CManagers::instance().Scene()->CurrentScene()->GetObjList(eType).push_back(pNewObject);
+		//else if (eType == TYPE::EFFECT)
+		//CManagers::instance().Scene()->CurrentScene()->GetObjList(eType).push_back(pNewObject);
 	}
 		break;
 

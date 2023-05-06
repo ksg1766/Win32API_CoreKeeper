@@ -20,11 +20,6 @@ void CCollisionManager::LateUpdate()
 	{
 		for (UINT iCol = iRow; iCol < (UINT)TYPE::END; ++iCol)
 		{
-			if ((UINT)TYPE::TILE == iRow && (UINT)TYPE::TILE == iCol)	// 나중에 enum순서 바꾸고 삭제 할 것...
-				continue;
-			//if ((UINT)TYPE::PLAYER == iRow && (UINT)TYPE::PLAYER == iCol)	// 나중에 enum순서 바꾸고 삭제 할 것...
-			//	continue;
-
 			if (m_arrCheck[iRow] & (1 << iCol))
 			{
 				CheckCollisionByType((TYPE)iRow, (TYPE)iCol);

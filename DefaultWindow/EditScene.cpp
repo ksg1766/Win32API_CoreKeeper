@@ -2,13 +2,14 @@
 #include "EditScene.h"
 #include "Managers.h"
 
-CEditScene::CEditScene():m_iDrawIDX(0), m_iDrawIDY(0), m_iOption(0)
+CEditScene::CEditScene():m_iDrawID(0), m_iOption(0)
 {
 }
 
 CEditScene::~CEditScene()
 {
 	Release();
+	CManagers::instance().Tile()->Release();
 }
 
 void CEditScene::Initialize(void)
@@ -24,6 +25,8 @@ void CEditScene::FixedUpdate(void)
 void CEditScene::Update(void)
 {
 	CManagers::instance().Tile()->Update();
+	srand((unsigned)time(NULL));
+
 
 	if (CManagers::instance().Key()->Key_Pressing(VK_LEFT))
 		CManagers::instance().Scroll()->Set_ScrollX(5.f);
@@ -41,21 +44,20 @@ void CEditScene::Update(void)
 	{
 		++m_iOption;
 		if (m_iOption > 1)
-			m_iOption -= 2;
+			m_iOption = 0;
 	}
 
-	if (CManagers::instance().Key()->Key_Down('1'))
+	if (CManagers::instance().Key()->Key_Down('1'))	{ m_iBiom = 0; m_iDrawID = 0; }
+	if (CManagers::instance().Key()->Key_Down('2'))	{ m_iBiom = 1; m_iDrawID = 0; }
+	if (CManagers::instance().Key()->Key_Down('3'))	{ m_iBiom = 2; m_iDrawID = 0; }
+	if (CManagers::instance().Key()->Key_Down(VK_SPACE))
 	{
-		++m_iDrawIDX;
-		if (m_iDrawIDX > 15)
-			m_iDrawIDX -= 16;
-	}
-
-	if (CManagers::instance().Key()->Key_Down(VK_CONTROL) && CManagers::instance().Key()->Key_Down('1'))
-	{
-		++m_iDrawIDY;
-		if (m_iDrawIDY > 19)
-			m_iDrawIDY -= 20;
+		if (0 == m_iBiom || 1 == m_iBiom)
+		{
+			++m_iDrawID;
+			if (6 < m_iDrawID)
+				m_iDrawID = 0;
+		}
 	}
 
 	if (CManagers::instance().Key()->Key_Pressing(VK_LBUTTON))
@@ -67,7 +69,7 @@ void CEditScene::Update(void)
 		pt.x -= (long)CManagers::instance().Scroll()->Get_ScrollX();
 		pt.y -= (long)CManagers::instance().Scroll()->Get_ScrollY();
 
-		CManagers::instance().Tile()->PickingTile(pt, m_iDrawIDX, m_iDrawIDY, m_iOption);
+		CManagers::instance().Tile()->PickingTile(pt, m_iBiom, m_iDrawID, m_iOption);
 	}
 
 	if (CManagers::instance().Key()->Key_Pressing(VK_CONTROL) && CManagers::instance().Key()->Key_Down('S'))
@@ -87,5 +89,6 @@ void CEditScene::LateUpdate(void)
 
 void CEditScene::Render(HDC m_DC)
 {
+	//HDC		hMemDC = CManagers::instance().Resource()->Find_Image(m_pFrameKey);
 	CManagers::instance().Tile()->Render(m_DC);
 }

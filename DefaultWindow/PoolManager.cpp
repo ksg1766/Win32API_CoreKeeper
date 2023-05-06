@@ -3,8 +3,10 @@
 #include "Managers.h"
 #include "Struct.h"
 #include "Slime.h"
-#include "Enum.h"
-
+#include "Larva.h"
+#include "BigLarva.h"
+#include "Tile.h"
+#include "HitEffect.h"
 
 CPoolManager::CPoolManager()
 {
@@ -12,8 +14,18 @@ CPoolManager::CPoolManager()
 
 void CPoolManager::Initialize()
 {
-	m_cMonsterPool = new MonsterPool;
-	m_cMonsterPool->Initialize();
+	m_pMonsterPool = new MonsterPool;
+	m_pMonsterPool->Initialize();
+	m_pEffectPool = new EffectPool;
+	m_pEffectPool->Initialize();
+}
+
+void CPoolManager::ReturnPool(CGameObject * _pGameObject)
+{
+	if(TYPE::MONSTER == _pGameObject->GetType())
+		m_pMonsterPool->GetMonsterPool()->push_back(_pGameObject);
+	else if(TYPE::EFFECT == _pGameObject->GetType())
+		m_pEffectPool->GetEffectPool()->push_back(_pGameObject);
 }
 
 CPoolManager::~CPoolManager()
@@ -21,16 +33,16 @@ CPoolManager::~CPoolManager()
 	Release();
 }
 
-void CPoolManager::ReturnMonster(CGameObject * _cMonster)
-{
-	//_cMonster->SetDead(true);
-	m_cMonsterPool->GetMonsterPool()->push_back(_cMonster);
-}
+//void CPoolManager::ReturnMonster(CGameObject * _pMonster)
+//{
+//	//_cMonster->SetDead(true);
+//	m_pMonsterPool->GetMonsterPool()->push_back(_pMonster);
+//}
 
 void CPoolManager::Release()
 {
-	m_cMonsterPool->Release();
-	Safe_Delete(m_cMonsterPool);
+	Safe_Delete(m_pMonsterPool);
+	Safe_Delete(m_pEffectPool);
 }
 
 CPoolManager::MonsterPool::~MonsterPool()
@@ -40,11 +52,23 @@ CPoolManager::MonsterPool::~MonsterPool()
 
 void CPoolManager::MonsterPool::Initialize()
 {
-	for (int i = 0; i < iMaxMonsterPool; ++i)
+	for (int i = 0; i < 10; ++i)
 	{
 		CGameObject* pSlime = new CSlime;
-		dynamic_cast<CSlime*>(pSlime)->Initialize();
+		pSlime->Initialize();
 		m_MonsterList.push_back(pSlime);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		CGameObject* pLarva = new CLarva;
+		pLarva->Initialize();
+		m_MonsterList.push_back(pLarva);
+	}
+	for (int i = 0; i < 5; ++i)
+	{
+		CGameObject* pBigLarva = new CBigLarva;
+		pBigLarva->Initialize();
+		m_MonsterList.push_back(pBigLarva);
 	}
 }
 
@@ -69,8 +93,11 @@ void CPoolManager::MonsterPool::CreateMonster()
 		UINT iIndex = rand() % iTileSize;
 		if (TYPE::TILE == vecTile[iIndex]->GetType())
 		{
-			(*iterMonster)->SetPosition(vecTile[iIndex]->GetPosition());
-			break;
+			if (dynamic_cast<CTile*>(vecTile[iIndex])->GetBiom() == dynamic_cast<CMonster*>(*iterMonster)->GetBiom())
+			{
+				(*iterMonster)->SetPosition(vecTile[iIndex]->GetPosition());
+				break;
+			}
 		}
 	}
 
@@ -87,4 +114,45 @@ void CPoolManager::MonsterPool::Release()
 		}
 
 	m_MonsterList.clear();
+}
+
+CPoolManager::EffectPool::~EffectPool()
+{
+	Release();
+}
+
+void CPoolManager::EffectPool::Initialize()
+{
+	for (int i = 0; i < 20; ++i)
+	{
+		CGameObject* pHitEffect = new CHitEffect;
+		pHitEffect->Initialize();
+		m_EffectsList.push_back(pHitEffect);
+	}
+}
+
+void CPoolManager::EffectPool::PlayEffect(EFFECT_TYPE _eEffect, Vector2 _vPos)
+{
+	auto& findByType = [&](CGameObject* _iter)
+	{
+		if (_eEffect == dynamic_cast<CEffect*>(_iter)->GetEffectType() && _iter->IsDead())
+			return _iter;
+	};
+
+	auto& iterEffect = find_if(m_EffectsList.begin(), m_EffectsList.end(), findByType);
+	(*iterEffect)->SetDead(false);
+	(*iterEffect)->SetPosition(_vPos);
+	CManagers::instance().Event()->CreateObject(*iterEffect, TYPE::EFFECT);
+	m_EffectsList.erase(iterEffect);
+}
+
+void CPoolManager::EffectPool::Release()
+{
+	if (!(m_EffectsList.empty()))
+		for (auto& iter : m_EffectsList)
+		{
+			Safe_Delete(iter);
+		}
+
+	m_EffectsList.clear();
 }

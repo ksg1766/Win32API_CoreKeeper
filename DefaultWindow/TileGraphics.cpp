@@ -34,8 +34,8 @@ void CTileGraphics::Render(HDC hDC, HDC hMemDC)
 			TILECX,
 			TILECY,
 			hMemDC,
-			TILECX * dynamic_cast<CTile*>(m_pHost)->GetDrawIDX(),
-			TILECY * dynamic_cast<CTile*>(m_pHost)->GetDrawIDY(),
+			TILECX * dynamic_cast<CTile*>(m_pHost)->GetDrawID(),
+			0,
 			SRCCOPY);
 	}
 	else if(TYPE::WALL == m_pHost->GetType())
@@ -46,8 +46,8 @@ void CTileGraphics::Render(HDC hDC, HDC hMemDC)
 			TILECX,
 			TILECY,
 			hMemDC,
-			TILECX * dynamic_cast<CWall*>(m_pHost)->GetDrawIDX(),
-			TILECY * dynamic_cast<CWall*>(m_pHost)->GetDrawIDY(),
+			TILECX * dynamic_cast<CWall*>(m_pHost)->GetDrawID(),
+			0,
 			SRCCOPY);
 	}
 }

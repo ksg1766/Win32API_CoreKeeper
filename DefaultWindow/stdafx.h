@@ -25,6 +25,17 @@
 #include <list>
 #include <map>
 #include <ctime>
+#include <queue>
+#include <functional>
+
+#include <Vfw.h>
+#pragma comment(lib, "vfw32.lib")
+
+#include "fmod.h"
+#include "fmod.hpp"
+#pragma comment(lib, "fmodex_vc.lib")
+
+#include <io.h>
 
 #ifdef _DEBUG
 

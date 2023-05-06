@@ -122,9 +122,6 @@
     <Filter Include="Script\03. Manager\TileManager">
       <UniqueIdentifier>{32d46d5e-f071-4adf-874e-45a401569f67}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\02. GameObject\Ray">
-      <UniqueIdentifier>{411216fc-60a8-47eb-afab-3bbf1cd90f87}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\03. Manager\EventManager">
       <UniqueIdentifier>{c960d4fa-e468-40c5-9a5c-b1959c75725e}</UniqueIdentifier>
     </Filter>
@@ -145,6 +142,66 @@
     </Filter>
     <Filter Include="Script\02. GameObject\02. Monster\BaseMonster">
       <UniqueIdentifier>{6510165a-c212-4015-a51f-3b495dfdf0d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster\Larva">
+      <UniqueIdentifier>{9ceb87d9-1266-49eb-807e-edc12dbb0864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster\BigLarva">
+      <UniqueIdentifier>{4d52c9ab-6297-49af-8ad9-652930a22240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\08. Effect">
+      <UniqueIdentifier>{f6085818-b91b-4f97-a5a3-2af154a1118c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\EffectManager">
+      <UniqueIdentifier>{a3c8e86f-bb6f-4cd0-a836-29103b0c1105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\08. Effect\HitEffect">
+      <UniqueIdentifier>{dc0ea9d4-2ac9-4706-9102-fd52d5378d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\08. Effect\BaseEffect">
+      <UniqueIdentifier>{11d40413-f1b5-4dca-b9d1-1e2227f5eea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\SoundManager">
+      <UniqueIdentifier>{4d590676-0ff1-4f7f-9c4d-af1110050456}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\03. Manager\UIManager">
+      <UniqueIdentifier>{50587f88-2fff-4268-a0cf-b516bdba9226}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\09. Ray">
+      <UniqueIdentifier>{411216fc-60a8-47eb-afab-3bbf1cd90f87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI">
+      <UniqueIdentifier>{46df11ca-3388-420b-aa43-9cdf24040d42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\00. SceneUI">
+      <UniqueIdentifier>{1f931e5a-6b0d-4703-bd39-38bcbd6f305b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\01. PopUpUI">
+      <UniqueIdentifier>{6ef21ff7-92a8-4efa-9568-156db2d567b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\UI_Base">
+      <UniqueIdentifier>{68bababb-1b4e-4ca9-a251-db071c93d2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\00. SceneUI\HP_Bar">
+      <UniqueIdentifier>{c0638c52-c8ef-4a3b-85e0-cbf6132a5bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Graphics\UIGraphics">
+      <UniqueIdentifier>{5b631028-3a43-4a85-9f75-222c2d68696c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\00. SceneUI\QuickSlot">
+      <UniqueIdentifier>{96ab85f8-5b16-4cab-827f-b941e5f07a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\01. Component\Storage">
+      <UniqueIdentifier>{3f58f33e-90ef-49c3-8413-38f86fc64f55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\08. Effect\GlowEffect">
+      <UniqueIdentifier>{c1e1186b-5305-42da-b1cd-9bc5fe89c7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\05. Wall\OreWall">
+      <UniqueIdentifier>{58e494f9-22dc-44bb-a711-7d2c3cfd6058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Ore">
+      <UniqueIdentifier>{348fada9-1f24-4c02-aa18-b8c11ef46ad7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -248,7 +305,7 @@
       <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
     </ClInclude>
     <ClInclude Include="Ray.h">
-      <Filter>Script\02. GameObject\Ray</Filter>
+      <Filter>Script\02. GameObject\09. Ray</Filter>
     </ClInclude>
     <ClInclude Include="EventManager.h">
       <Filter>Script\03. Manager\EventManager</Filter>
@@ -267,6 +324,51 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Script\02. GameObject\02. Monster\BaseMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="Larva.h">
+      <Filter>Script\02. GameObject\02. Monster\Larva</Filter>
+    </ClInclude>
+    <ClInclude Include="BigLarva.h">
+      <Filter>Script\02. GameObject\02. Monster\BigLarva</Filter>
+    </ClInclude>
+    <ClInclude Include="HitEffect.h">
+      <Filter>Script\02. GameObject\08. Effect\HitEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Script\02. GameObject\08. Effect\BaseEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Script\03. Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Script\03. Manager\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Script\03. Manager\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Script\02. GameObject\10. UI\UI_Base</Filter>
+    </ClInclude>
+    <ClInclude Include="HP_Bar.h">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\HP_Bar</Filter>
+    </ClInclude>
+    <ClInclude Include="UIGraphics.h">
+      <Filter>Engine\01. Component\Graphics\UIGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="QuickSlot.h">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\QuickSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>Engine\01. Component\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="GlowEffect.h">
+      <Filter>Script\02. GameObject\08. Effect\GlowEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="OreWall.h">
+      <Filter>Script\02. GameObject\05. Wall\OreWall</Filter>
+    </ClInclude>
+    <ClInclude Include="Ore.h">
+      <Filter>Script\02. GameObject\04. Item\Ore</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -352,7 +454,7 @@
       <Filter>Engine\01. Component\Graphics\TileGraphics</Filter>
     </ClCompile>
     <ClCompile Include="Ray.cpp">
-      <Filter>Script\02. GameObject\Ray</Filter>
+      <Filter>Script\02. GameObject\09. Ray</Filter>
     </ClCompile>
     <ClCompile Include="EventManager.cpp">
       <Filter>Script\03. Manager\EventManager</Filter>
@@ -371,6 +473,51 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Script\02. GameObject\02. Monster\BaseMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="Larva.cpp">
+      <Filter>Script\02. GameObject\02. Monster\Larva</Filter>
+    </ClCompile>
+    <ClCompile Include="BigLarva.cpp">
+      <Filter>Script\02. GameObject\02. Monster\BigLarva</Filter>
+    </ClCompile>
+    <ClCompile Include="HitEffect.cpp">
+      <Filter>Script\02. GameObject\08. Effect\HitEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Script\02. GameObject\08. Effect\BaseEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Script\03. Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Script\03. Manager\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Script\03. Manager\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Script\02. GameObject\10. UI\UI_Base</Filter>
+    </ClCompile>
+    <ClCompile Include="HP_Bar.cpp">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\HP_Bar</Filter>
+    </ClCompile>
+    <ClCompile Include="UIGraphics.cpp">
+      <Filter>Engine\01. Component\Graphics\UIGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="QuickSlot.cpp">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\QuickSlot</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>Engine\01. Component\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="GlowEffect.cpp">
+      <Filter>Script\02. GameObject\08. Effect\GlowEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="OreWall.cpp">
+      <Filter>Script\02. GameObject\05. Wall\OreWall</Filter>
+    </ClCompile>
+    <ClCompile Include="Ore.cpp">
+      <Filter>Script\02. GameObject\04. Item\Ore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

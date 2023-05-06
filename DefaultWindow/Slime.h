@@ -16,18 +16,13 @@ public:
 	virtual void Release(void)		override;
 
 private:
-	int				m_iRange;
-	CGameObject*	m_pTarget;
-	Vector2			m_vTargetPoint;
+	virtual void		Action()		override;
+	virtual void		Attack()		override;
+	virtual void		SetMotion(void)	override;
+	virtual void		MoveFrame(void)	override;
 
-	CShadow*		m_pShadow;
-
-	STATE			m_eCurState;
-	STATE			m_ePreState;
-
-	void			Action();
-	void			Attack();
-	void			SetMotion(void);
-	void			MoveFrame(void);
+	virtual void	OnCollisionEnter(CCollider* _pOther);
+	virtual void	OnCollisionStay(CCollider* _pOther);
+	virtual void	OnCollisionExit(CCollider* _pOther);
 };
 

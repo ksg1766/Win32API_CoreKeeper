@@ -13,7 +13,7 @@ CScene::~CScene()
 
 void CScene::Release(void)
 {
-	for (int i = 0; i < (int)TYPE::END; ++i)
+	for (int i = 0; i < (int)TYPE::WALL; ++i)
 	{
 		for (auto& iter : m_vecObjList[i])
 			Safe_Delete(iter);

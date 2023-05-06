@@ -20,9 +20,16 @@ void CGlurch::Initialize(void)
 {
 	m_IsDead = false;
 	m_eType = TYPE::BOSS;
-	m_vPosition = Vector2(900.f, 900.f);
+	m_vPosition = Vector2(1400.f, 250.f);
 	m_vScale = Vector2(256.f, 256.f);
 	m_iRange = 7 * TILECX;
+
+	m_iBiom = 1;
+
+	m_iMaxHp = 100;
+	m_iHp = m_iMaxHp;
+
+	m_iDamage = 20;
 
 	m_vTargetPoint = m_vPosition;
 	m_pTarget = nullptr;
@@ -46,7 +53,7 @@ void CGlurch::Initialize(void)
 
 	m_fSpeed = 25.f;
 
-	m_fTime = 0;
+	m_dwTime = 0;
 
 	m_pFrameKey = L"Glurch";
 	m_tFrame.iFrameStart = 0;
@@ -60,6 +67,19 @@ void CGlurch::Initialize(void)
 
 int CGlurch::Update(void)
 {
+	if (m_iHp <= 0)
+	{
+		m_iHp = 0;
+		m_fSpeed = 0;
+		m_eCurState = STATE::DEAD;
+	}
+
+	if (STATE::DEAD == m_eCurState)
+		return 0;
+
+	if (m_iHp <= m_iMaxHp * 0.3)
+		m_fSpeed = 50.f;
+	
 	CGameObject* pPlayer = CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::PLAYER).front();
 	if (Vector2::Distance(pPlayer->GetPosition(), m_vPosition) <= m_iRange)
 	{
@@ -153,6 +173,7 @@ void CGlurch::TakeDown()
 {
 	if (m_vPosition.y > m_vTargetPoint.y - 20.f && m_vPosition.y < m_vTargetPoint.y + 20.f)	// TargetPoint에 도달 했을 시
 	{
+		CManagers::instance().Sound()->PlaySound(L"SlimeBossImpact_short.wav", CHANNELID::SOUND_EFFECT6, CManagers::instance().Sound()->GetVolume());
 		m_pRigidBody->SetVelocity(Vector2::Zero());
 		m_IsTakingDown = true;
 		CManagers::instance().Scroll()->StartScrollShaking();
@@ -217,11 +238,13 @@ void CGlurch::MoveFrame(void)
 			if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
 				m_tFrame.iFrameStart = m_tFrame.iFrameEnd;
 		}
-		else
+		else if (STATE::ATTACK == m_eCurState)
 		{
 			if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
 				m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
 		}
+		else
+			CManagers::instance().Event()->DeleteObject(this);;
 
 		m_tFrame.dwTime = GetTickCount();
 	}
@@ -292,6 +315,7 @@ void CGlurch::OnCollisionEnter(CCollider * _pOther)
 	{
 		if (TYPE::PLAYER == pOtherObj->GetType())
 		{
+			//-1.f * Vector2(m_vPosition - pOtherObj->GetPosition()).Normalize()
 			// hp 감소 & 밀어내기
 		}
 		else if (TYPE::WALL == pOtherObj->GetType())

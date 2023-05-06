@@ -1,5 +1,7 @@
 #pragma once
 #include "Scene.h"
+#include "Struct.h"
+
 class CEditScene :
 	public CScene
 {
@@ -14,8 +16,11 @@ public:
 	virtual void Render(HDC m_DC)	override;
 
 private:
-	int			m_iDrawIDX;
-	int			m_iDrawIDY;
-	int			m_iOption;
+	FRAME		m_tFrame;
+	TCHAR*		m_pFrameKey;
+
+	int			m_iBiom;
+	int			m_iDrawID;
+	int			m_iOption;	//  0 = ¹Ù´Ú, 1 = º®
 };
 

@@ -80,4 +80,12 @@ struct Vector2
 
 	static Vector2 Zero()	{ return Vector2(0.f, 0.f); }
 	static Vector2 One()	{ return Vector2(1.f, 1.f); }
+
+	// юс╫ц
+	bool operator<(const Vector2& other) const
+	{
+		if (y != other.y)
+			return y < other.y;
+		return x < other.x;
+	}
 };

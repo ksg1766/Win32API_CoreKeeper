@@ -18,6 +18,9 @@ public:
 	virtual void Release(void) override;
 
 public:
+	int				GetDamage() { return m_iDamage; }
+	void			SetDamage(int _iDamage) { m_iDamage = _iDamage; };
+
 	virtual void	OnCollisionEnter(CCollider* _pOther);
 	virtual void	OnCollisionStay(CCollider* _pOther);
 	virtual void	OnCollisionExit(CCollider* _pOther);
@@ -27,6 +30,8 @@ private:
 	virtual void	MoveFrame(void) override;
 
 	virtual void	SetUsing(bool _isUsig) override { m_IsUsing = _isUsig; }
+
+	int				m_iDamage;
 //private:
 	//bool		m_IsDead;
 
@@ -37,7 +42,7 @@ private:
 
 	//FRAME		m_tFrame;
 	//TCHAR*		m_pFrameKey;
-	//float		m_fTime;
+	//DWORD		m_dwTime;
 
 	//float		m_fSpeed;
 };

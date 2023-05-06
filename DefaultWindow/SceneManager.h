@@ -13,9 +13,14 @@ public:
 	void TerminateScene();
 	void Release();
 
+	void	SwitchGridOn() { m_bGridOn = !m_bGridOn; }
+	void	SwitchAStarGrid() { m_bAStarGrid = !m_bAStarGrid; }
 
-	CScene* CurrentScene() { return m_pCurrentScene; };
-	void*	SetCurrentScene(CScene* _pCurrentScene) { m_pCurrentScene = _pCurrentScene; };
+	bool	GetGridOn() { return m_bGridOn; }
+	bool	GetAStarGrid() { return m_bAStarGrid; }
+
+	CScene* CurrentScene() { return m_pCurrentScene; }
+	void*	SetCurrentScene(CScene* _pCurrentScene) { m_pCurrentScene = _pCurrentScene; }
 	HBRUSH	GetBrush(BRUSH_TYPE _eBrush) { return m_arrBrush[(UINT)_eBrush]; }
 	HPEN	GetPen(PEN_TYPE _ePen) { return m_arrPen[(UINT)_ePen]; }
 
@@ -29,5 +34,8 @@ private:
 
 	HBRUSH	m_arrBrush[(UINT)BRUSH_TYPE::END];
 	HPEN	m_arrPen[(UINT)PEN_TYPE::END];
+
+	bool	m_bGridOn;
+	bool	m_bAStarGrid;
 };
 

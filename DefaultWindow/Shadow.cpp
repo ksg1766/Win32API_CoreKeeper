@@ -23,7 +23,7 @@ void CShadow::Initialize(void)
 
 	m_fSpeed = 30.f;
 
-	m_fTime = 0;
+	m_dwTime = 0;
 
 	m_pFrameKey = L"Glurch_Shadow";
 	
