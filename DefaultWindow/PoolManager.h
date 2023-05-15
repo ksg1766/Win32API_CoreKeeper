@@ -12,6 +12,8 @@ public:
 	void Initialize();
 
 	void CreateMonster() { m_pMonsterPool->CreateMonster(); }
+	void CreateMonster(int _iBiom, Vector2 _vPos) { m_pMonsterPool->CreateMonster(_iBiom, _vPos); }
+	//void CreateMonster() { m_pMonsterPool->CreateMonster(); }
 	void ReturnPool(CGameObject* _pGameObject);
 	int  MonsterInPool() { return m_pMonsterPool->MonsterInPool(); }
 
@@ -29,6 +31,7 @@ private:
 
 		void Initialize();
 		void CreateMonster();
+		void CreateMonster(int _iBiom, Vector2 _vPos);
 		void Release();
 		int	 MonsterInPool() { return m_MonsterList.size(); }
 

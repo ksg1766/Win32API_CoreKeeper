@@ -27,7 +27,7 @@ public:
 	bool			IsDead()						{ return m_IsDead; }
 	Vector2			GetPosition()					{ return m_vPosition; }
 	Vector2			GetScale()						{ return m_vScale; }
-	FRAME			GetFrame()						{ return m_tFrame; }
+	FRAME&			GetFrame()						{ return m_tFrame; }
 	DIR				GetDir()						{ return m_eDir; }
 
 	TCHAR*			GetFrameKey()					{ return m_pFrameKey; }
@@ -51,6 +51,8 @@ public:
 	virtual void	OnCollisionStay(CCollider* _pOther) {}
 	virtual void	OnCollisionExit(CCollider* _pOther) {}
 
+	BOSS	GetBossType() { return m_eBossType; }	// 임시로 여기에...
+
 protected:
 	TYPE		m_eType;
 	RENDERID	m_eRender;
@@ -73,11 +75,13 @@ protected:
 	CRigidBody*		m_pRigidBody;
 	CGraphics*		m_pGraphics;
 
+	BOSS			m_eBossType;	// 일단 임시로 여기에..
+
 	friend class CCollider;
 	friend class CRigidBody;
 	friend class CGraphics;
 	friend class CShadow;
 	friend class CEventManager;
-	friend class CPoolManager;
+	friend class CPoolManager;		// 필요없는거 정리하기
 };
 

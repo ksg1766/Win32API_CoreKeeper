@@ -145,16 +145,26 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AcidProjectile.h" />
     <ClInclude Include="BigLarva.h" />
+    <ClInclude Include="Cocoon.h" />
+    <ClInclude Include="Copper.h" />
+    <ClInclude Include="Core.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EndScene.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="GlowEffect.h" />
     <ClInclude Include="Glurch.h" />
+    <ClInclude Include="HartCoreTile.h" />
     <ClInclude Include="HitEffect.h" />
+    <ClInclude Include="HiveMother.h" />
+    <ClInclude Include="HP_Bar_Boss.h" />
+    <ClInclude Include="IntroScene.h" />
     <ClInclude Include="Larva.h" />
-    <ClInclude Include="Ore.h" />
-    <ClInclude Include="OreWall.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MazeMerchant.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="QuickSlot.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Collider.h" />
@@ -167,6 +177,9 @@
     <ClInclude Include="Shadow.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Spawner.h" />
+    <ClInclude Include="Statue_Glurch.h" />
+    <ClInclude Include="Statue_HiveMother.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="TileGraphics.h" />
     <ClInclude Include="TileManager.h" />
@@ -195,6 +208,7 @@
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="Trap.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIGraphics.h" />
     <ClInclude Include="UIManager.h" />
@@ -202,16 +216,26 @@
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AcidProjectile.cpp" />
     <ClCompile Include="BigLarva.cpp" />
+    <ClCompile Include="Cocoon.cpp" />
+    <ClCompile Include="Copper.cpp" />
+    <ClCompile Include="Core.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GlowEffect.cpp" />
     <ClCompile Include="Glurch.cpp" />
+    <ClCompile Include="HartCoreTile.cpp" />
     <ClCompile Include="HitEffect.cpp" />
+    <ClCompile Include="HiveMother.cpp" />
+    <ClCompile Include="HP_Bar_Boss.cpp" />
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Larva.cpp" />
-    <ClCompile Include="Ore.cpp" />
-    <ClCompile Include="OreWall.cpp" />
+    <ClCompile Include="Material.cpp" />
+    <ClCompile Include="MazeMerchant.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="QuickSlot.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -223,6 +247,9 @@
     <ClCompile Include="Shadow.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Spawner.cpp" />
+    <ClCompile Include="Statue_Glurch.cpp" />
+    <ClCompile Include="Statue_HiveMother.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="TileGraphics.cpp" />
     <ClCompile Include="TileManager.cpp" />
@@ -252,6 +279,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Trap.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIGraphics.cpp" />
     <ClCompile Include="UIManager.cpp" />

@@ -16,17 +16,19 @@ public:
 	CGameObject**	GetQuickSlotObjects() { return m_arrObjects; }
 	CGameObject**	GetQuickSlotUI() { return m_arrQuickSlot; }
 	CGameObject**	GetQuickSlotIcon() { return m_arrIcons; }
-	//vector<CGameObject*>&	GetQuickSLots() { return m_vecSlots; }
+	UINT**			GetObjectsNum() { return &m_iObjectsNum; }
 
 private:
 	CGameObject**	m_arrObjects;
+	UINT*			m_iObjectsNum;
 	//vector<CGameObject*>* m_vecObjects;
-
+	//map<CGameObject*, UINT>* m_mapQuickSlot;
 	CGameObject*	m_arrQuickSlot[10];
 
 	CGameObject*	m_arrIcons[10];
+	CGameObject*	m_arrNumbers[10][3];
 	//vector<CGameObject*> m_vecIcons;
 
-	// 아.. 코드 왜 이따구로 짰지 어제의 나는..
+	// 뭔 코드지 대체..
 };
 

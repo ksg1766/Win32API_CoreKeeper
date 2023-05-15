@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Player.h"
-//#include "Item.h"
 #include "PickAxe.h"
+#include "Trap.h"
+#include "Material.h"
 #include "Collider.h"
 #include "RigidBody.h"
 #include "Graphics.h"
@@ -10,9 +11,12 @@
 #include "Storage.h"
 #include "Monster.h"
 #include "Glurch.h"
+#include "UI.h"
+#include "EndScene.h"
 
 CPlayer::CPlayer() :m_parrQuickSlot{}
 {
+	//memset(m_iQuickSlotCount, 0, 10 * sizeof(UINT));
 	//ZeroMemory(m_parrQuickSlot, 0);
 }
 
@@ -28,7 +32,7 @@ void CPlayer::Initialize(void)
 	m_vPosition = Vector2(500.f, 400.f);
 	m_vScale = Vector2(44.f, 44.f);
 
-	m_iMaxHp = 100;
+	m_iMaxHp = 400;
 	m_iHp = m_iMaxHp;
 
 	m_bFootStepSound = true;
@@ -58,18 +62,38 @@ void CPlayer::Initialize(void)
 	for (int i = 0; i < 10; ++i)
 		m_parrQuickSlot[i] = nullptr;
 
+	memset(m_iQuickSlotCount, 0, 10 * sizeof(UINT));
+
 	CItem* _pPickAxe = new CPickAxe;
 	_pPickAxe->SetOwner(this); // Initialize보다 먼저해줘야함.
 	_pPickAxe->Initialize();
 
-
 	m_parrQuickSlot[0] = _pPickAxe;
-	//m_pStorage->AddObject(_pPickAxe);
+	++m_iQuickSlotCount[0];
 
-	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::ITEM).push_back(_pPickAxe);
+	//CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::ITEM).push_back(_pPickAxe);
+
+	//CGameObject* pTestTrap = new CTrap;
+	//static_cast<CItem*>(pTestTrap)->SetOwner(this);
+	//pTestTrap->Initialize();
+
+	//m_parrQuickSlot[1] = pTestTrap;
+	//m_iQuickSlotCount[1] = 10;
+
+	//CGameObject* pInitMaterial = new CMaterial;
+	//static_cast<CItem*>(pInitMaterial);
+
+	//CItem::CreateItem(MATERIAL::STONE_COPPER);
+	//{
+
+	//}
+
+	CGameObject* pTestTrap = new CTrap;
+	static_cast<CItem*>(pTestTrap)->SetOwner(this);
+	pTestTrap->Initialize();
 
 	m_dwAttackSpeed = 300;
-	m_fSpeed = 7.f;
+	m_fSpeed = 4.f;
 
 //	m_dwTime = 0;
 
@@ -119,13 +143,12 @@ void CPlayer::Release(void)
 	Safe_Delete(m_pCollider);
 	Safe_Delete(m_pRigidBody);
 	Safe_Delete(m_pGraphics);
-	//Safe_Delete(m_pStorage);
 }
 
-vector<CGameObject*>* CPlayer::GetStorage()
-{
-	return &m_pStorage->GetStorage();
-}
+//vector<CGameObject*>* CPlayer::GetStorage()
+//{
+//	return &m_pStorage->GetStorage();
+//}
 
 void CPlayer::OnCollisionEnter(CCollider * _pOther)
 {
@@ -134,14 +157,14 @@ void CPlayer::OnCollisionEnter(CCollider * _pOther)
 	{
 		CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT7, CManagers::instance().Sound()->GetVolume());
 		//CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
-		m_iHp -= dynamic_cast<CMonster*>(pOtherObj)->GetDamage();
+		m_iHp -= static_cast<CMonster*>(pOtherObj)->GetDamage();
 	}
-	if (TYPE::BOSS == pOtherObj->GetType())
-	{
-		CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT8, CManagers::instance().Sound()->GetVolume());
-		//CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
-		m_iHp -= dynamic_cast<CGlurch*>(pOtherObj)->GetDamage();
-	}
+	//if (TYPE::BOSS == pOtherObj->GetType())
+	//{
+	//	CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT8, CManagers::instance().Sound()->GetVolume());
+	//	//CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
+	//	m_iHp -= static_cast<CGlurch*>(pOtherObj)->GetDamage();
+	//}
 }
 
 void CPlayer::OnCollisionStay(CCollider * _pOther)
@@ -154,6 +177,32 @@ void CPlayer::OnCollisionExit(CCollider * _pOther)
 
 void CPlayer::Key_Input(void)
 {
+	if (CManagers::instance().Key()->Key_Up(VK_RIGHT))
+	{
+		m_eCurState = STATE::IDLE;
+		m_pRigidBody->SetVelocity(Vector2::Zero());
+	}
+	if (CManagers::instance().Key()->Key_Up(VK_LEFT))
+	{
+		m_eCurState = STATE::IDLE;
+		m_pRigidBody->SetVelocity(Vector2::Zero());
+	}
+	if (CManagers::instance().Key()->Key_Up(VK_DOWN))
+	{
+		m_eCurState = STATE::IDLE;
+		m_pRigidBody->SetVelocity(Vector2::Zero());
+	}
+	if (CManagers::instance().Key()->Key_Up(VK_UP))
+	{
+		m_eCurState = STATE::IDLE;
+		m_pRigidBody->SetVelocity(Vector2::Zero());
+	}
+	if (CManagers::instance().Key()->Key_Up(VK_SPACE))
+	{
+		m_eCurState = STATE::IDLE;
+		m_pRigidBody->SetVelocity(Vector2::Zero());
+	}
+
 	if (CManagers::instance().Key()->Key_Pressing(VK_RIGHT))
 	{
 		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
@@ -164,7 +213,6 @@ void CPlayer::Key_Input(void)
 		else if (CManagers::instance().Key()->Key_Pressing(VK_DOWN))
 			m_eDir = DIR::RIGHTDOWN;
 	}
-
 	else if (CManagers::instance().Key()->Key_Pressing(VK_LEFT))
 	{
 		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
@@ -175,26 +223,133 @@ void CPlayer::Key_Input(void)
 		else if (CManagers::instance().Key()->Key_Pressing(VK_DOWN))
 			m_eDir = DIR::LEFTDOWN;
 	}
-
 	else if (CManagers::instance().Key()->Key_Pressing(VK_UP))
 	{
 		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::UP;
 	}
-
 	else if (CManagers::instance().Key()->Key_Pressing(VK_DOWN))
 	{
 		CManagers::instance().Sound()->PlaySound(L"Footstep_Grass_short.wav", CHANNELID::SOUND_EFFECT1);
 		m_eCurState = STATE::MOVE;
 		m_eDir = DIR::DOWN;
 	}
-
 	else
 	{
 		m_eCurState = STATE::IDLE;
 	}
 
+	if (CManagers::instance().Key()->Key_Down('1'))
+	{
+		if (m_iQuickSlotCount[0] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[0])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[0])->Use();
+			--m_iQuickSlotCount[0];
+			//if (!m_iQuickSlotCount[0])
+			//	m_parrQuickSlot[0] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('2'))
+	{
+		if (m_iQuickSlotCount[1] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[1])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[1])->Use();
+			--m_iQuickSlotCount[1];
+			//if (!m_iQuickSlotCount[1])
+			//	m_parrQuickSlot[1] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('3'))
+	{
+		if (m_iQuickSlotCount[2] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[2])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[2])->Use();
+			--m_iQuickSlotCount[2];
+			/*if (!m_iQuickSlotCount[2])
+				m_parrQuickSlot[2] = nullptr;*/
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('4'))
+	{
+		if (m_iQuickSlotCount[3] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[3])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[3])->Use();
+			--m_iQuickSlotCount[3];
+			if (!m_iQuickSlotCount[3])
+				m_parrQuickSlot[3] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('5'))
+	{
+		if (m_iQuickSlotCount[4] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[4])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[4])->Use();
+			--m_iQuickSlotCount[4];
+			if (!m_iQuickSlotCount[4])
+				m_parrQuickSlot[4] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('6'))
+	{
+		if (m_iQuickSlotCount[5] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[5])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[5])->Use();
+			--m_iQuickSlotCount[5];
+			if (!m_iQuickSlotCount[5])
+				m_parrQuickSlot[5] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('7'))
+	{
+		if (m_iQuickSlotCount[6] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[6])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[6])->Use();
+			--m_iQuickSlotCount[6];
+			if (!m_iQuickSlotCount[6])
+				m_parrQuickSlot[6] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('8'))
+	{
+		if (m_iQuickSlotCount[7] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[7])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[7])->Use();
+			--m_iQuickSlotCount[7];
+			if (!m_iQuickSlotCount[7])
+				m_parrQuickSlot[7] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('9'))
+	{
+		if (m_iQuickSlotCount[8] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[8])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[8])->Use();
+			--m_iQuickSlotCount[8];
+			if (!m_iQuickSlotCount[8])
+				m_parrQuickSlot[8] = nullptr;
+		}
+
+	}
+	if (CManagers::instance().Key()->Key_Down('0'))
+	{
+		if (m_iQuickSlotCount[9] && ITEM::CONSUM == static_cast<CItem*>(m_parrQuickSlot[9])->GetItemType())
+		{
+			static_cast<CItem*>(m_parrQuickSlot[9])->Use();
+			--m_iQuickSlotCount[9];
+			if (!m_iQuickSlotCount[9])
+				m_parrQuickSlot[9] = nullptr;
+		}
+
+	}
 	if (CManagers::instance().Key()->Key_Pressing(VK_SPACE))
 	{
 		m_eCurState = STATE::ATTACK;
@@ -225,6 +380,9 @@ void CPlayer::Key_Input(void)
 
 	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('A'))
 		CManagers::instance().Scene()->SwitchAStarGrid();
+
+	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('C'))
+		CManagers::instance().Scene()->SwitchGridOn();
 }
 
 void CPlayer::Action(void)
@@ -268,11 +426,11 @@ void CPlayer::Attack()
 {
 	if (m_dwTime + m_dwAttackSpeed < GetTickCount())
 	{
-		dynamic_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(true);
+		static_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(true);
 		m_dwTime = GetTickCount();
 	}
 	else
-		dynamic_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(false);
+		static_cast<CItem*>(m_parrQuickSlot[0])->SetUsing(false);
 }
 
 void CPlayer::SetMotion(void)

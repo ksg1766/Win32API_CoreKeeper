@@ -27,10 +27,10 @@ void CLarva::Initialize(void)
 	m_iBiom = 2;
 
 	m_iHp = 30;
-	m_iDamage = 8;
+	m_iDamage = 7;
 
 	m_vScale = Vector2(32.f, 32.f);
-	m_iRange = 3 * TILECX;
+	m_iRange = 7 * TILECX;
 
 	m_vTargetPoint = m_vPosition;
 	m_pTarget = nullptr;

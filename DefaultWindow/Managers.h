@@ -39,7 +39,7 @@ public:
 	CResourceManager*	Resource() { return m_pResource; }
 	CTileManager*		Tile() { return m_pTile; }
 	CEventManager*		Event() { return m_pEvent; }
-//	CEffectManager*		Effect() { return m_pEffect; }
+	CEffectManager*		Effect() { return m_pEffect; }
 	CSoundManager*		Sound() { return m_pSound; }
 	CUIManager*			UI() { return m_pUI; }
 
@@ -57,7 +57,7 @@ private:
 	CResourceManager*	m_pResource;
 	CTileManager*		m_pTile;
 	CEventManager*		m_pEvent;
-//	CEffectManager*		m_pEffect;
+	CEffectManager*		m_pEffect;
 	CSoundManager*		m_pSound;
 	CUIManager*			m_pUI;
 };

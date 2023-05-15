@@ -30,9 +30,9 @@ void CScrollManager::ScrollShaking()
 	}
 }
 
-void CScrollManager::StartScrollShaking()
+void CScrollManager::StartScrollShaking(int _iCount)
 {
-	m_dwTime = 6;
+	m_dwTime = _iCount;
 }
 
 void CScrollManager::Initialize()

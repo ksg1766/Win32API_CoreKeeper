@@ -20,6 +20,6 @@ public:
 
 private:
 	CGameObject*	m_pHost;
-	friend class	CGameObject;
+	friend class	CGameObject;	// 이거 왜이렇게 여기저기 있어 열받게
 };
 

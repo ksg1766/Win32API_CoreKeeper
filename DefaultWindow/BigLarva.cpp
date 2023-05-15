@@ -27,10 +27,10 @@ void CBigLarva::Initialize(void)
 	m_iBiom = 2;
 
 	m_iHp = 50;
-	m_iDamage = 12;
+	m_iDamage = 10;
 
 	m_vScale = Vector2(64.f, 64.f);
-	m_iRange = 3 * TILECX;
+	m_iRange = 4 * TILECX;
 
 	m_vTargetPoint = m_vPosition;
 	m_pTarget = nullptr;
@@ -61,7 +61,7 @@ void CBigLarva::Initialize(void)
 	_tShadowFrame.dwTime = GetTickCount();
 	m_pShadow->SetFrame(_tShadowFrame);
 
-	m_fSpeed = 2.f;
+	m_fSpeed = 1.f;
 
 	m_dwTime = 0;
 

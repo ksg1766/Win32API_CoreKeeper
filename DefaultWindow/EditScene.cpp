@@ -2,7 +2,7 @@
 #include "EditScene.h"
 #include "Managers.h"
 
-CEditScene::CEditScene():m_iDrawID(0), m_iOption(0)
+CEditScene::CEditScene():m_iDrawID(0), m_iOption(0), m_iBiom(0)
 {
 }
 

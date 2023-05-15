@@ -7,9 +7,17 @@
 #include "Ray.h"
 #include "Collider.h"
 #include "Glurch.h"
-#include "Item.h"
+#include "HiveMother.h"
+#include "MazeMerchant.h"
+#include "PickAxe.h"
 #include "UI.h"
 
+#include "Core.h"
+#include "Slime.h"
+#include "Statue_Glurch.h"
+#include "Statue_HiveMother.h"
+
+#include "Trap.h"
 //float g_fSound = 1.f;
 
 CGameScene::CGameScene()
@@ -37,6 +45,14 @@ void CGameScene::Initialize(void)
 	pPlayer->Initialize();
 	m_vecObjList[(UINT)TYPE::PLAYER].push_back(pPlayer);
 
+	//CItem* _pPickAxe = new CPickAxe;
+	//_pPickAxe->SetOwner(static_cast<CPlayer*>(pPlayer)); // Initialize보다 먼저해줘야함.
+	//_pPickAxe->Initialize();
+	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::PLAYER).push_back(static_cast<CPlayer*>(pPlayer)->GetQuickSlot()[0]);
+	//static_cast<CPlayer*>(pPlayer)->GetQuickSlot()[0] = _pPickAxe;
+	//static_cast<CPlayer*>(pPlayer)->GetQuickSlotCount()[0] += 1;
+
+	//TestMap1
 	CGameObject* pGlurch = new CGlurch;
 	pGlurch->Initialize();
 	m_vecObjList[(UINT)TYPE::BOSS].push_back(pGlurch);
@@ -44,17 +60,50 @@ void CGameScene::Initialize(void)
 	for (int i = 0; i < 20; ++i)
 		CManagers::instance().Pool()->CreateMonster();
 
+	CGameObject* pMazeMerchant = new CMazeMerchant;
+	pMazeMerchant->Initialize();
+	m_vecObjList[(UINT)TYPE::PLAYER].push_back(pMazeMerchant);
+
+	CGameObject* pMazeTrap = new CTrap;
+	pMazeTrap->Initialize();
+	pMazeTrap->SetPosition(Vector2(40.5f * TILECX, 44.5f * TILECY));
+	m_vecObjList[(UINT)TYPE::ITEM].push_back(pMazeTrap);
+
+	//TestMap2
+	CGameObject* pHiveMother = new CHiveMother;
+	pHiveMother->Initialize();
+	m_vecObjList[(UINT)TYPE::BOSS].push_back(pHiveMother);
+
+	m_IsHiveMotherDead = false;
+	m_IsGlurchDead = false;
+	//static_cast<CSlime*>(pMazeSlime)->Set();
+
+	//MainMap
+	CGameObject* pCore = new CCore;
+	pCore->Initialize();
+	CGameObject* pStatueGlurch = new CStatue_Glurch;
+	pStatueGlurch->Initialize();
+	CGameObject* pStatueHiveMother = new CStatue_HiveMother;
+	pStatueHiveMother->Initialize();
+
+
+	m_vecObjList[(UINT)TYPE::TILE].push_back(pCore);
+	m_vecObjList[(UINT)TYPE::TILE].push_back(pStatueGlurch);
+	m_vecObjList[(UINT)TYPE::TILE].push_back(pStatueHiveMother);
+
+
 	CManagers::instance().UI()->InitializeSceneUI();
 
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::MONSTER);
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::BOSS);
 	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::TILE);
+	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::ITEM);
 	CManagers::instance().Collision()->CheckGroup(TYPE::RAY, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::TILE);
-	//CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::TILE);
 	CManagers::instance().Collision()->CheckGroup(TYPE::BOSS, TYPE::ITEM);
 	CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::ITEM);
-	CManagers::instance().Collision()->CheckGroup(TYPE::ITEM, TYPE::TILE);
+	CManagers::instance().Collision()->CheckGroup(TYPE::MONSTER, TYPE::TILE);
+	CManagers::instance().Collision()->CheckGroup(TYPE::PLAYER, TYPE::PLAYER);
 
 	CManagers::instance().Sound()->PlayBGM(L"Base_Theme_v4.wav", CManagers::instance().Sound()->GetVolume());
 }
@@ -65,34 +114,6 @@ void CGameScene::FixedUpdate(void)
 
 void CGameScene::Update(void)
 {
-	//for (auto& iter = m_vecObjList[(UINT)TYPE::TILE].begin(); iter != m_vecObjList[(UINT)TYPE::TILE].end();)
-	//{
-	//	if ((*iter)->IsDead())
-	//	{
-	//		CWall* pIter = dynamic_cast<CWall*>(*iter);
-	//		CTile* pTile = new CTile;
-	//		pTile->Initialize();
-	//		pTile->SetPosition(pIter->GetPosition());
-	//		
-	//		CPlayer* pPlayer = dynamic_cast<CPlayer*>(m_vecObjList[(UINT)TYPE::PLAYER].front());
-	//
-	//		if (pIter->GetCollider() == pPlayer->GetWallTarget())
-	//		{
-	//			//pIter->GetCollider()->OnCollisionExit(pPlayer->GetCollider());
-	//			//pPlayer->GetCollider()->OnCollisionExit(pIter->GetCollider());
-	//			pPlayer->GetRay()->GetCollider()->OnCollisionExit(pIter->GetCollider());
-	//		}
-	//		
-	//		CManagers::instance().Tile()->DestroyWall(pIter->GetPosition());
-	//
-	//		pTile->SetTile(15, 0, 0, pIter->GetWallAround());
-	//		Safe_Delete(pIter);
-	//		*iter = pTile;
-	//		++iter;
-	//	}
-	//	else
-	//		++iter;
-	//}
 	// 다른 오브젝트 삭제는 나중에 처리... // 여기도 함수로 옮길 것..
 	srand((unsigned)time(NULL));
 	for (int i = 0; i < (int)TYPE::TILE; ++i)
@@ -110,6 +131,11 @@ void CGameScene::Update(void)
 			}
 		}
 	}
+
+	/*if (!(m_pMazeMerchant)->IsDead())
+	{
+		m_pMazeMerchant->Update();
+	}*/
 
 	for (auto& iter = m_vecObjList[(UINT)TYPE::EFFECT].begin(); iter != m_vecObjList[(UINT)TYPE::EFFECT].end();)
 	{
@@ -140,59 +166,49 @@ void CGameScene::Update(void)
 
 void CGameScene::LateUpdate(void)
 {
-	/*int	iCullX = abs((int)CManagers::instance().Scroll()->Get_ScrollX() / TILECX);
-	int	iCullY = abs((int)CManagers::instance().Scroll()->Get_ScrollY() / TILECY);
-
-	int	iMaxX = iCullX + WINCX / TILECX + 2;
-	int	iMaxY = iCullY + WINCY / TILECY + 2;*/
-
 	Vector2 vPlayerPosition = m_vecObjList[(UINT)TYPE::PLAYER].front()->GetPosition();
+
+	/*m_pMazeMerchant->LateUpdate();
+	RENDERID eMazeMerchID = m_pMazeMerchant->GetRenderID();
+	m_RenderSort[(UINT)eMazeMerchID].push_back(m_pMazeMerchant);*/
+
 	for (int i = 0; i < (UINT)TYPE::END; ++i)
 	{
-		/*if (i == (UINT)TYPE::TILE)
+		if (i == (UINT)TYPE::TILE)
 		{
-			for (int i = iCullY; i < iMaxY; ++i)
+			for (auto& iter : m_vecObjList[i])
 			{
-				for (int j = iCullX; j < iMaxX; ++j)
+
+				if (abs(vPlayerPosition.x - iter->GetPosition().x) < 500
+					&& abs(vPlayerPosition.y - iter->GetPosition().y) < 400)
 				{
-					int	iIndex = i * TILEX + j;
-
-					if (0 > iIndex || m_vecObjList[(UINT)TYPE::TILE].size() <= (size_t)iIndex)
-						continue;
-
-					if (!m_vecObjList[(UINT)TYPE::TILE][iIndex]->IsDead())
-					{
-						m_vecObjList[(UINT)TYPE::TILE][iIndex]->LateUpdate();
-						if(TYPE::TILE == m_vecObjList[(UINT)TYPE::TILE][iIndex]->GetType())
-							m_RenderSort[(UINT)RENDERID::BACKGROUND].push_back(m_vecObjList[(UINT)TYPE::TILE][iIndex]);
-						else if (TYPE::WALL == m_vecObjList[(UINT)TYPE::TILE][iIndex]->GetType())
-							m_RenderSort[(UINT)RENDERID::GAMEOBJECT].push_back(m_vecObjList[(UINT)TYPE::TILE][iIndex]);
-					}
-
+					iter->LateUpdate();
+					RENDERID eID = iter->GetRenderID();
+					m_RenderSort[(UINT)eID].push_back(iter);
 				}
 			}
 		}
-		else
-		{*/
+
+		else {
 			for (auto& iter : m_vecObjList[i])
 			{
 				iter->LateUpdate();
 
-				if (abs(vPlayerPosition.x - iter->GetPosition().x) < 750
-					&& abs(vPlayerPosition.y - iter->GetPosition().y) < 580)
+				if (abs(vPlayerPosition.x - iter->GetPosition().x) < 500
+					&& abs(vPlayerPosition.y - iter->GetPosition().y) < 400)
 				{
 					RENDERID eID = iter->GetRenderID();
 					m_RenderSort[(UINT)eID].push_back(iter);
 				}
 			}
-		//}
+		}
 	}
 
 	for (auto& iter : m_vecObjList[(UINT)TYPE::EFFECT])
 	{
 		iter->LateUpdate();
-		if (abs(vPlayerPosition.x - iter->GetPosition().x) < 750
-			&& abs(vPlayerPosition.y - iter->GetPosition().y) < 580)
+		if (abs(vPlayerPosition.x - iter->GetPosition().x) < 500
+			&& abs(vPlayerPosition.y - iter->GetPosition().y) < 400)
 		{
 			m_RenderSort[(UINT)RENDERID::EFFECT].push_back(iter);
 		}
@@ -223,12 +239,12 @@ void CGameScene::Render(HDC m_DC)
 				if (pSrc->GetCollider())
 					return (pDest->GetCollider()->GetPosition().y + pDest->GetCollider()->GetScale().y / 2.f) < (pSrc->GetCollider()->GetPosition().y + pSrc->GetCollider()->GetScale().y / 2.f);
 				else
-					return (pDest->GetCollider()->GetPosition().y + pDest->GetCollider()->GetScale().y / 2.f) < (pSrc->GetPosition().y + pSrc->GetCollider()->GetScale().y / 2.f);
+					return (pDest->GetCollider()->GetPosition().y + pDest->GetCollider()->GetScale().y / 2.f) < (pSrc->GetPosition().y + pSrc->GetScale().y / 2.f);
 			}
 			else
 			{
 				if (pSrc->GetCollider())
-					return (pDest->GetPosition().y + pDest->GetCollider()->GetScale().y / 2.f) < (pSrc->GetCollider()->GetPosition().y + pSrc->GetCollider()->GetScale().y / 2.f);
+					return (pDest->GetPosition().y + pDest->GetScale().y / 2.f) < (pSrc->GetCollider()->GetPosition().y + pSrc->GetCollider()->GetScale().y / 2.f);
 				else
 					return (pDest->GetPosition().y + pDest->GetScale().y / 2.f) < (pSrc->GetPosition().y + pSrc->GetScale().y / 2.f);
 			}
@@ -245,7 +261,7 @@ void CGameScene::Render(HDC m_DC)
 
 	sort(m_RenderSort[(UINT)RENDERID::UI].begin(), m_RenderSort[(UINT)RENDERID::UI].end(), [&](CGameObject* pDest, CGameObject* pSrc)
 	{
-		return (dynamic_cast<CUI*>(pDest)->GetLayer() < dynamic_cast<CUI*>(pSrc)->GetLayer());
+		return (static_cast<CUI*>(pDest)->GetLayer() < static_cast<CUI*>(pSrc)->GetLayer());
 	});
 
 	for (auto& iter : m_RenderSort[(UINT)RENDERID::UI])

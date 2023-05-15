@@ -3,7 +3,7 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Collider.h"
-
+#include "Item.h"
 
 CCollisionManager::CCollisionManager()
 {
@@ -47,6 +47,13 @@ void CCollisionManager::CheckCollisionByType(TYPE _eTypeLeft, TYPE _eTypeRight)
 			{
 				continue;
 			}
+
+			if (TYPE::ITEM == _eTypeLeft && ITEM::CONSUM == static_cast<CItem*>(vecLeft[i])->GetItemType())
+				continue;
+
+			if (TYPE::PLAYER == _eTypeLeft && TYPE::MONSTER == vecLeft[i]->GetType())
+				if(TYPE::TILE == _eTypeRight)
+					continue;
 
 			CCollider* pLeftCol = vecLeft[i]->GetCollider();
 			CCollider* pRightCol = vecRight[j]->GetCollider();

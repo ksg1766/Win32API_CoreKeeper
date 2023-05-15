@@ -5,7 +5,7 @@
 
 
 CTile::CTile()
-	: m_iDrawID(14), m_iOption(0), m_iBiom(0)
+	: m_iDrawID(0), m_iOption(0), m_iBiom(0)
 {
 	m_pFrameKey = L"Desert_Ground";
 	m_IsDead = false;

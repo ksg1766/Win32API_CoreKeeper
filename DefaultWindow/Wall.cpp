@@ -3,6 +3,7 @@
 #include "Managers.h"
 #include "TileGraphics.h"
 #include "Collider.h"
+#include "Material.h"
 
 CWall::CWall() : m_iDrawID(0), m_iOption(1), m_iBiom(0)
 {
@@ -21,12 +22,17 @@ void CWall::Initialize(void)
 	m_eType = TYPE::WALL;
 	m_vScale = Vector2(TILECX, TILECY);
 	m_chWallAround = 0b00000000;
+	m_eMaterial = MATERIAL::END;
+
+	m_iHp = 20;
 
 	m_pCollider = new CCollider;
 	m_pGraphics = new CTileGraphics;
 
 	m_pCollider->Initialize(this);
 	m_pGraphics->Initialize(this);
+
+	m_dwTime = 0;
 
 	m_eRender = RENDERID::GAMEOBJECT;
 }
@@ -38,6 +44,15 @@ int CWall::Update(void)
 
 int CWall::LateUpdate(void)
 {
+	if (MATERIAL::END != m_eMaterial)
+	{
+		if (m_dwTime + 5000 < GetTickCount())
+		{
+			CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::GLOW, m_vPosition);
+			m_dwTime = GetTickCount();
+		}
+	}
+
 	m_pCollider->LateUpdate();
 	return 0;
 }
@@ -63,6 +78,21 @@ void CWall::Release(void)
 	Safe_Delete(m_pGraphics);
 }
 
+void CWall::DropMaterial()
+{
+	CGameObject*	pMaterial = nullptr;
+
+	if (0 == m_iBiom || 3 == m_iBiom) // Dessert: copper // Temple: iron
+		if (MATERIAL::END != m_eMaterial)
+			pMaterial = CItem::CreateItem(m_eMaterial);
+	if (pMaterial)
+	{
+		pMaterial->SetPosition(m_vPosition);
+		pMaterial->SetDead(false);
+		CManagers::instance().Event()->CreateObject(pMaterial, TYPE::ITEM);
+	}
+}
+
 void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 {
 	if (_isCreated)
@@ -82,7 +112,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if(MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 			else
@@ -93,7 +126,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 		}
@@ -107,7 +143,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 			else
@@ -118,7 +157,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 		}
@@ -135,7 +177,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 			else
@@ -146,7 +191,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 		}
@@ -160,7 +208,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 			else
@@ -171,7 +222,10 @@ void CWall::OnUpdate(DIR _eDir, bool _isCreated)
 				}
 				else
 				{
-					m_iDrawID = 16;
+					if (MATERIAL::END != m_eMaterial)
+						m_iDrawID = 17;
+					else
+						m_iDrawID = 16;
 				}
 			}
 		}

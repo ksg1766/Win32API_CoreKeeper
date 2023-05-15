@@ -11,7 +11,6 @@ CSlime::CSlime()
 {
 }
 
-
 CSlime::~CSlime()
 {
 	Release();
@@ -70,7 +69,7 @@ void CSlime::Initialize(void)
 	m_tFrame.iFrameStart = 0;
 	m_tFrame.iFrameEnd = 7;
 	m_tFrame.iMotion = 0;
-	m_tFrame.dwSpeed = 100;
+	m_tFrame.dwSpeed = 80;
 	m_tFrame.dwTime = GetTickCount();
 
 	m_eRender = RENDERID::GAMEOBJECT;
@@ -190,8 +189,15 @@ void CSlime::Action()
 			//Pos to Vecto2
 			int	i = (m_vPosition.x - (TILECX >> 1)) / TILECX;
 			int	j = (m_vPosition.y - (TILECY >> 1)) / TILECY;
+			if (m_path.size() == 0)
+				break;
 			if (Pos(i, j) == m_path[m_pathIndex])
-				m_pathIndex+=2;
+			{
+				if (m_path.size() > m_pathIndex + 2)
+					m_pathIndex += 2;
+				else
+					++m_pathIndex;
+			}
 			
 			//Vecto2 to Pos
 			float	fX = (TILECX * m_path[m_pathIndex].x) + (TILECX >> 1);
@@ -272,7 +278,6 @@ void CSlime::MoveFrame(void)
 {
 	if (m_tFrame.dwTime + m_tFrame.dwSpeed < GetTickCount())
 	{
-
 		++m_tFrame.iFrameStart;
 
 		if (STATE::IDLE == m_eCurState)

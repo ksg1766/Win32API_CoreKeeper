@@ -9,6 +9,7 @@ CUI::CUI() : m_iLayer(0)
 
 CUI::~CUI()
 {
+	Release();
 }
 
 void CUI::Initialize(void)
@@ -36,9 +37,10 @@ void CUI::Render(HDC hDC)
 {
 	HDC		hMemDC = CManagers::instance().Resource()->Find_Image(m_pFrameKey);
 
-	dynamic_cast<CUIGraphics*>(m_pGraphics)->Render(hDC, hMemDC);
+	static_cast<CGraphics*>(m_pGraphics)->Render(hDC, hMemDC);
 }
 
 void CUI::Release(void)
 {
+	Safe_Delete(m_pGraphics);
 }

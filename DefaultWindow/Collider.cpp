@@ -39,11 +39,11 @@ void CCollider::Initialize(CGameObject* _pHost)
 	// 나눌 필요가 있는지 의문
 	else if (TYPE::ITEM == m_pHost->m_eType)
 	{
-		if (ITEM::WEAPON == dynamic_cast<CItem*>(m_pHost)->GetItemType())
+		if (ITEM::WEAPON == static_cast<CItem*>(m_pHost)->GetItemType())
 		{
 			m_vOffset = Vector2::Zero();
-			m_vPosition = dynamic_cast<CItem*>(m_pHost)->GetOwner()->m_vPosition + m_vOffset;
-			m_vScale = dynamic_cast<CItem*>(m_pHost)->GetOwner()->m_vScale;
+			m_vPosition = static_cast<CItem*>(m_pHost)->GetOwner()->m_vPosition + m_vOffset;
+			m_vScale = static_cast<CItem*>(m_pHost)->GetOwner()->m_vScale;
 		}
 	}
 
@@ -57,15 +57,12 @@ void CCollider::Initialize(CGameObject* _pHost)
 
 void CCollider::LateUpdate()
 {
-	if (CManagers::instance().Key()->Key_Pressing(VK_SHIFT) && CManagers::instance().Key()->Key_Down('C'))
-		CManagers::instance().Scene()->SwitchGridOn();
-
 	assert(0 <= m_iCol);
 	// Weapon 같은 경우 플레이어의 m_eDir과 같은 방향으로 Collider On/Off
 	// 플레이어 앞 3타일 // 방향 얻어와서 켜는것으로 결정
-	if (TYPE::ITEM == m_pHost->m_eType)
-	{
-		/*CPlayer* pOwner = dynamic_cast<CItem*>(m_pHost)->GetOwner();
+	//if (TYPE::ITEM == m_pHost->m_eType)
+	//{
+		/*CPlayer* pOwner = static_cast<CItem*>(m_pHost)->GetOwner();
 		
 		switch (pOwner->m_eDir)
 		{ 
@@ -82,7 +79,7 @@ void CCollider::LateUpdate()
 			m_vOffset = Vector2(-pOwner->m_vScale.x, pOwner->m_vScale.y * 0.3f);
 			break;
 		}*/
-	}
+	//}
 	m_vPosition = m_pHost->m_vPosition + m_vOffset;
 		
 	/*}
@@ -127,7 +124,7 @@ void CCollider::OnCollisionEnter(CCollider* _pOther)
 {
 	//
 	//if (_pOther->m_isRay && TYPE::PLAYER == _pOther->m_pHost->m_eType)
- 	//	dynamic_cast<CPlayer*>(_pOther)->SetWallTarget(this);
+ 	//	static_cast<CPlayer*>(_pOther)->SetWallTarget(this);
 
 	++m_iCol;
 	m_pHost->OnCollisionEnter(_pOther);

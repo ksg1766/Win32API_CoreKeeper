@@ -20,6 +20,7 @@ public:
 	virtual void Release(void)		override;
 
 public:
+	int			GetHp()				{ return m_iHp; }
 	STATE		GetState()			{ return m_eCurState; }
 	Vector2		GetVelocity()		{ return m_vVelocity; }
 	FRAME		GetFrame()			{ return m_tFrame; }
@@ -28,11 +29,15 @@ public:
 	CRay*		GetRay()			{ return m_pRay; }
 	//
 	CGameObject**			GetQuickSlot()		{ return m_parrQuickSlot; }
-	vector<CGameObject*>*	GetStorage();
+	UINT*					GetQuickSlotCount() { return m_iQuickSlotCount; }
+	//vector<CGameObject*>*	GetStorage();
 
+	void		SetHp(int _iHp)		{ m_iHp = _iHp; }
 	void		SetState(STATE _eState) { m_eCurState = _eState; }
 	void		SetVelocity(Vector2 _tVelocity) { m_vVelocity = _tVelocity; }
 	void		SetWallTarget(CCollider* _pWallTarget) { m_pWallTarget = _pWallTarget; }
+
+	//void		SetQuickSlotCount(UINT _iIndex, int _iNum) { m_iQuickSlotCount[_iIndex] = _iNum; }
 
 	virtual void	OnCollisionEnter(CCollider* _pOther);
 	virtual void	OnCollisionStay(CCollider* _pOther);
@@ -59,8 +64,9 @@ private:
 
 	CCollider*	m_pWallTarget;	// 상위 클래스로 옮기는 것 고려
 
-	CStorage*		m_pStorage;
+	//CStorage*		m_pStorage;
 	CGameObject*	m_parrQuickSlot[10];
+	UINT			m_iQuickSlotCount[10];
 
 	CRay*		m_pRay;
 	//CInput*			m_pInput;

@@ -19,9 +19,12 @@ public:
 	int		GetDamage() { return m_iDamage; }
 	int		GetHp() { return m_iHp; }
 	void	SetHp(int _iHp) { m_iHp = _iHp; }
+	void	SetRange(int _iRange) { m_iRange = _iRange; }
+	void	SetTarget(CGameObject* _pObj) { m_pTarget = _pObj; }
+	void	SetTargetPoint(Vector2 _vPoint) { m_vTargetPoint = _vPoint; }
 
-	bool CanGo(Pos _pos);
-	void AStar();
+	bool	CanGo(Pos _pos);
+	void	AStar();
 
 protected:
 	int				m_iRange;

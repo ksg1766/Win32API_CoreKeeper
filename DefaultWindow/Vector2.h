@@ -88,4 +88,6 @@ struct Vector2
 			return y < other.y;
 		return x < other.x;
 	}
+
+	static Vector2 MyRandVec2() { return Vector2(rand() % 20 - 10, (rand() * rand()) % 20 - 10); }
 };

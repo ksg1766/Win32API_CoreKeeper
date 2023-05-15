@@ -9,6 +9,7 @@ CHitEffect::CHitEffect()
 
 CHitEffect::~CHitEffect()
 {
+	Release();
 }
 
 void CHitEffect::Initialize(void)
@@ -75,19 +76,13 @@ void CHitEffect::MoveFrame(void)
 {
 	if (m_tFrame.dwTime + m_tFrame.dwSpeed < GetTickCount())
 	{
-		if (m_tFrame.dwTime + m_tFrame.dwSpeed < GetTickCount())
+		++m_tFrame.iFrameStart;
+
+		if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
 		{
-			++m_tFrame.iFrameStart;
-
-			if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
-			{
-				m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
-				CManagers::instance().Event()->DeleteObject(this);
-			}
-
-			m_tFrame.dwTime = GetTickCount();
+			m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
+			CManagers::instance().Event()->DeleteObject(this);
 		}
-
 		m_tFrame.dwTime = GetTickCount();
 	}
 }

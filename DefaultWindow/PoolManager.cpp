@@ -7,6 +7,7 @@
 #include "BigLarva.h"
 #include "Tile.h"
 #include "HitEffect.h"
+#include "GlowEffect.h"
 
 CPoolManager::CPoolManager()
 {
@@ -58,14 +59,13 @@ void CPoolManager::MonsterPool::Initialize()
 		pSlime->Initialize();
 		m_MonsterList.push_back(pSlime);
 	}
-	for (int i = 0; i < 5; ++i)
+
+	for (int i = 0; i < 150; ++i)
 	{
 		CGameObject* pLarva = new CLarva;
 		pLarva->Initialize();
 		m_MonsterList.push_back(pLarva);
-	}
-	for (int i = 0; i < 5; ++i)
-	{
+
 		CGameObject* pBigLarva = new CBigLarva;
 		pBigLarva->Initialize();
 		m_MonsterList.push_back(pBigLarva);
@@ -91,9 +91,11 @@ void CPoolManager::MonsterPool::CreateMonster()
 	while (true)
 	{
 		UINT iIndex = rand() % iTileSize;
+		if (iIndex / TILEX < 37 && iIndex % TILEX < 37)
+			continue;
 		if (TYPE::TILE == vecTile[iIndex]->GetType())
 		{
-			if (dynamic_cast<CTile*>(vecTile[iIndex])->GetBiom() == dynamic_cast<CMonster*>(*iterMonster)->GetBiom())
+			if (static_cast<CTile*>(vecTile[iIndex])->GetBiom() == static_cast<CMonster*>(*iterMonster)->GetBiom())
 			{
 				(*iterMonster)->SetPosition(vecTile[iIndex]->GetPosition());
 				break;
@@ -103,6 +105,21 @@ void CPoolManager::MonsterPool::CreateMonster()
 
 	CManagers::instance().Event()->CreateObject(*iterMonster, TYPE::MONSTER);
 	m_MonsterList.erase(iterMonster);
+}
+
+void CPoolManager::MonsterPool::CreateMonster(int _iBiom, Vector2 _vPos)
+{
+	for (auto& iter = m_MonsterList.begin(); iter != m_MonsterList.end(); ++iter)
+	{
+		if (_iBiom == static_cast<CMonster*>(*iter)->GetBiom())
+		{
+			(*iter)->SetPosition(_vPos);
+			(*iter)->SetDead(false);
+			CManagers::instance().Event()->CreateObject(*iter, TYPE::MONSTER);
+			m_MonsterList.erase(iter);
+			break;
+		}
+	}
 }
 
 void CPoolManager::MonsterPool::Release()
@@ -123,7 +140,14 @@ CPoolManager::EffectPool::~EffectPool()
 
 void CPoolManager::EffectPool::Initialize()
 {
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < 150; ++i)
+	{
+		CGameObject* pGlowEffect = new CGlowEffect;
+		pGlowEffect->Initialize();
+		m_EffectsList.push_back(pGlowEffect);
+	}
+
+	for (int i = 0; i < 30; ++i)
 	{
 		CGameObject* pHitEffect = new CHitEffect;
 		pHitEffect->Initialize();
@@ -133,17 +157,28 @@ void CPoolManager::EffectPool::Initialize()
 
 void CPoolManager::EffectPool::PlayEffect(EFFECT_TYPE _eEffect, Vector2 _vPos)
 {
-	auto& findByType = [&](CGameObject* _iter)
+	/*auto& findByType = [&](CGameObject* _Obj)
 	{
-		if (_eEffect == dynamic_cast<CEffect*>(_iter)->GetEffectType() && _iter->IsDead())
-			return _iter;
-	};
+		if (_eEffect == static_cast<CEffect*>(_Obj)->GetEffectType() && _Obj->IsDead())
+			return _Obj;
+	};*/
 
-	auto& iterEffect = find_if(m_EffectsList.begin(), m_EffectsList.end(), findByType);
-	(*iterEffect)->SetDead(false);
+	//auto& iterEffect = find_if(m_EffectsList.begin(), m_EffectsList.end(), findByType);
+	for (auto& iter = m_EffectsList.begin(); iter != m_EffectsList.end(); ++iter)
+	{
+		if (_eEffect == static_cast<CEffect*>(*iter)->GetEffectType())
+		{
+			(*iter)->SetDead(false);
+			(*iter)->SetPosition(_vPos);
+			CManagers::instance().Event()->CreateObject(*iter, TYPE::EFFECT);
+			m_EffectsList.erase(iter);
+			return;
+		}
+	}
+	/*(*iterEffect)->SetDead(false);
 	(*iterEffect)->SetPosition(_vPos);
 	CManagers::instance().Event()->CreateObject(*iterEffect, TYPE::EFFECT);
-	m_EffectsList.erase(iterEffect);
+	m_EffectsList.erase(iterEffect);*/
 }
 
 void CPoolManager::EffectPool::Release()

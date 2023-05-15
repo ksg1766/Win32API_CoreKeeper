@@ -27,11 +27,14 @@ void CTileManager::Initialize(void)
 			pObj->SetPosition(Vector2(fX, fY));
 			pObj->Initialize();
 
-			int iDrawID = rand() % 100 - 93;
-			if (iDrawID < 0)
-				iDrawID = 0;
-
-			dynamic_cast<CTile*>(pObj)->SetTile(iDrawID, 0, 0b00000000);
+			int iDrawID = 0;
+			if (0 == static_cast<CTile*>(pObj)->GetBiom())// || 3 == static_cast<CTile*>(pObj)->GetBiom())
+			{
+				iDrawID = rand() % 100 - 93;
+				if (iDrawID < 0)
+					iDrawID = 0;
+			}
+			static_cast<CTile*>(pObj)->SetTile(iDrawID, 0, 0b00000000);
 
 			m_vecTile.push_back(pObj);
 		}
@@ -96,7 +99,7 @@ void CTileManager::CreateWall(Vector2 _vPos, int _iBiom, int _iDrawID)
 
 	pObj->SetPosition(Vector2(fX, fY));
 	pObj->Initialize();
-	dynamic_cast<CWall*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
+	static_cast<CWall*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
 	Safe_Delete(m_vecTile[iIndex]);
 	m_vecTile[iIndex] = pObj;
 
@@ -130,7 +133,7 @@ void CTileManager::CreateTile(Vector2 _vPos, int _iBiom, int _iDrawID)
 	Safe_Delete(m_vecTile[iIndex]);
 	pObj->SetPosition(Vector2(fX, fY));
 	pObj->Initialize();
-	dynamic_cast<CTile*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
+	static_cast<CTile*>(pObj)->SetTile(_iDrawID, _iBiom, 0b00000000);
 	m_vecTile[iIndex] = pObj;
 }
 
@@ -150,50 +153,50 @@ void CTileManager::Invoke(Vector2 _pPos, bool _IsCreated)
 
 	if (TYPE::WALL == m_vecTile[iIndex + 1]->GetType())	// Right
 	{
-		dynamic_cast<CWall*>(m_vecTile[iIndex + 1])->OnUpdate(DIR::LEFT, _IsCreated);
+		static_cast<CWall*>(m_vecTile[iIndex + 1])->OnUpdate(DIR::LEFT, _IsCreated);
 		if(_IsCreated)
-			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::RIGHT, _IsCreated);
+			static_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::RIGHT, _IsCreated);
 	}
 
 	if (TYPE::WALL == m_vecTile[iIndex + 1 - TILEX - 1]->GetType())	// Up
 	{
-		dynamic_cast<CWall*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+		static_cast<CWall*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
 		if (_IsCreated)
-			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
+			static_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
 	}
 	else
 	{
 		if (TYPE::TILE == m_vecTile[iIndex + 1 - TILEX - 1]->GetType())
 		{
-			dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+			static_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
 			if (_IsCreated)
 			{
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::GAMEOBJECT);
-				dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
+				static_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::GAMEOBJECT);
+				static_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::UP, _IsCreated);
 				if (TYPE::TILE == (m_vecTile[iIndex - 1 - TILEX])->GetType())
-					dynamic_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
+					static_cast<CTile*>(m_vecTile[iIndex - 1 - TILEX])->OnUpdate(DIR::RIGHT, _IsCreated);
 				if (TYPE::TILE == (m_vecTile[iIndex + 2 - TILEX])->GetType())
-					dynamic_cast<CTile*>(m_vecTile[iIndex + 2 - TILEX])->OnUpdate(DIR::LEFT, _IsCreated);
+					static_cast<CTile*>(m_vecTile[iIndex + 2 - TILEX])->OnUpdate(DIR::LEFT, _IsCreated);
 			}
 			else
 			{
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
-				dynamic_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::BACKGROUND);
+				static_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->OnUpdate(DIR::DOWN, _IsCreated);
+				static_cast<CTile*>(m_vecTile[iIndex + 1 - TILEX - 1])->SetRenderID(RENDERID::BACKGROUND);
 			}
 		}
 	}
 
 	if (TYPE::WALL == m_vecTile[iIndex - 1]->GetType())	// Left
 	{
-		dynamic_cast<CWall*>(m_vecTile[iIndex - 1])->OnUpdate(DIR::RIGHT, _IsCreated);
+		static_cast<CWall*>(m_vecTile[iIndex - 1])->OnUpdate(DIR::RIGHT, _IsCreated);
 		if (_IsCreated)
-			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::LEFT, _IsCreated);
+			static_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::LEFT, _IsCreated);
 	}
 	if (TYPE::WALL == m_vecTile[iIndex + TILEX]->GetType())	// Down
 	{
-		dynamic_cast<CWall*>(m_vecTile[iIndex + TILEX])->OnUpdate(DIR::UP, _IsCreated);
+		static_cast<CWall*>(m_vecTile[iIndex + TILEX])->OnUpdate(DIR::UP, _IsCreated);
 		if (_IsCreated)
-			dynamic_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::DOWN, _IsCreated);
+			static_cast<CWall*>(m_vecTile[iIndex])->OnUpdate(DIR::DOWN, _IsCreated);
 	}
 }
 
@@ -209,7 +212,7 @@ void CTileManager::PickingTile(POINT _pt, int _iBiom, int _iDrawID, int _iOption
 	case 1:
 	{
 		CreateWall(Vector2(_pt.x, _pt.y), _iBiom, _iDrawID);
-		//dynamic_cast<CWall*>(m_vecTile[iIndex])->SetTile(_iDrawIDX, _iDrawIDY, _iOption);
+		//static_cast<CWall*>(m_vecTile[iIndex])->SetTile(_iDrawIDX, _iDrawIDY, _iOption);
 		break;
 	}
 	}
@@ -217,7 +220,10 @@ void CTileManager::PickingTile(POINT _pt, int _iBiom, int _iDrawID, int _iOption
 
 void CTileManager::SaveTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/TestMap.dat",
+	//HANDLE	hFile = CreateFile(L"../Data/HiveTest.dat",	// Hive Mother Test
+	//HANDLE	hFile = CreateFile(L"../Data/WallItemTest.dat", // Test
+	HANDLE	hFile = CreateFile(L"../Data/MazeScene.dat",
+	//HANDLE	hFile = CreateFile(L"../Data/MainScene.dat",	// ¸Ê ¸¸µå´Â Áß..
 		GENERIC_WRITE,
 		NULL,
 		NULL,
@@ -241,20 +247,20 @@ void CTileManager::SaveTile(void)
 		if (TYPE::TILE == iter->GetType())
 		{
 			eType	= TYPE::TILE;
-			iDrawID = dynamic_cast<CTile*>(iter)->GetDrawID();
-			iBiom	= dynamic_cast<CTile*>(iter)->GetBiom();
-			chWallAround = dynamic_cast<CTile*>(iter)->GetWallAround();
+			iDrawID = static_cast<CTile*>(iter)->GetDrawID();
+			iBiom	= static_cast<CTile*>(iter)->GetBiom();
+			chWallAround = static_cast<CTile*>(iter)->GetWallAround();
 
-			//dynamic_cast<CTile*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
+			//static_cast<CTile*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
 		}
 		else if(TYPE::WALL == iter->GetType())
 		{
 			eType	= TYPE::WALL;
-			iDrawID = dynamic_cast<CWall*>(iter)->GetDrawID();
-			iBiom	= dynamic_cast<CWall*>(iter)->GetBiom();
-			chWallAround = dynamic_cast<CWall*>(iter)->GetWallAround();
+			iDrawID = static_cast<CWall*>(iter)->GetDrawID();
+			iBiom	= static_cast<CWall*>(iter)->GetBiom();
+			chWallAround = static_cast<CWall*>(iter)->GetWallAround();
 
-			//dynamic_cast<CWall*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
+			//static_cast<CWall*>(iter)->GetTile(&iDrawID, &iBiom, &chWallAround);
 		}
 
 		WriteFile(hFile, &eType, sizeof(TYPE), &dwByte, nullptr);
@@ -265,12 +271,15 @@ void CTileManager::SaveTile(void)
 	}
 
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, _T("Save success"), L"Success", MB_OK);
+	//MessageBox(g_hWnd, _T("Save success"), L"Success", MB_OK);
 }
 
 void CTileManager::LoadTile(void)
 {
-	HANDLE	hFile = CreateFile(L"../Data/TestMap.dat",
+	//HANDLE	hFile = CreateFile(L"../Data/HiveTest.dat",
+	//HANDLE	hFile = CreateFile(L"../Data/WallItemTest.dat",
+	HANDLE	hFile = CreateFile(L"../Data/MazeScene.dat",	// ¸Ê ¸¸µå´Â Áß..
+	//HANDLE	hFile = CreateFile(L"../Data/MainScene.dat",	// ¸Ê ¸¸µå´Â Áß..
 		GENERIC_READ,
 		NULL,
 		NULL,
@@ -311,7 +320,7 @@ void CTileManager::LoadTile(void)
 			CGameObject*	pObj = new CTile();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CTile*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
+			static_cast<CTile*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}
@@ -320,12 +329,12 @@ void CTileManager::LoadTile(void)
 			CGameObject*	pObj = new CWall();
 			pObj->Initialize();
 			pObj->SetPosition(vPosition);
-			dynamic_cast<CWall*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
+			static_cast<CWall*>(pObj)->SetTile(iDrawID, iBiom, chWallAround);
 
 			m_vecTile.push_back(pObj);
 		}
 	}
 
 	CloseHandle(hFile);
-	MessageBox(g_hWnd, _T("Load success"), L"Success", MB_OK);
+	//MessageBox(g_hWnd, _T("Load success"), L"Success", MB_OK);
 }

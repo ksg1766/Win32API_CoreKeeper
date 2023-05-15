@@ -22,14 +22,15 @@ void CUIManager::InitializeSceneUI()
 	pHP_Bar->Initialize();
 	pQuickSlot->Initialize();
 	pHunger_Bar->Initialize();
+	//static_cast<CHP_Bar*>(pHunger_Bar)->SetHost(nullptr);
 
-	dynamic_cast<CHP_Bar*>(pHunger_Bar)->SetFrameKey(L"HungerBarWindow");
-	dynamic_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetFrameKey(L"HungerBarOrange");
+	static_cast<CHP_Bar*>(pHunger_Bar)->SetFrameKey(L"HungerBarWindow");
+	static_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetFrameKey(L"HungerBarOrange");
 
 	pHunger_Bar->SetPosition(pHP_Bar->GetPosition() + 15.f * Vector2::Down());
 	pHunger_Bar->SetScale(Vector2(244.f, 9.f));
-	dynamic_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetPosition(pHunger_Bar->GetPosition());
-	dynamic_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetScale(pHunger_Bar->GetScale() - 2.f * Vector2::One());
+	static_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetPosition(pHunger_Bar->GetPosition());
+	static_cast<CHP_Bar*>(pHunger_Bar)->GetFrontBar()->SetScale(pHunger_Bar->GetScale() - 2.f * Vector2::One());
 
 	AddSceneUI(pHP_Bar);
 	AddSceneUI(pHunger_Bar);
@@ -53,11 +54,12 @@ void CUIManager::SubSceneUI(CGameObject * _pUI)
 
 void CUIManager::PickingIcon(POINT _pt, bool _isPressing)
 {
-	CGameObject** ppQuickSlotObj = dynamic_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotObjects();
-	CGameObject** ppQuickSlotRect = dynamic_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotUI();
-	CGameObject** ppQuickSlotIcon = dynamic_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotIcon();
-	
-	CGameObject** ppQuickSlot = dynamic_cast<CPlayer*>(CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::PLAYER).front())->GetQuickSlot();
+	CGameObject** ppQuickSlotObj = static_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotObjects();
+	CGameObject** ppQuickSlotRect = static_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotUI();
+	CGameObject** ppQuickSlotIcon = static_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetQuickSlotIcon();
+	UINT** ppQuickSlotNum = static_cast<CQuickSlot*>(vecGroupSceneUI[(UINT)SCENEUI::QUICKSLOT])->GetObjectsNum();
+
+	CGameObject** ppQuickSlot = static_cast<CPlayer*>(CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::PLAYER).front())->GetQuickSlot();
 
 
 	for (int i = 0; i < 10; ++i)
@@ -89,6 +91,8 @@ void CUIManager::PickingIcon(POINT _pt, bool _isPressing)
 							&& (ppQuickSlotIcon[i]->GetPosition().y >= ppQuickSlotRect[j]->GetPosition().y - ppQuickSlotRect[j]->GetScale().y / 2.f))
 						{
 							swap(ppQuickSlot[j], ppQuickSlot[i]);
+							swap(ppQuickSlotNum[j], ppQuickSlotNum[i]);
+
 							ppQuickSlotIcon[i]->SetPosition(ppQuickSlotRect[i]->GetPosition());
 							ppQuickSlotIcon[j]->SetPosition(ppQuickSlotRect[j]->GetPosition());
 							//ppQuickSlotObj[j] = ppQuickSlotObj[i];
@@ -121,4 +125,16 @@ void CUIManager::ClosePopUpUI(CGameObject * _pUI)
 void CUIManager::Initialize()
 {
 
+}
+
+void CUIManager::Release()
+{
+	for (auto& iter : vecGroupSceneUI)
+		Safe_Delete(iter);
+
+	for (auto& iter : vecGroupPopUpUI)
+		Safe_Delete(iter);
+
+	vecGroupSceneUI.clear();
+	vecGroupPopUpUI.clear();
 }

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StartScene.h"
 #include "Managers.h"
+#include "IntroScene.h"
 #include "EditScene.h"
 #include "GameScene.h"
 
@@ -26,8 +27,9 @@ void CStartScene::Update(void)
 {
 	if (CManagers::instance().Key()->Key_Down(VK_RETURN))
 	{
-		CScene* pGameScene = new CGameScene;
-		CManagers::instance().Scene()->LoadScene(pGameScene);
+		CScene* pIntroScene = new CIntroScene;
+		pIntroScene->Initialize();
+		CManagers::instance().Scene()->LoadScene(pIntroScene);
 	}
 	else if (CManagers::instance().Key()->Key_Pressing(VK_CONTROL) && CManagers::instance().Key()->Key_Down('E'))
 	{

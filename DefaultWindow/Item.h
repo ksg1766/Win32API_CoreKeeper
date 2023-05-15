@@ -16,18 +16,32 @@ public:
 	virtual void	Render(HDC hDC)				PURE;
 	virtual void	Release(void)				PURE;
 
+	//static CItem*	CreateItem(ITEM _eItem);
+	static CItem*	CreateItem(MATERIAL _eMaterial);
+
 	ITEM			GetItemType()	{ return m_eItemType; }
 	CPlayer*		GetOwner()		{ return m_pOwner; }
 	STATE			GetCurState()	{ return m_eCurState; }
+	bool			GetUsing()		{ return m_IsUsing; }
 
 	void			SetOwner(CPlayer* _pOwner) { m_pOwner = _pOwner; }
-	virtual void	SetUsing(bool _isUsig)		PURE;//
+	virtual void	SetUsing(bool _isUsing) {};//
+
+	virtual	void	Use()			PURE;
+
+	virtual void	OnCollisionEnter(CCollider* _pOther);
+	virtual void	OnCollisionStay(CCollider* _pOther);
+	virtual void	OnCollisionExit(CCollider* _pOther);
+
+	//virtual CItem*	clone() {}				//PURE;
 
 protected:
-	virtual void		SetMotion(void)			PURE;
-	virtual void		MoveFrame(void)			PURE;
+	virtual void	SetMotion(void)				PURE;
+	virtual void	MoveFrame(void)				PURE;
 
-	bool				m_IsUsing;
+	int				m_iRange;
+
+	bool			m_IsUsing;
 
 	ITEM		m_eItemType;
 	CPlayer*	m_pOwner;

@@ -6,6 +6,9 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Glurch.h"
+#include "HiveMother.h"
+#include "Cocoon.h"
+#include "Wall.h"
 
 CPickAxe::CPickAxe():CItem()
 {
@@ -20,13 +23,14 @@ CPickAxe::~CPickAxe()
 
 void CPickAxe::Initialize()
 {
+	//m_eType = TYPE::ITEM;
 	m_eType = TYPE::ITEM;
 	m_eItemType = ITEM::WEAPON;
 
 	m_vPosition = m_pOwner->GetPosition() + 10.f * Vector2::Up();
 	m_vScale = Vector2(120.f, 120.f);
 
-	m_iDamage = 7;
+	m_iDamage = 9;
 
 	m_ePreState = STATE::END;
 	m_eCurState = STATE::IDLE;
@@ -213,6 +217,10 @@ void CPickAxe::MoveFrame(void)
 	}
 }
 
+void CPickAxe::Use()
+{
+}
+
 void CPickAxe::OnCollisionEnter(CCollider * _pOther)
 {
 	CGameObject* pOtherObj = _pOther->GetHost();
@@ -227,21 +235,33 @@ void CPickAxe::OnCollisionStay(CCollider * _pOther)
 	CGameObject* pOtherObj = _pOther->GetHost();
 	if (m_IsUsing && m_pOwner->GetWallTarget() == _pOther)
 	{
-		CManagers::instance().Sound()->PlaySound(L"wall_short.wav", CHANNELID::SOUND_EFFECT2, CManagers::instance().Sound()->GetVolume());
+		CManagers::instance().Sound()->PlaySound(L"wall_short.wav", CHANNELID::SOUND_EFFECT12, CManagers::instance().Sound()->GetVolume());
 		CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
-		CManagers::instance().Event()->DeleteObject(pOtherObj);
+
+		static_cast<CWall*>(pOtherObj)->SetHp(static_cast<CWall*>(pOtherObj)->GetHp() - m_iDamage);
+		if (static_cast<CWall*>(pOtherObj)->GetHp() <= 0)
+		{
+			static_cast<CWall*>(pOtherObj)->DropMaterial();
+			CManagers::instance().Event()->DeleteObject(pOtherObj);
+		}
 	}
 	if (m_IsUsing && TYPE::MONSTER == pOtherObj->GetType())
 	{
 		CManagers::instance().Sound()->PlaySound(L"damage_short.wav", CHANNELID::SOUND_EFFECT2, CManagers::instance().Sound()->GetVolume());
 		CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
-		dynamic_cast<CMonster*>(pOtherObj)->SetHp(dynamic_cast<CMonster*>(pOtherObj)->GetHp() - m_iDamage);
+		static_cast<CMonster*>(pOtherObj)->SetHp(static_cast<CMonster*>(pOtherObj)->GetHp() - m_iDamage);
 	}
 	if (m_IsUsing && TYPE::BOSS == pOtherObj->GetType())
 	{
+		if (BOSS::GLURCH == pOtherObj->GetBossType())
+			static_cast<CGlurch*>(pOtherObj)->SetHp(static_cast<CGlurch*>(pOtherObj)->GetHp() - m_iDamage);
+		else if (BOSS::HIVEMOTHER == pOtherObj->GetBossType())
+			static_cast<CHiveMother*>(pOtherObj)->SetHp(static_cast<CHiveMother*>(pOtherObj)->GetHp() - m_iDamage);
+		else
+			static_cast<CCocoon*>(pOtherObj)->SetHp(static_cast<CCocoon*>(pOtherObj)->GetHp() - m_iDamage);
+
 		CManagers::instance().Sound()->PlaySound(L"damage_short.wav", CHANNELID::SOUND_EFFECT2, CManagers::instance().Sound()->GetVolume());
 		CManagers::instance().Pool()->PlayEffect(EFFECT_TYPE::HIT, m_pCollider->GetPosition());
-		dynamic_cast<CGlurch*>(pOtherObj)->SetHp(dynamic_cast<CGlurch*>(pOtherObj)->GetHp() - m_iDamage);
 	}
 }
 

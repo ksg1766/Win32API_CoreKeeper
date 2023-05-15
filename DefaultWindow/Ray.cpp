@@ -84,7 +84,7 @@ void CRay::SetHost(CGameObject * _pHost)
 void CRay::OnCollisionEnter(CCollider * _pOther)
 {
 	if (TYPE::PLAYER == m_pHost->GetType() && TYPE::WALL == _pOther->GetHost()->GetType())
-		dynamic_cast<CPlayer*>(m_pHost)->SetWallTarget(_pOther);
+		static_cast<CPlayer*>(m_pHost)->SetWallTarget(_pOther);
 }
 
 void CRay::OnCollisionStay(CCollider * _pOther)
@@ -94,6 +94,6 @@ void CRay::OnCollisionStay(CCollider * _pOther)
 void CRay::OnCollisionExit(CCollider * _pOther)
 {
 	if (TYPE::PLAYER == m_pHost->GetType())
-		dynamic_cast<CPlayer*>(m_pHost)->SetWallTarget(nullptr);
+		static_cast<CPlayer*>(m_pHost)->SetWallTarget(nullptr);
 	
 }

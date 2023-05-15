@@ -16,11 +16,15 @@ public:
 	virtual void Render(HDC hDC)	override;
 	virtual void Release(void)		override;
 
+	SCENEUI		GetUIType() { return m_eUIType; }
 	UINT		GetLayer() { return m_iLayer; }
+	
+	void		SetUIType(SCENEUI _eUIType) { m_eUIType = _eUIType; }
 	void		SetFrameKey(TCHAR* _pFrameKey) { m_pFrameKey = _pFrameKey; }
 	void		SetLayer(UINT _iLayer) { m_iLayer = _iLayer; };
 
 protected:
+	SCENEUI			m_eUIType;
 	UINT			m_iLayer;
 	CUI*			m_pIcon;
 };

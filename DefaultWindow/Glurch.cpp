@@ -4,8 +4,11 @@
 #include "RigidBody.h"
 #include "Graphics.h"
 #include "Shadow.h"
+#include "Player.h"
+#include "HP_Bar_Boss.h"
 #include "Managers.h"
-
+#include "Statue_Glurch.h"
+#include "GameScene.h"
 
 CGlurch::CGlurch()
 {
@@ -20,14 +23,21 @@ void CGlurch::Initialize(void)
 {
 	m_IsDead = false;
 	m_eType = TYPE::BOSS;
-	m_vPosition = Vector2(1400.f, 250.f);
-	m_vScale = Vector2(256.f, 256.f);
+	m_eBossType = BOSS::GLURCH;
+	m_vPosition = Vector2(63.5f * TILECX, 42.5f * TILECY);
+	m_vScale = Vector2(384.f, 384.f);
 	m_iRange = 7 * TILECX;
 
-	m_iBiom = 1;
+	m_iBiom = 0;
 
-	m_iMaxHp = 100;
+	m_iMaxHp = 150;
 	m_iHp = m_iMaxHp;
+
+	m_pHPBar = new CHP_Bar_Boss;
+	static_cast<CHP_Bar_Boss*>(m_pHPBar)->SetHost(this);
+	static_cast<CHP_Bar_Boss*>(m_pHPBar)->Initialize();
+	//static_cast<CHP_Bar_Boss*>(m_pHPBar)->SetUIType();
+	CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::UI).push_back(m_pHPBar);
 
 	m_iDamage = 20;
 
@@ -44,14 +54,14 @@ void CGlurch::Initialize(void)
 
 	m_pShadow->SetHost(this);
 	m_pShadow->Initialize();
-	m_pShadow->SetScale(Vector2(144.f, 96.f));
+	m_pShadow->SetScale(Vector2(216.f, 144.f));
 	m_pShadow->SetFrameKey(L"Glurch_Shadow");
 
 	m_pCollider->Initialize(this);
 	m_pRigidBody->Initialize(this);
 	m_pGraphics->Initialize(this);
 
-	m_fSpeed = 25.f;
+	m_fSpeed = 8.f;
 
 	m_dwTime = 0;
 
@@ -72,14 +82,18 @@ int CGlurch::Update(void)
 		m_iHp = 0;
 		m_fSpeed = 0;
 		m_eCurState = STATE::DEAD;
-	}
+		m_pFrameKey = L"SlimeExplosion";
 
+		m_vScale = Vector2(420.f, 420.f);
+
+		CManagers::instance().Sound()->PlaySound(L"slimeBossDeath.wav", CHANNELID::SOUND_EFFECT8, CManagers::instance().Sound()->GetVolume());
+		m_pShadow->SetScale(Vector2::Zero());
+	}
+	
 	if (STATE::DEAD == m_eCurState)
 		return 0;
-
-	if (m_iHp <= m_iMaxHp * 0.3)
-		m_fSpeed = 50.f;
 	
+
 	CGameObject* pPlayer = CManagers::instance().Scene()->CurrentScene()->GetObjList(TYPE::PLAYER).front();
 	if (Vector2::Distance(pPlayer->GetPosition(), m_vPosition) <= m_iRange)
 	{
@@ -106,7 +120,7 @@ int CGlurch::Update(void)
 	Action();
 
 	m_pRigidBody->Update();
-
+	static_cast<CHP_Bar_Boss*>(m_pHPBar)->Update();
 	return 0;
 }
 
@@ -127,6 +141,8 @@ void CGlurch::Render(HDC hDC)
 	m_pShadow->Render(hDC);
 	m_pGraphics->Render(hDC, hMemDC);
 	m_pCollider->Render(hDC);
+
+	m_pHPBar->Render(hDC);
 }
 
 void CGlurch::Release(void)
@@ -135,6 +151,8 @@ void CGlurch::Release(void)
 	Safe_Delete(m_pCollider);
 	Safe_Delete(m_pRigidBody);
 	Safe_Delete(m_pGraphics);
+
+	CManagers::instance().Event()->DeleteObject(m_pHPBar);
 }
 
 void CGlurch::Action()
@@ -143,11 +161,11 @@ void CGlurch::Action()
 	{
 	case STATE::IDLE:
 		m_pRigidBody->SetVelocity(Vector2::Zero());
-		m_pShadow->SetPosition(m_vPosition + Vector2::Down() * 30.f);//
+		m_pShadow->SetPosition(m_vPosition + Vector2::Down() * 45.f);//
 		break;
 
 	case STATE::MOVE:	//m_tFrame.iFrameStart 가 특정 프레임이 되었을 때 움직임
-		m_pShadow->SetPosition(Vector2(m_vPosition + Vector2::Down() * 30.f));
+		m_pShadow->SetPosition(Vector2(m_vPosition + Vector2::Down() * 45.f));
 		if (14 == m_tFrame.iFrameStart)
 		{
 			m_pRigidBody->SetVelocity(m_fSpeed * (m_vTargetPoint + 100.f * Vector2::Up() - m_vPosition).Normalize());
@@ -173,14 +191,20 @@ void CGlurch::TakeDown()
 {
 	if (m_vPosition.y > m_vTargetPoint.y - 20.f && m_vPosition.y < m_vTargetPoint.y + 20.f)	// TargetPoint에 도달 했을 시
 	{
+		m_IsTakingDown = false;
 		CManagers::instance().Sound()->PlaySound(L"SlimeBossImpact_short.wav", CHANNELID::SOUND_EFFECT6, CManagers::instance().Sound()->GetVolume());
 		m_pRigidBody->SetVelocity(Vector2::Zero());
-		m_IsTakingDown = true;
-		CManagers::instance().Scroll()->StartScrollShaking();
+		
+		CManagers::instance().Scroll()->StartScrollShaking(6);
 		m_eCurState = STATE::IDLE;
 	}
 	else
 	{
+		if (m_dwTime + 10000 / m_fSpeed < GetTickCount())
+		{
+			m_IsTakingDown = true;
+			m_dwTime = GetTickCount();
+		}
 		m_pRigidBody->SetVelocity(m_fSpeed * Vector2::Down());
 		m_pShadow->SetPosition(Vector2(m_vPosition.x, m_vTargetPoint.y));
 	}
@@ -213,7 +237,15 @@ void CGlurch::SetMotion(void)
 			m_tFrame.iFrameEnd = 18;
 			m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
 			m_tFrame.iMotion = 0;
-			m_tFrame.dwSpeed = 200;
+			m_tFrame.dwSpeed = 200;	// ?????????????????????????
+			m_tFrame.dwTime = GetTickCount();
+			break;
+		case STATE::DEAD:
+			m_tFrame.iFrameStart = 0;
+			m_tFrame.iFrameEnd = 10;
+			m_tFrame.iFrameStartBf = m_tFrame.iFrameStart;
+			m_tFrame.iMotion = 0;
+			m_tFrame.dwSpeed = 100;
 			m_tFrame.dwTime = GetTickCount();
 			break;
 		}
@@ -243,9 +275,15 @@ void CGlurch::MoveFrame(void)
 			if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
 				m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
 		}
-		else
-			CManagers::instance().Event()->DeleteObject(this);;
-
+		else if (STATE::DEAD == m_eCurState)
+		{// 아직 테스트 안해봄
+			if (m_tFrame.iFrameStart > m_tFrame.iFrameEnd)
+			{
+				m_tFrame.iFrameStart = m_tFrame.iFrameStartBf;
+				CManagers::instance().Event()->DeleteObject(this);
+				static_cast<CGameScene*>(CManagers::instance().Scene()->CurrentScene())->SetGlurchDead(true);
+			}
+		}
 		m_tFrame.dwTime = GetTickCount();
 	}
 }
@@ -315,6 +353,9 @@ void CGlurch::OnCollisionEnter(CCollider * _pOther)
 	{
 		if (TYPE::PLAYER == pOtherObj->GetType())
 		{
+			CManagers::instance().Sound()->PlaySound(L"damagePlayer.wav", CHANNELID::SOUND_EFFECT8, CManagers::instance().Sound()->GetVolume());
+			static_cast<CPlayer*>(pOtherObj)->SetHp(static_cast<CPlayer*>(pOtherObj)->GetHp() - m_iDamage);
+
 			//-1.f * Vector2(m_vPosition - pOtherObj->GetPosition()).Normalize()
 			// hp 감소 & 밀어내기
 		}
@@ -328,8 +369,8 @@ void CGlurch::OnCollisionEnter(CCollider * _pOther)
 void CGlurch::OnCollisionStay(CCollider * _pOther)
 {
 	CGameObject* pOtherObj = _pOther->GetHost();
-	/*if (m_IsTakingDown)
-	{*/
+	if (STATE::MOVE != m_eCurState)
+	{
 		if (TYPE::PLAYER == pOtherObj->GetType() || TYPE::MONSTER == pOtherObj->GetType())
 		{
 			Vector2 vOtherPos = _pOther->GetPosition();
@@ -371,7 +412,7 @@ void CGlurch::OnCollisionStay(CCollider * _pOther)
 			}
 			pOtherObj->SetPosition(vOtherPos);
 		}
-	//}
+	}
 }
 
 void CGlurch::OnCollisionExit(CCollider * _pOther)

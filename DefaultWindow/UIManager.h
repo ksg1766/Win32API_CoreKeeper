@@ -9,6 +9,7 @@ public:
 	virtual ~CUIManager();
 
 	void	Initialize();
+	void	Release();
 
 	void	InitializeSceneUI();
 	void	InitializePopUpUI();

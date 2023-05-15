@@ -11,13 +11,15 @@ public:
 	virtual ~CPickAxe();
 
 	// CItem을(를) 통해 상속됨
-	virtual void Initialize() override;
-	virtual int	Update(void) override;
-	virtual int LateUpdate(void) override;
-	virtual void Render(HDC hDC) override;
-	virtual void Release(void) override;
+	virtual void	Initialize()		override;
+	virtual int		Update(void)		override;
+	virtual int		LateUpdate(void)	override;
+	virtual void	Render(HDC hDC)		override;
+	virtual void	Release(void)		override;
 
 public:
+	virtual void	Use()				override;
+
 	int				GetDamage() { return m_iDamage; }
 	void			SetDamage(int _iDamage) { m_iDamage = _iDamage; };
 

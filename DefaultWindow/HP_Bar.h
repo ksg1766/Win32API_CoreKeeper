@@ -14,9 +14,10 @@ public:
 	virtual void	Render(HDC hDC)		override;
 	virtual void	Release(void)		override;
 
-	CUI*			GetFrontBar() { return m_pHPfront; }
+	CUI*	GetFrontBar()					{ return m_pHPfront; }
+	void	SetHost(CGameObject* _pHost)	{ m_pHost = _pHost; }
 
-private:
+protected:
 	CUI*			m_pHPfront;
 	CGameObject*	m_pHost;
 //protected:

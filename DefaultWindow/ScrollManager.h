@@ -13,7 +13,7 @@ public:
 	void		Set_ScrollY(float _fY) { m_fScrollY += _fY; }
 
 	void		ScrollShaking();
-	void		StartScrollShaking();
+	void		StartScrollShaking(int _iCount);
 
 public:
 	void Initialize();

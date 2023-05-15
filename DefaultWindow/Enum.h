@@ -14,6 +14,7 @@ enum class TYPE
 	EFFECT  = 8,
 
 	UI		= 9,
+	PROJECTILE = 10,
 };
 
 enum class RENDERID
@@ -27,11 +28,13 @@ enum class RENDERID
 
 enum class ITEM
 {
-	WEAPON	= 0,
-	HELMET	= 1,
-	CHEST	= 2,
-	PANTS	= 3,
-	END		= 4,
+	WEAPON		= 0,
+	HELMET		= 1,
+	CHEST		= 2,
+	PANTS		= 3,
+	MATERIAL	= 4,
+	CONSUM		= 5,
+	END			= 6,
 };
 
 //enum class WEAPON
@@ -47,10 +50,27 @@ enum class MONSTER
 
 };
 
+enum class BOSS
+{
+	GLURCH		= 0,
+	HIVEMOTHER	= 1,
+	END			= 2,
+};
+
+enum class MATERIAL
+{
+	STONE_COPPER	= 0,
+	STONE_IRON		= 1,
+	INGOT_COPPER	= 2,
+	INGOT_IRON		= 3,
+	END				= 4,
+};
+
 enum class EFFECT_TYPE
 {
 	HIT = 0,
-	END = 1,
+	GLOW = 1,
+	END = 2,
 };
 
 enum class STATE
@@ -88,7 +108,8 @@ enum class SCENEUI
 	HPBAR = 0,
 	HUNGERBAR = 1,
 	QUICKSLOT = 2,
-	END = 3,
+	BOSSHP = 3,
+	END = 4,
 };
 
 enum class CHANNELID

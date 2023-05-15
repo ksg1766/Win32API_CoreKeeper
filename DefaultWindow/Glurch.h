@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+class CUI;
 class CShadow;
 class CGlurch :
 	public CGameObject
@@ -10,16 +11,17 @@ public:
 	virtual ~CGlurch();
 
 	// CGameObject을(를) 통해 상속됨
-	virtual void Initialize(void) override;
-	virtual int  Update(void) override;
-	virtual int  LateUpdate(void) override;
-	virtual void Render(HDC hDC) override;
-	virtual void Release(void) override;
+	virtual void	Initialize(void)	override;
+	virtual int		Update(void)		override;
+	virtual int		LateUpdate(void)	override;
+	virtual void	Render(HDC hDC)		override;
+	virtual void	Release(void)		override;
 
-	UINT		GetBiom() { return m_iBiom; }
-	int			GetHp() { return m_iHp; }
-	int			GetDamage() { return m_iDamage; }
-	void		SetHp(int _iHp) { m_iHp = _iHp; }
+	UINT			GetBiom()			{ return m_iBiom; }
+	int				GetHp()				{ return m_iHp; }
+	int				GetMaxHp()			{ return m_iMaxHp; }
+	int				GetDamage()			{ return m_iDamage; }
+	void			SetHp(int _iHp)		{ m_iHp = _iHp; }
 
 	virtual void	OnCollisionEnter(CCollider* _pOther);
 	virtual void	OnCollisionStay(CCollider* _pOther);
@@ -46,6 +48,8 @@ private:
 
 	STATE			m_eCurState;
 	STATE			m_ePreState;
+
+	CUI*			m_pHPBar;
 
 	friend class	CShadow;
 

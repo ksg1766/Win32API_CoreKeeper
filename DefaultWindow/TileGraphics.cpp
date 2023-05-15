@@ -34,7 +34,7 @@ void CTileGraphics::Render(HDC hDC, HDC hMemDC)
 			TILECX,
 			TILECY,
 			hMemDC,
-			TILECX * dynamic_cast<CTile*>(m_pHost)->GetDrawID(),
+			TILECX * static_cast<CTile*>(m_pHost)->GetDrawID(),
 			0,
 			SRCCOPY);
 	}
@@ -46,7 +46,7 @@ void CTileGraphics::Render(HDC hDC, HDC hMemDC)
 			TILECX,
 			TILECY,
 			hMemDC,
-			TILECX * dynamic_cast<CWall*>(m_pHost)->GetDrawID(),
+			TILECX * static_cast<CWall*>(m_pHost)->GetDrawID(),
 			0,
 			SRCCOPY);
 	}

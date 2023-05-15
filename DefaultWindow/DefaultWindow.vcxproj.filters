@@ -95,15 +95,6 @@
     <Filter Include="Script\02. GameObject\04. Item\Weapon">
       <UniqueIdentifier>{38c4c19d-f111-44e3-b0bc-6a2e36d18b6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\02. GameObject\04. Item\Chest">
-      <UniqueIdentifier>{ad94b63c-67b9-498b-b1a9-6daa1f6a6982}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\02. GameObject\04. Item\Helmet">
-      <UniqueIdentifier>{255ba4a1-f759-44a5-bf93-039d97e6bf65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\02. GameObject\04. Item\Pants">
-      <UniqueIdentifier>{3e65e96f-51c6-4aae-bf06-2ee5c247397d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\02. GameObject\04. Item\00. BaseClass">
       <UniqueIdentifier>{220b1704-032e-41fd-8237-a6e280d0cf58}</UniqueIdentifier>
     </Filter>
@@ -197,11 +188,62 @@
     <Filter Include="Script\02. GameObject\08. Effect\GlowEffect">
       <UniqueIdentifier>{c1e1186b-5305-42da-b1cd-9bc5fe89c7ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\02. GameObject\05. Wall\OreWall">
-      <UniqueIdentifier>{58e494f9-22dc-44bb-a711-7d2c3cfd6058}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\02. GameObject\04. Item\Ore">
+    <Filter Include="Script\02. GameObject\04. Item\Material">
       <UniqueIdentifier>{348fada9-1f24-4c02-aa18-b8c11ef46ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Material\Copper">
+      <UniqueIdentifier>{ff2311e0-912d-49fb-8919-f01ffea078fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Material\00. BaseMaterial">
+      <UniqueIdentifier>{a7e4e127-a240-48dc-b93b-4081c9af2c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\01. HiveMotherGroup">
+      <UniqueIdentifier>{19cf2a11-fca8-447f-8839-b7191b5c7f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\01. HiveMotherGroup\00. HiveMother">
+      <UniqueIdentifier>{dddb0b96-b7d3-4099-af20-4f3255f82598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\01. HiveMotherGroup\01. Spawner">
+      <UniqueIdentifier>{c10b5bce-5bf5-42a4-8fc5-48096044f060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\01. HiveMotherGroup\02. Cocoon">
+      <UniqueIdentifier>{aab234d8-5c5f-4648-ab3a-e108a4e75d39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Projectile">
+      <UniqueIdentifier>{9ad3868a-1f9c-4b58-9c06-08acdc47ac0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\03. Boss\01. HiveMotherGroup\03. AcidSplat">
+      <UniqueIdentifier>{23f8d7e5-d35b-452a-9b32-6fdb3d405fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\10. UI\00. SceneUI\HP_Bar_BOSS">
+      <UniqueIdentifier>{6934fc68-35b4-46eb-8055-92aedbc3d7fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\11. Core">
+      <UniqueIdentifier>{b0eb67e7-5e4b-493d-93b8-f195937d4ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\11. Core\01. Statue_Glurch">
+      <UniqueIdentifier>{284571df-e1b9-47cc-9db5-90c3418aa021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\11. Core\02. Statue_HiveMother">
+      <UniqueIdentifier>{0b6e6801-6b6f-462e-a162-4e0965f3b5ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\11. Core\03. HartCoreTile">
+      <UniqueIdentifier>{a97f51d4-e789-4753-84e9-5040211f5353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\11. Core\00. MainCore">
+      <UniqueIdentifier>{b34b4394-2ca1-428d-ab24-0434da91a8d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\04. Item\Trap">
+      <UniqueIdentifier>{06c27049-a917-46b5-abe0-65864e2c98ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\02. GameObject\02. Monster\MazeMonster">
+      <UniqueIdentifier>{35c7e407-b25a-44bc-9762-4327cdde9755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\IntroScene">
+      <UniqueIdentifier>{348cb7fc-eba7-4642-b36e-a36eb5953fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\01. Scene\EndScene">
+      <UniqueIdentifier>{27a4470b-00d0-4d64-b1ee-730a0ab6c6ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -289,9 +331,6 @@
     <ClInclude Include="PickAxe.h">
       <Filter>Script\02. GameObject\04. Item\Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Script\02. GameObject\05. Wall</Filter>
-    </ClInclude>
     <ClInclude Include="TileManager.h">
       <Filter>Script\03. Manager\TileManager</Filter>
     </ClInclude>
@@ -364,11 +403,56 @@
     <ClInclude Include="GlowEffect.h">
       <Filter>Script\02. GameObject\08. Effect\GlowEffect</Filter>
     </ClInclude>
-    <ClInclude Include="OreWall.h">
-      <Filter>Script\02. GameObject\05. Wall\OreWall</Filter>
+    <ClInclude Include="Copper.h">
+      <Filter>Script\02. GameObject\04. Item\Material\Copper</Filter>
     </ClInclude>
-    <ClInclude Include="Ore.h">
-      <Filter>Script\02. GameObject\04. Item\Ore</Filter>
+    <ClInclude Include="Material.h">
+      <Filter>Script\02. GameObject\04. Item\Material\00. BaseMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\01. Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="Cocoon.h">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\02. Cocoon</Filter>
+    </ClInclude>
+    <ClInclude Include="HiveMother.h">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\00. HiveMother</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Script\02. GameObject\04. Item\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="AcidProjectile.h">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\03. AcidSplat</Filter>
+    </ClInclude>
+    <ClInclude Include="HP_Bar_Boss.h">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\HP_Bar_BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Script\02. GameObject\05. Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Statue_Glurch.h">
+      <Filter>Script\02. GameObject\11. Core\01. Statue_Glurch</Filter>
+    </ClInclude>
+    <ClInclude Include="Statue_HiveMother.h">
+      <Filter>Script\02. GameObject\11. Core\02. Statue_HiveMother</Filter>
+    </ClInclude>
+    <ClInclude Include="HartCoreTile.h">
+      <Filter>Script\02. GameObject\11. Core\03. HartCoreTile</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Script\02. GameObject\11. Core\00. MainCore</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Script\02. GameObject\04. Item\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeMerchant.h">
+      <Filter>Script\02. GameObject\02. Monster\MazeMonster</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroScene.h">
+      <Filter>Script\01. Scene\IntroScene</Filter>
+    </ClInclude>
+    <ClInclude Include="EndScene.h">
+      <Filter>Script\01. Scene\EndScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -513,11 +597,53 @@
     <ClCompile Include="GlowEffect.cpp">
       <Filter>Script\02. GameObject\08. Effect\GlowEffect</Filter>
     </ClCompile>
-    <ClCompile Include="OreWall.cpp">
-      <Filter>Script\02. GameObject\05. Wall\OreWall</Filter>
+    <ClCompile Include="Copper.cpp">
+      <Filter>Script\02. GameObject\04. Item\Material\Copper</Filter>
     </ClCompile>
-    <ClCompile Include="Ore.cpp">
-      <Filter>Script\02. GameObject\04. Item\Ore</Filter>
+    <ClCompile Include="Material.cpp">
+      <Filter>Script\02. GameObject\04. Item\Material\00. BaseMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\01. Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="Cocoon.cpp">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\02. Cocoon</Filter>
+    </ClCompile>
+    <ClCompile Include="HiveMother.cpp">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\00. HiveMother</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Script\02. GameObject\04. Item\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="AcidProjectile.cpp">
+      <Filter>Script\02. GameObject\03. Boss\01. HiveMotherGroup\03. AcidSplat</Filter>
+    </ClCompile>
+    <ClCompile Include="HP_Bar_Boss.cpp">
+      <Filter>Script\02. GameObject\10. UI\00. SceneUI\HP_Bar_BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="Statue_Glurch.cpp">
+      <Filter>Script\02. GameObject\11. Core\01. Statue_Glurch</Filter>
+    </ClCompile>
+    <ClCompile Include="Statue_HiveMother.cpp">
+      <Filter>Script\02. GameObject\11. Core\02. Statue_HiveMother</Filter>
+    </ClCompile>
+    <ClCompile Include="HartCoreTile.cpp">
+      <Filter>Script\02. GameObject\11. Core\03. HartCoreTile</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Script\02. GameObject\11. Core\00. MainCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Script\02. GameObject\04. Item\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeMerchant.cpp">
+      <Filter>Script\02. GameObject\02. Monster\MazeMonster</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroScene.cpp">
+      <Filter>Script\01. Scene\IntroScene</Filter>
+    </ClCompile>
+    <ClCompile Include="EndScene.cpp">
+      <Filter>Script\01. Scene\EndScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

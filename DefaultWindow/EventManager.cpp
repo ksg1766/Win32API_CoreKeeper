@@ -40,23 +40,28 @@ void CEventManager::Update()
 		// 여기에서 삭제 해주고, GameScene에서는 벡터 원소만 날려 줌.
 		if (TYPE::WALL == m_vecDead[i]->GetType())
 		{
-			CWall* pWall = dynamic_cast<CWall*>(m_vecDead[i]);
+			CWall* pWall = static_cast<CWall*>(m_vecDead[i]);
 			CTile* pTile = new CTile;
 			pTile->Initialize();
 			pTile->SetPosition(m_vecDead[i]->GetPosition());
-			if (3 == pWall->GetBiom())
-				pTile->SetTile(0, pWall->GetBiom(), dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
-			else
+
+			int iDraw = 0;
+			if (0 == static_cast<CWall*>(m_vecDead[i])->GetBiom() || 3 == static_cast<CWall*>(m_vecDead[i])->GetBiom())
 			{
-				int iDraw = rand() % 30 - 23;
+				iDraw = rand() % 30 - 24;
 				if (iDraw < 0)
 					iDraw = 0;
-				pTile->SetTile(iDraw, pWall->GetBiom(), dynamic_cast<CWall*>(m_vecDead[i])->GetWallAround());
-			}m_vecCreate.push_back(pTile);
+			}
+			pTile->SetTile(iDraw, pWall->GetBiom(), static_cast<CWall*>(m_vecDead[i])->GetWallAround());
+			m_vecCreate.push_back(pTile);
 		}
 		else if (TYPE::MONSTER == m_vecDead[i]->GetType())
 		{
 			CManagers::instance().Pool()->ReturnPool(m_vecDead[i]);
+		}
+		else if (TYPE::ITEM == m_vecDead[i]->GetType())
+		{
+
 		}
 		else if (TYPE::EFFECT == m_vecDead[i]->GetType())
 		{

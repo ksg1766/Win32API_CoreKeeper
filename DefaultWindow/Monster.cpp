@@ -86,6 +86,7 @@ void CMonster::AStar()
 	i = (m_pTarget->GetCollider()->GetPosition().x - (TILECX >> 1)) / TILECX;
 	j = (m_pTarget->GetCollider()->GetPosition().y - (TILECY >> 1)) / TILECY;
 	
+
 	Pos dest = Pos(i, j);
 
 	enum
@@ -155,7 +156,7 @@ void CMonster::AStar()
 		pq.pop();
 
 		// 동일한 좌표를 여러 경로로 찾아서\
-				// 더 빠른 경로로 인해서 이미 방문(closed)된 경우 스킵
+		// 더 빠른 경로로 인해서 이미 방문(closed)된 경우 스킵
 // [선택]
 
 		if (closed[node.pos.y][node.pos.x])
